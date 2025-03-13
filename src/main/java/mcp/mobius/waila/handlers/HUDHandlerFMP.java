@@ -2,14 +2,7 @@ package mcp.mobius.waila.handlers;
 
 import java.util.List;
 
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.Constants;
-
+import net.minecraft.src.*;
 import org.apache.logging.log4j.Level;
 
 import mcp.mobius.waila.Waila;
@@ -98,7 +91,7 @@ public class HUDHandlerFMP implements IWailaDataProvider {
 
     @Override
     public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x,
-            int y, int z) {
+                                     int y, int z) {
         if (te != null) te.writeToNBT(tag);
         return tag;
     }

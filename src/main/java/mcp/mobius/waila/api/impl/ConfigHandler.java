@@ -5,15 +5,13 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.handlers.HUDHandlerEntities;
 import mcp.mobius.waila.overlay.OverlayConfig;
 import mcp.mobius.waila.utils.Constants;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.Property;
 
 public class ConfigHandler implements IWailaConfigHandler {
 

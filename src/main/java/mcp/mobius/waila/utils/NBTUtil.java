@@ -1,17 +1,12 @@
 package mcp.mobius.waila.utils;
 
+import net.minecraft.src.*;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashSet;
 
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTSizeTracker;
-import net.minecraft.nbt.NBTTagByte;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.nbt.NBTTagShort;
 
 public class NBTUtil {
 
@@ -76,15 +71,13 @@ public class NBTUtil {
     }
 
     public static NBTTagCompound readNBTTagCompound(DataInputStream par0DataInputStream) throws IOException {
-        short short1 = par0DataInputStream.readShort();
-
-        if (short1 < 0) {
+        int readShort = par0DataInputStream.readShort();
+        if (readShort < 0) {
             return null;
-        } else {
-            byte[] abyte = new byte[short1];
-            par0DataInputStream.readFully(abyte);
-            return CompressedStreamTools.func_152457_a(abyte, NBTSizeTracker.field_152451_a);
         }
+        byte[] abyte = new byte[readShort];
+        par0DataInputStream.readFully(abyte);
+        return CompressedStreamTools.decompress(abyte);
     }
 
     public static int getNBTInteger(NBTTagCompound tag, String keyname) {

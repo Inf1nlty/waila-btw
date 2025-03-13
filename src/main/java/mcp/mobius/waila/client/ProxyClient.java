@@ -1,13 +1,5 @@
 package mcp.mobius.waila.client;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.WorldEvent;
-
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
 import mcp.mobius.waila.cbcore.LangUtil;
@@ -21,6 +13,9 @@ import mcp.mobius.waila.overlay.tooltiprenderers.TTRenderHealth;
 import mcp.mobius.waila.overlay.tooltiprenderers.TTRenderProgressBar;
 import mcp.mobius.waila.overlay.tooltiprenderers.TTRenderStack;
 import mcp.mobius.waila.server.ProxyServer;
+import net.minecraft.src.Block;
+import net.minecraft.src.Entity;
+import net.minecraft.src.ResourceLocation;
 
 public class ProxyClient extends ProxyServer {
 
@@ -31,13 +26,13 @@ public class ProxyClient extends ProxyServer {
     @Override
     public void registerHandlers() {
 
-        LangUtil.loadLangDir("waila");
+//        LangUtil.loadLangDir("waila");
 
-        if (Loader.isModLoaded("NotEnoughItems")) {
-            NEIHandler.register();
-        } else {
-            MinecraftForge.EVENT_BUS.register(new VanillaTooltipHandler());
-        }
+//        if (Loader.isModLoaded("NotEnoughItems")) {
+//            NEIHandler.register();
+//        } else {
+//            MinecraftForge.EVENT_BUS.register(new VanillaTooltipHandler());
+//        }
 
         ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerBlocks(), Block.class);
         ModuleRegistrar.instance().registerTailProvider(new HUDHandlerBlocks(), Block.class);

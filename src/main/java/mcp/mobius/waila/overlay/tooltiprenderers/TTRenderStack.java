@@ -2,14 +2,13 @@ package mcp.mobius.waila.overlay.tooltiprenderers;
 
 import java.awt.Dimension;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import mcp.mobius.waila.api.IWailaCommonAccessor;
 import mcp.mobius.waila.api.IWailaTooltipRenderer;
 import mcp.mobius.waila.overlay.DisplayUtil;
+import net.minecraft.src.Block;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.RenderHelper;
 
 public class TTRenderStack implements IWailaTooltipRenderer {
 
@@ -24,10 +23,11 @@ public class TTRenderStack implements IWailaTooltipRenderer {
         String name = params[1]; // Fully qualified name
         int amount = Integer.parseInt(params[2]);
         int meta = Integer.parseInt(params[3]);
+        int id = Integer.parseInt(params[4]);
 
         ItemStack stack = null;
-        if (type == 0) stack = new ItemStack((Block) Block.blockRegistry.getObject(name), amount, meta);
-        if (type == 1) stack = new ItemStack((Item) Item.itemRegistry.getObject(name), amount, meta);
+        if (type == 0) stack = new ItemStack(accessor.getBlock(), amount, meta);
+        if (type == 1) stack = new ItemStack(Item.getItem(id), amount, meta);
 
         RenderHelper.enableGUIStandardItemLighting();
         DisplayUtil.renderStack(0, 0, stack);

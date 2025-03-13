@@ -1,8 +1,5 @@
 package mcp.mobius.waila.gui.screens.config;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.common.config.Configuration;
-
 import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.gui.events.MouseEvent;
 import mcp.mobius.waila.gui.interfaces.CType;
@@ -20,6 +17,8 @@ import mcp.mobius.waila.gui.widgets.buttons.ButtonScreenChange;
 import mcp.mobius.waila.gui.widgets.movable.PictureMovableRC;
 import mcp.mobius.waila.overlay.OverlayConfig;
 import mcp.mobius.waila.utils.Constants;
+import net.minecraft.src.GuiScreen;
+import net.minecraftforge.common.Configuration;
 
 public class ScreenHUDConfig extends ScreenBase {
 

@@ -2,7 +2,7 @@ package mcp.mobius.waila.overlay.tooltiprenderers;
 
 import java.awt.Dimension;
 
-import net.minecraft.util.MathHelper;
+import net.minecraft.src.MathHelper;
 
 import mcp.mobius.waila.api.IWailaCommonAccessor;
 import mcp.mobius.waila.api.IWailaTooltipRenderer;

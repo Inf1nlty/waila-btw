@@ -3,26 +3,14 @@ package mcp.mobius.waila.overlay;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-import net.minecraftforge.common.IShearable;
-import net.minecraftforge.common.config.Configuration;
-
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaEntityProvider;
 import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
 import mcp.mobius.waila.utils.Constants;
+import net.minecraft.src.*;
+import net.minecraftforge.common.Configuration;
 
 public class RayTracing {
 
@@ -39,7 +27,7 @@ public class RayTracing {
     private final Minecraft mc = Minecraft.getMinecraft();
 
     public void fire() {
-        if (mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY
+        if (mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == EnumMovingObjectType.ENTITY
                 && !shouldHidePlayer(mc.objectMouseOver.entityHit)) {
             this.target = mc.objectMouseOver;
             return;
@@ -65,11 +53,11 @@ public class RayTracing {
     }
 
     public ItemStack getTargetStack() {
-        return this.target.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK ? this.getIdentifierStack() : null;
+        return this.target.typeOfHit == EnumMovingObjectType.TILE ? this.getIdentifierStack() : null;
     }
 
     public Entity getTargetEntity() {
-        return this.target.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY ? this.getIdentifierEntity()
+        return this.target.typeOfHit == EnumMovingObjectType.ENTITY ? this.getIdentifierEntity()
                 : null;
     }
 
@@ -123,7 +111,7 @@ public class RayTracing {
         int z = this.target.blockZ;
 
         Block mouseoverBlock = world.getBlock(x, y, z);
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (mouseoverBlock == null) return items;
 
         if (ModuleRegistrar.instance().hasStackProviders(mouseoverBlock)) {
@@ -161,7 +149,7 @@ public class RayTracing {
 
         if (!items.isEmpty()) return items;
 
-        if (world.getTileEntity(x, y, z) == null) {
+        if (world.getBlockTileEntity(x, y, z) == null) {
             try {
                 ItemStack block = new ItemStack(mouseoverBlock, 1, world.getBlockMetadata(x, y, z));
 

@@ -1,9 +1,8 @@
 package mcp.mobius.waila.overlay;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.util.MovingObjectPosition;
-
+import net.minecraft.src.EnumMovingObjectType;
+import net.minecraft.src.Minecraft;
+import net.minecraft.src.RenderHelper;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -24,17 +23,17 @@ public class OverlayRenderer {
         Minecraft mc = Minecraft.getMinecraft();
         if (!(mc.currentScreen == null && mc.theWorld != null
                 && Minecraft.isGuiEnabled()
-                && !mc.gameSettings.keyBindPlayerList.getIsKeyPressed()
+                && !mc.gameSettings.keyBindPlayerList.isPressed()
                 && ConfigHandler.instance().showTooltip()
                 && RayTracing.instance().getTarget() != null))
             return;
 
-        if (RayTracing.instance().getTarget().typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK
+        if (RayTracing.instance().getTarget().typeOfHit == EnumMovingObjectType.TILE
                 && RayTracing.instance().getTargetStack() != null) {
             renderOverlay(WailaTickHandler.instance().tooltip);
         }
 
-        if (RayTracing.instance().getTarget().typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY
+        if (RayTracing.instance().getTarget().typeOfHit == EnumMovingObjectType.ENTITY
                 && ConfigHandler.instance().getConfig("general.showents")) {
             renderOverlay(WailaTickHandler.instance().tooltip);
         }

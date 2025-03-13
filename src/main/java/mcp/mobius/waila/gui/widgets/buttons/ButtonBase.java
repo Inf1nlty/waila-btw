@@ -1,8 +1,6 @@
 package mcp.mobius.waila.gui.widgets.buttons;
 
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
-
+import net.minecraft.src.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 

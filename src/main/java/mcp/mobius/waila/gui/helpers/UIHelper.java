@@ -1,11 +1,6 @@
 package mcp.mobius.waila.gui.helpers;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.Vec3;
-
+import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
 
 public class UIHelper {
@@ -58,7 +53,7 @@ public class UIHelper {
     }
 
     public static void drawBillboard(Vec3 pos, float offX, float offY, float offZ, double x1, double y1, double x2,
-            double y2, int r, int g, int b, int a, double partialFrame) {
+                                     double y2, int r, int g, int b, int a, double partialFrame) {
         UIHelper.drawBillboard(
                 (float) pos.xCoord,
                 (float) pos.yCoord,

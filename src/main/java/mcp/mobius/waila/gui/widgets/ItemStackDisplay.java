@@ -1,8 +1,7 @@
 package mcp.mobius.waila.gui.widgets;
 
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.item.ItemStack;
-
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.RenderHelper;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 

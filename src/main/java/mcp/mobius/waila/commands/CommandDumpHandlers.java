@@ -1,11 +1,10 @@
 package mcp.mobius.waila.commands;
 
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.ICommandSender;
-
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaEntityProvider;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
+import net.minecraft.src.CommandBase;
+import net.minecraft.src.ICommandSender;
 
 public class CommandDumpHandlers extends CommandBase {
 

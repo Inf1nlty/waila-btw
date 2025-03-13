@@ -10,16 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.item.ItemStack;
-
+import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
 
 import mcp.mobius.waila.api.IWailaTooltipRenderer;
@@ -54,7 +45,7 @@ public class DisplayUtil {
 
     public static Dimension displaySize() {
         Minecraft mc = Minecraft.getMinecraft();
-        ScaledResolution res = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        ScaledResolution res = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
         return new Dimension(res.getScaledWidth(), res.getScaledHeight());
     }
 
@@ -107,7 +98,7 @@ public class DisplayUtil {
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_ALPHA_TEST);
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        GL11.glBlendFunc(770, 771);
         GL11.glShadeModel(GL11.GL_SMOOTH);
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
@@ -157,7 +148,7 @@ public class DisplayUtil {
 
         if (namelist.get(0) == null || namelist.get(0).isEmpty()) namelist.set(0, "Unnamed");
 
-        namelist.set(0, itemstack.getRarity().rarityColor.toString() + namelist.get(0));
+        namelist.set(0, String.valueOf(itemstack.getRarity().rarityColor)+ namelist.get(0));
         for (int i = 1; i < namelist.size(); i++) namelist.set(i, "\u00a77" + namelist.get(i));
 
         return namelist;

@@ -8,18 +8,10 @@ import static mcp.mobius.waila.api.SpecialChars.getRenderString;
 
 import java.util.List;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
-
-import cpw.mods.fml.common.ModContainer;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry.EntityRegistration;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaEntityAccessor;
 import mcp.mobius.waila.api.IWailaEntityProvider;
+import net.minecraft.src.*;
 
 public class HUDHandlerEntities implements IWailaEntityProvider {
 
@@ -33,7 +25,7 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
 
     @Override
     public List<String> getWailaHead(Entity entity, List<String> currenttip, IWailaEntityAccessor accessor,
-            IWailaConfigHandler config) {
+                                     IWailaConfigHandler config) {
         try {
             currenttip.add(WHITE + entity.getCommandSenderName());
         } catch (Exception e) {

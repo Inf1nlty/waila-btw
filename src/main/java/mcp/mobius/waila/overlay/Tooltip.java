@@ -14,9 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
-
+import net.minecraft.src.ItemStack;
+import net.minecraftforge.common.Configuration;
 import org.lwjgl.opengl.GL11;
 
 import mcp.mobius.waila.api.IWailaCommonAccessor;

@@ -3,21 +3,6 @@ package mcp.mobius.waila.overlay;
 import static mcp.mobius.waila.api.SpecialChars.ITALIC;
 
 import java.util.List;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-import net.minecraftforge.common.config.Configuration;
-
-import org.lwjgl.input.Keyboard;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.api.impl.MetaDataProvider;
@@ -25,6 +10,9 @@ import mcp.mobius.waila.api.impl.TipList;
 import mcp.mobius.waila.cbcore.Layout;
 import mcp.mobius.waila.client.KeyEvent;
 import mcp.mobius.waila.utils.Constants;
+import net.minecraft.src.*;
+import net.minecraftforge.common.Configuration;
+import org.lwjgl.input.Keyboard;
 
 public class WailaTickHandler {
 
@@ -51,7 +39,7 @@ public class WailaTickHandler {
     @SideOnly(Side.CLIENT)
     public void tickClient(TickEvent.ClientTickEvent event) {
 
-        if (!Keyboard.isKeyDown(KeyEvent.key_show.getKeyCode())
+        if (!Keyboard.isKeyDown(KeyEvent.key_show.keyCode)
                 && !ConfigHandler.instance().getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_MODE, false)
                 && ConfigHandler.instance()
                         .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SHOW, false)) {
@@ -68,7 +56,7 @@ public class WailaTickHandler {
             List<String> currenttipHead;
             List<String> currenttipBody;
             List<String> currenttipTail;
-            if (target != null && target.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+            if (target != null && target.typeOfHit == EnumMovingObjectType.TILE) {
                 DataAccessorCommon accessor = DataAccessorCommon.instance;
                 accessor.set(world, player, target);
                 ItemStack targetStack = RayTracing.instance().getTargetStack(); // Here we get either the proper stack
@@ -119,7 +107,7 @@ public class WailaTickHandler {
 
                     this.tooltip = new Tooltip(currenttip, targetStack);
                 }
-            } else if (target != null && target.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
+            } else if (target != null && target.typeOfHit == EnumMovingObjectType.ENTITY) {
                 DataAccessorCommon accessor = DataAccessorCommon.instance;
                 accessor.set(world, player, target);
 

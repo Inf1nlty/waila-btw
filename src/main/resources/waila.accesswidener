@@ -1,0 +1,14 @@
+accessWidener v2 named
+
+accessible method net/minecraft/src/Block getItemSubtypes ()[I
+accessible field net/minecraft/src/Minecraft renderEngine Lnet/minecraft/src/TextureManager;
+accessible method net/minecraft/src/GuiIngame renderBossHealth ()V
+accessible field net/minecraft/src/EntityAnimal breeding I
+accessible field net/minecraft/src/GuiScreen mc Lnet/minecraft/src/Minecraft;
+accessible field net/minecraft/src/BlockFurnace isActive Z
+accessible field net/minecraft/src/Minecraft timer Lnet/minecraft/src/Timer;
+accessible field net/minecraft/src/EntityLivestock production_counter I
+accessible field net/minecraft/src/GuiIngame updateCounter I
+accessible field net/minecraft/src/NetClientHandler mc Lnet/minecraft/src/Minecraft;
+accessible method net/minecraft/src/EnumDirection getFace() Lnet/minecraft/src/EnumFace;
+accessible field net/minecraft/src/Block unlocalizedName Ljava/lang/String;

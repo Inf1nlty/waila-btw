@@ -5,19 +5,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaEntityProvider;
+import net.minecraft.src.*;
 
 public class AccessHelper {
 
@@ -110,7 +101,7 @@ public class AccessHelper {
     }
 
     public static NBTTagCompound getNBTData(IWailaDataProvider provider, TileEntity entity, NBTTagCompound tag,
-            World world, int x, int y, int z) throws NoSuchMethodException, SecurityException, IllegalAccessException,
+                                            World world, int x, int y, int z) throws NoSuchMethodException, SecurityException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException {
         Method getNBTData = provider.getClass().getMethod(
                 "getNBTData",

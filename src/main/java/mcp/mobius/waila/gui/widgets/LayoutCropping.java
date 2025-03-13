@@ -1,7 +1,6 @@
 package mcp.mobius.waila.gui.widgets;
 
-import net.minecraft.client.gui.ScaledResolution;
-
+import net.minecraft.src.ScaledResolution;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 
@@ -23,7 +22,7 @@ public class LayoutCropping extends LayoutBase {
 
     @Override
     public void draw() {
-        this.rez = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        this.rez = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
         this.saveGLState();
 
         GL11.glEnable(GL11.GL_BLEND);

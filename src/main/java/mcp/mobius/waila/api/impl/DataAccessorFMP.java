@@ -1,14 +1,8 @@
 package mcp.mobius.waila.api.impl;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-
 import mcp.mobius.waila.api.IWailaFMPAccessor;
 import mcp.mobius.waila.utils.NBTUtil;
+import net.minecraft.src.*;
 
 public class DataAccessorFMP implements IWailaFMPAccessor {
 
@@ -26,7 +20,7 @@ public class DataAccessorFMP implements IWailaFMPAccessor {
     public static DataAccessorFMP instance = new DataAccessorFMP();
 
     public void set(World _world, EntityPlayer _player, MovingObjectPosition _mop, NBTTagCompound _partialNBT,
-            String id) {
+                    String id) {
         this.set(_world, _player, _mop, _partialNBT, id, null, 0.0);
     }
 
@@ -35,7 +29,7 @@ public class DataAccessorFMP implements IWailaFMPAccessor {
         this.world = _world;
         this.player = _player;
         this.mop = _mop;
-        this.entity = world.getTileEntity(_mop.blockX, _mop.blockY, _mop.blockZ);
+        this.entity = world.getBlockTileEntity(_mop.blockX, _mop.blockY, _mop.blockZ);
         this.partialNBT = _partialNBT;
         this.id = id;
         this.renderingvec = renderVec;

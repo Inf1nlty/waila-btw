@@ -1,12 +1,11 @@
 package mcp.mobius.waila.addons.vanillamc;
 
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.item.ItemStack;
-
 import mcp.mobius.waila.api.IWailaBlockDecorator;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.gui.helpers.UIHelper;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Tessellator;
 
 public class HUDDecoratorVanilla implements IWailaBlockDecorator {
 

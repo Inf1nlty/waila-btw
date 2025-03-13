@@ -2,9 +2,8 @@ package mcp.mobius.waila.gui.screens;
 
 import java.util.HashMap;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-
+import net.minecraft.src.GuiScreen;
+import net.minecraft.src.Minecraft;
 import org.lwjgl.input.Mouse;
 
 import mcp.mobius.waila.gui.interfaces.IWidget;

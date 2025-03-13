@@ -1,12 +1,8 @@
 package mcp.mobius.waila.api;
 
-import java.util.List;
+import net.minecraft.src.*;
 
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import java.util.List;
 
 /**
  * Callback class interface used to provide Block/TileEntity tooltip informations to Waila.<br>
@@ -95,5 +91,5 @@ public interface IWailaDataProvider {
      * @return Modified input NBTTagCompound tag.
      */
     NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y,
-            int z);
+                              int z);
 }

@@ -2,52 +2,38 @@ package mcp.mobius.waila.addons.vanillamc;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRedstoneOre;
-import net.minecraft.block.BlockStoneSlab;
-import net.minecraft.block.BlockWoodSlab;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.world.World;
-
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.SpecialChars;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
 import mcp.mobius.waila.cbcore.LangUtil;
+import net.minecraft.src.*;
 
 public class HUDHandlerVanilla implements IWailaDataProvider {
 
-    static Block mobSpawner = Blocks.mob_spawner;
-    static Block crops = Blocks.wheat;
-    static Block melonStem = Blocks.melon_stem;
-    static Block pumpkinStem = Blocks.pumpkin_stem;
-    static Block carrot = Blocks.carrots;
-    static Block potato = Blocks.potatoes;
-    static Block lever = Blocks.lever;
-    static Block repeaterIdle = Blocks.unpowered_repeater;
-    static Block repeaterActv = Blocks.powered_repeater;
-    static Block comparatorIdl = Blocks.unpowered_comparator;
-    static Block comparatorAct = Blocks.powered_comparator;
-    static Block redstone = Blocks.redstone_wire;
-    static Block jukebox = Blocks.jukebox;
-    static Block cocoa = Blocks.cocoa;
-    static Block netherwart = Blocks.nether_wart;
-    static Block silverfish = Blocks.monster_egg;
-    static Block doubleplant = Blocks.double_plant;
-    static Block leave = Blocks.leaves;
-    static Block leave2 = Blocks.leaves2;
-    static Block log = Blocks.log;
-    static Block log2 = Blocks.log2;
-    static Block quartz = Blocks.quartz_block;
-    static Block anvil = Blocks.anvil;
-    static Block sapling = Blocks.sapling;
+    static Block mobSpawner = Block.mobSpawner;
+    static Block crops = Block.crops;
+    static Block melonStem = Block.melonStem;
+    static Block pumpkinStem = Block.pumpkinStem;
+    static Block carrot = Block.carrot;
+    static Block potato = Block.potato;
+    static Block lever = Block.lever;
+    static Block repeaterIdle = Block.redstoneRepeaterIdle;
+    static Block repeaterActv = Block.redstoneRepeaterActive;
+    static Block comparatorIdl = Block.redstoneComparatorIdle;
+    static Block comparatorAct = Block.redstoneComparatorActive;
+    static Block redstone = Block.redstoneWire;
+    static Block jukebox = Block.jukebox;
+    static Block cocoa = Block.cocoaPlant;
+    static Block netherwart = Block.netherStalk;
+    static Block silverfish = Block.silverfish;
+    static Block leave = Block.leaves;
+    static Block log = Block.wood;
+    static Block quartz = Block.blockNetherQuartz;
+    static Block anvil = Block.anvil;
+    static Block sapling = Block.sapling;
+    static Block skull = Block.skull;
 
     @Override
     public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
@@ -56,9 +42,9 @@ public class HUDHandlerVanilla implements IWailaDataProvider {
         if (block == silverfish && config.getConfig("vanilla.silverfish")) {
             int metadata = accessor.getMetadata();
             return switch (metadata) {
-                case 0 -> new ItemStack(Blocks.stone);
-                case 1 -> new ItemStack(Blocks.cobblestone);
-                case 2 -> new ItemStack(Blocks.brick_block);
+                case 0 -> new ItemStack(Block.stone);
+                case 1 -> new ItemStack(Block.cobblestone);
+                case 2 -> new ItemStack(Block.brick);
                 default -> null;
             };
         }
@@ -222,7 +208,7 @@ public class HUDHandlerVanilla implements IWailaDataProvider {
 
     @Override
     public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x,
-            int y, int z) {
+                                     int y, int z) {
         if (te != null) te.writeToNBT(tag);
         return tag;
     }

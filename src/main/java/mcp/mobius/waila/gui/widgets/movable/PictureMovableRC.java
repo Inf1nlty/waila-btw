@@ -1,7 +1,6 @@
 package mcp.mobius.waila.gui.widgets.movable;
 
-import net.minecraft.util.ResourceLocation;
-
+import net.minecraft.src.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 

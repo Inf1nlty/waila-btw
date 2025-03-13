@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "cn.xylose.waila.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "target": "DEFAULT",
+  "minVersion": "0.8.3",
+  "mixins": [
+    "GuiInGameMixin",
+    "MinecraftMixin",
+    "PlayerControllerMPMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

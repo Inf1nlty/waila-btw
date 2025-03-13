@@ -16,9 +16,8 @@ package mcp.mobius.waila.gui.truetyper;
 
 import java.nio.FloatBuffer;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-
+import net.minecraft.src.Minecraft;
+import net.minecraft.src.ScaledResolution;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;

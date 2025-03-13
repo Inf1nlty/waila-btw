@@ -2,10 +2,9 @@ package mcp.mobius.waila.gui.widgets;
 
 import java.util.LinkedHashMap;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.texture.TextureManager;
-
+import net.minecraft.src.Minecraft;
+import net.minecraft.src.ScaledResolution;
+import net.minecraft.src.TextureManager;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 
@@ -39,7 +38,7 @@ public abstract class WidgetBase implements IWidget {
     public WidgetBase() {
         this.setParent(null);
         this.mc = Minecraft.getMinecraft();
-        this.rez = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        this.rez = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
         this.texManager = this.mc.renderEngine;
         this.setGeometry(new WidgetGeometry(0, 0, 50, 50, CType.ABSXY, CType.ABSXY));
     }
@@ -47,7 +46,7 @@ public abstract class WidgetBase implements IWidget {
     public WidgetBase(IWidget parent) {
         this.setParent(parent);
         this.mc = Minecraft.getMinecraft();
-        this.rez = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        this.rez = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
         this.texManager = this.mc.renderEngine;
         this.setGeometry(new WidgetGeometry(0, 0, 50, 50, CType.ABSXY, CType.ABSXY));
     }

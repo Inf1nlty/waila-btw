@@ -1,23 +1,23 @@
-
 pluginManagement {
-    repositories {
-        maven {
-            // RetroFuturaGradle
-            name "GTNH Maven"
-            url "https://nexus.gtnewhorizons.com/repository/public/"
-            mavenContent {
-                includeGroup("com.gtnewhorizons")
-                includeGroupByRegex("com\\.gtnewhorizons\\..+")
-            }
-        }
-        gradlePluginPortal()
-        mavenCentral()
-        mavenLocal()
-    }
+	repositories {
+		maven {
+			url 'https://BTW-Community.github.io/BTW-gradle'
+		}
+		maven {
+			name = 'Fabric'
+			url = 'https://maven.fabricmc.net/'
+		}
+		maven {
+			name = 'Jitpack'
+			url = 'https://jitpack.io'
+		}
+		gradlePluginPortal()
+	}
 }
+rootProject.name = name
 
-plugins {
-    id 'com.gtnewhorizons.gtnhsettingsconvention' version '1.0.29'
+gradle.rootProject {
+	group = group
+	version = version
+	description = description
 }
-
-

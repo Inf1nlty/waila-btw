@@ -1,14 +1,12 @@
 package mcp.mobius.waila.utils;
 
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.src.ItemStack;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
-
-import net.minecraft.item.ItemStack;
-
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
-import cpw.mods.fml.common.registry.GameData;
 
 public class ModIdentification {
 
@@ -17,9 +15,9 @@ public class ModIdentification {
 
     public static void init() {
 
-        for (ModContainer mod : Loader.instance().getModList()) {
-            modSource_Name.put(mod.getSource().getName(), mod.getName());
-            modSource_ID.put(mod.getSource().getName(), mod.getModId());
+        for (ModContainer mod : FabricLoader.getInstance().getAllMods()) {
+            modSource_Name.put(mod.getMetadata().getName(), mod.getMetadata().getName());
+            modSource_ID.put(mod.getMetadata().getName(), mod.getMetadata().getId());
         }
 
         // TODO : Update this to match new version (1.7.2)

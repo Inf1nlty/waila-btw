@@ -1,14 +1,6 @@
 package mcp.mobius.waila.api;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.src.*;
 
 /**
  * The Accessor is used to get some basic data out of the game without having to request direct access to the game
@@ -46,7 +38,7 @@ public interface IWailaDataAccessor {
 
     double getPartialFrame();
 
-    ForgeDirection getSide();
+    EnumDirection getSide();
 
     ItemStack getStack();
 }

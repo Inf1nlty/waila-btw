@@ -1,23 +1,10 @@
 package mcp.mobius.waila.api.impl;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import cpw.mods.fml.common.registry.GameData;
 import mcp.mobius.waila.api.IWailaCommonAccessor;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaEntityAccessor;
 import mcp.mobius.waila.utils.NBTUtil;
+import net.minecraft.src.*;
 
 public class DataAccessorCommon implements IWailaCommonAccessor, IWailaDataAccessor, IWailaEntityAccessor {
 
@@ -48,7 +35,7 @@ public class DataAccessorCommon implements IWailaCommonAccessor, IWailaDataAcces
         this.player = _player;
         this.mop = _mop;
 
-        if (this.mop.typeOfHit == MovingObjectType.BLOCK) {
+        if (this.mop.typeOfHit == EnumMovingObjectType.TILE) {
             this.block = world.getBlock(_mop.blockX, _mop.blockY, _mop.blockZ);
             this.metadata = world.getBlockMetadata(_mop.blockX, _mop.blockY, _mop.blockZ);
             this.tileEntity = world.getTileEntity(_mop.blockX, _mop.blockY, _mop.blockZ);
@@ -59,7 +46,7 @@ public class DataAccessorCommon implements IWailaCommonAccessor, IWailaDataAcces
                 this.stack = new ItemStack(this.block, 1, this.metadata);
             } catch (Exception ignored) {}
 
-        } else if (this.mop.typeOfHit == MovingObjectType.ENTITY) {
+        } else if (this.mop.typeOfHit == EnumMovingObjectType.ENTITY) {
             this.block = null;
             this.metadata = -1;
             this.tileEntity = null;

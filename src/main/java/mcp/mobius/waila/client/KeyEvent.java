@@ -1,15 +1,9 @@
 package mcp.mobius.waila.client;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraftforge.common.config.Configuration;
-
+import net.minecraft.src.KeyBinding;
+import net.minecraft.src.Minecraft;
+import net.minecraftforge.common.Configuration;
 import org.lwjgl.input.Keyboard;
-
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.gui.screens.config.ScreenConfig;
 import mcp.mobius.waila.handlers.nei.NEIHandler;
