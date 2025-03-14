@@ -29,15 +29,7 @@ public class WailaTickHandler {
         return _instance;
     }
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void tickRender(TickEvent.RenderTickEvent event) {
-        OverlayRenderer.renderOverlay();
-    }
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void tickClient(TickEvent.ClientTickEvent event) {
+    public void tickClient() {
 
         if (!Keyboard.isKeyDown(KeyEvent.key_show.keyCode)
                 && !ConfigHandler.instance().getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_MODE, false)

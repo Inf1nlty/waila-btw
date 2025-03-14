@@ -35,7 +35,7 @@ public class HUDHandlerBlocks implements IWailaDataProvider {
             if (name != null) currenttip.add(name);
         } catch (Exception ignored) {}
 
-        if (itemStack.getItem() == Items.redstone) {
+        if (itemStack.getItem() == Item.redstone) {
             int md = accessor.getMetadata();
             String s = "" + md;
             if (s.length() < 2) s = " " + s;

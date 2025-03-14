@@ -65,7 +65,7 @@ dependencies {
 
 	implementation group: 'it.unimi.dsi', name: 'fastutil', version: '8.5.12'
 
-	implementation files("libs\\ForgeConfig-0.0.1.jar")
+	implementation files("libs\\Forge_Config-0.0.1.jar")
 }
 
 configurations.all {

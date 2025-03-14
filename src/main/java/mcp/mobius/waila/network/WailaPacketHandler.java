@@ -4,7 +4,6 @@ import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.utils.WailaExceptionHandler;
 import cn.xylose.waila.api.PacketDispatcher;
-import net.minecraft.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.*;
 

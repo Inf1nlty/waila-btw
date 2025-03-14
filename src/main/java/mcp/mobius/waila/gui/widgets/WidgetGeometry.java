@@ -1,7 +1,6 @@
 package mcp.mobius.waila.gui.widgets;
 
-import net.minecraft.util.MathHelper;
-
+import net.minecraft.src.MathHelper;
 import org.lwjgl.util.Point;
 
 import mcp.mobius.waila.gui.interfaces.CType;

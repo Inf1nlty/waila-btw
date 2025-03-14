@@ -22,10 +22,10 @@ public class HUDHandlerFMP implements IWailaDataProvider {
 
     @Override
     public List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
-            IWailaConfigHandler config) {
-        NBTTagList list = accessor.getNBTData().getTagList("parts", Constants.NBT.TAG_COMPOUND);
+                                     IWailaConfigHandler config) {
+        NBTTagList list = accessor.getNBTData().getTagList("parts");
         for (int i = 0; i < list.tagCount(); i++) {
-            NBTTagCompound subtag = list.getCompoundTagAt(i);
+            NBTTagCompound subtag = (NBTTagCompound) list.tagAt(i);
             String id = subtag.getString("id");
 
             if (ModuleRegistrar.instance().hasHeadFMPProviders(id)) {
@@ -45,10 +45,10 @@ public class HUDHandlerFMP implements IWailaDataProvider {
 
     @Override
     public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
-            IWailaConfigHandler config) {
-        NBTTagList list = accessor.getNBTData().getTagList("parts", Constants.NBT.TAG_COMPOUND);
+                                     IWailaConfigHandler config) {
+        NBTTagList list = accessor.getNBTData().getTagList("parts");
         for (int i = 0; i < list.tagCount(); i++) {
-            NBTTagCompound subtag = list.getCompoundTagAt(i);
+            NBTTagCompound subtag = (NBTTagCompound) list.tagAt(i);
             String id = subtag.getString("id");
 
             if (ModuleRegistrar.instance().hasBodyFMPProviders(id)) {
@@ -68,10 +68,10 @@ public class HUDHandlerFMP implements IWailaDataProvider {
 
     @Override
     public List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
-            IWailaConfigHandler config) {
-        NBTTagList list = accessor.getNBTData().getTagList("parts", Constants.NBT.TAG_COMPOUND);
+                                     IWailaConfigHandler config) {
+        NBTTagList list = accessor.getNBTData().getTagList("parts");
         for (int i = 0; i < list.tagCount(); i++) {
-            NBTTagCompound subtag = list.getCompoundTagAt(i);
+            NBTTagCompound subtag = (NBTTagCompound) list.tagAt(i);
             String id = subtag.getString("id");
 
             if (ModuleRegistrar.instance().hasTailFMPProviders(id)) {

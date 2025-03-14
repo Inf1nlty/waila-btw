@@ -8,6 +8,7 @@ import static mcp.mobius.waila.api.SpecialChars.getRenderString;
 
 import java.util.List;
 
+import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaEntityAccessor;
 import mcp.mobius.waila.api.IWailaEntityProvider;
@@ -27,7 +28,7 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
     public List<String> getWailaHead(Entity entity, List<String> currenttip, IWailaEntityAccessor accessor,
                                      IWailaConfigHandler config) {
         try {
-            currenttip.add(WHITE + entity.getCommandSenderName());
+            currenttip.add(WHITE + entity.getEntityName());
         } catch (Exception e) {
             currenttip.add(WHITE + "Unknown");
         }
@@ -82,14 +83,14 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
     }
 
     private static String getEntityMod(Entity entity) {
-        String modName;
-        try {
-            EntityRegistration er = EntityRegistry.instance().lookupModSpawn(entity.getClass(), true);
-            ModContainer modC = er.getContainer();
-            modName = modC.getName();
-        } catch (NullPointerException e) {
-            modName = "Minecraft";
-        }
+        String modName = Waila.modsName;
+//        try {
+//            EntityRegistration er = EntityRegistry.instance().lookupModSpawn(entity.getClass(), true);
+//            ModContainer modC = er.getContainer();
+//            modsName = modC.getName();
+//        } catch (NullPointerException e) {
+//            modsName = "Minecraft";
+//        }
         return modName;
     }
 

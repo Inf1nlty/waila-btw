@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.src.Tessellator;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
@@ -203,7 +204,7 @@ public class TrueTypeFont {
                 if (i < 256) { // standard characters
                     charArray[i] = newIntObject;
                 } else { // custom characters
-                    customChars.put(new Character(ch), newIntObject);
+                    customChars.put(Character.valueOf(ch), newIntObject);
                 }
 
                 fontImage = null;
@@ -218,7 +219,7 @@ public class TrueTypeFont {
     }
 
     private void drawQuad(float drawX, float drawY, float drawX2, float drawY2, float srcX, float srcY, float srcX2,
-            float srcY2) {
+                          float srcY2) {
         float DrawWidth = drawX2 - drawX;
         float DrawHeight = drawY2 - drawY;
         float TextureSrcX = srcX / textureWidth;
@@ -253,7 +254,7 @@ public class TrueTypeFont {
             if (currentChar < 256) {
                 floatObject = charArray[currentChar];
             } else {
-                floatObject = (FloatObject) customChars.get(new Character((char) currentChar));
+                floatObject = (FloatObject) customChars.get(Character.valueOf((char) currentChar));
             }
 
             if (floatObject != null) {
@@ -288,7 +289,7 @@ public class TrueTypeFont {
     }
 
     public void drawString(float x, float y, String whatchars, int startIndex, int endIndex, float scaleX, float scaleY,
-            int format, float... rgba) {
+                           int format, float... rgba) {
         if (rgba.length == 0) rgba = new float[] { 1f, 1f, 1f, 1f };
         GL11.glPushMatrix();
         GL11.glScalef(scaleX, scaleY, 1.0f);
@@ -318,7 +319,7 @@ public class TrueTypeFont {
                     if (charCurrent < 256) {
                         floatObject = charArray[charCurrent];
                     } else {
-                        floatObject = (FloatObject) customChars.get(new Character((char) charCurrent));
+                        floatObject = (FloatObject) customChars.get(Character.valueOf((char) charCurrent));
                     }
                     totalwidth += floatObject.width - correctL;
                 }
@@ -342,7 +343,7 @@ public class TrueTypeFont {
             if (charCurrent < 256) {
                 floatObject = charArray[charCurrent];
             } else {
-                floatObject = (FloatObject) customChars.get(new Character((char) charCurrent));
+                floatObject = (FloatObject) customChars.get(Character.valueOf((char) charCurrent));
             }
 
             if (floatObject != null) {
@@ -357,7 +358,7 @@ public class TrueTypeFont {
                             if (charCurrent < 256) {
                                 floatObject = charArray[charCurrent];
                             } else {
-                                floatObject = (FloatObject) customChars.get(new Character((char) charCurrent));
+                                floatObject = (FloatObject) customChars.get(Character.valueOf((char) charCurrent));
                             }
                             totalwidth += floatObject.width - correctL;
                         }

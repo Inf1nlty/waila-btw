@@ -1,5 +1,6 @@
 package mcp.mobius.waila.utils;
 
+import mcp.mobius.waila.Waila;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.src.ItemStack;
@@ -54,11 +55,12 @@ public class ModIdentification {
     }
 
     public static String nameFromStack(ItemStack stack) {
-        try {
-            ModContainer mod = GameData.findModOwner(GameData.itemRegistry.getNameForObject(stack.getItem()));
-            return mod == null ? "Minecraft" : mod.getName();
-        } catch (NullPointerException e) {
-            return "";
-        }
+//        try {
+//            ModContainer mod = GameData.findModOwner(GameData.itemRegistry.getNameForObject(stack.getItem()));
+//            return mod == null ? "Minecraft" : mod.getName();
+//        } catch (NullPointerException e) {
+//            return "";
+//        }
+        return Waila.modsName;
     }
 }

@@ -85,7 +85,8 @@ public class AccessHelper {
     public static ArrayList<IRecipe> getCraftingRecipes(ItemStack stack) {
         ArrayList<IRecipe> recipes = new ArrayList<>();
 
-        for (IRecipe recipe : CraftingManager.getInstance().getRecipeList()) {
+        for (Object object : CraftingManager.getInstance().getRecipeList()) {
+            IRecipe recipe = (IRecipe) object;
             if (recipe != null && recipe.getRecipeOutput() != null) {
                 if (recipe.getRecipeOutput().isItemEqual(stack)) recipes.add(recipe);
             }

@@ -1,5 +1,6 @@
 package mcp.mobius.waila.api.impl;
 
+import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaCommonAccessor;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaEntityAccessor;
@@ -36,12 +37,12 @@ public class DataAccessorCommon implements IWailaCommonAccessor, IWailaDataAcces
         this.mop = _mop;
 
         if (this.mop.typeOfHit == EnumMovingObjectType.TILE) {
-            this.block = world.getBlock(_mop.blockX, _mop.blockY, _mop.blockZ);
+            this.block = Block.blocksList[world.getBlockId(_mop.blockX, _mop.blockY, _mop.blockZ)];
             this.metadata = world.getBlockMetadata(_mop.blockX, _mop.blockY, _mop.blockZ);
-            this.tileEntity = world.getTileEntity(_mop.blockX, _mop.blockY, _mop.blockZ);
+            this.tileEntity = world.getBlockTileEntity(_mop.blockX, _mop.blockY, _mop.blockZ);
             this.entity = null;
-            this.blockID = Block.getIdFromBlock(this.block);
-            this.blockResource = GameData.getBlockRegistry().getNameForObject(this.block);
+            this.blockID = world.getBlockId(_mop.blockX, _mop.blockY, _mop.blockZ);
+            this.blockResource = Waila.modsName;
             try {
                 this.stack = new ItemStack(this.block, 1, this.metadata);
             } catch (Exception ignored) {}
@@ -160,7 +161,7 @@ public class DataAccessorCommon implements IWailaCommonAccessor, IWailaDataAcces
 
         int id = tag.getInteger("WailaEntityID");
 
-        if (id == this.entity.getEntityId()) return true;
+        if (id == EntityList.getEntityID(this.entity)) return true;
         else {
             this.timeLastUpdate = System.currentTimeMillis() - 250;
             return false;
@@ -177,10 +178,10 @@ public class DataAccessorCommon implements IWailaCommonAccessor, IWailaDataAcces
         return this.partialFrame;
     }
 
-    @Override
-    public ForgeDirection getSide() {
-        return ForgeDirection.getOrientation(this.getPosition().sideHit);
-    }
+//    @Override
+//    public ForgeDirection getSide() {
+//        return ForgeDirection.getOrientation(this.getPosition().sideHit);
+//    }
 
     @Override
     public ItemStack getStack() {

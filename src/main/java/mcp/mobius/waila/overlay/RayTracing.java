@@ -67,8 +67,8 @@ public class RayTracing {
         Vec3 vec32 = vec3.addVector(vec31.xCoord * par1, vec31.yCoord * par1, vec31.zCoord * par1);
 
         if (ConfigHandler.instance().getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_LIQUID, true))
-            return entity.worldObj.rayTraceBlocks(vec3, vec32, true);
-        else return entity.worldObj.rayTraceBlocks(vec3, vec32, false);
+            return entity.worldObj.clip(vec3, vec32, true);
+        else return entity.worldObj.clip(vec3, vec32, false);
     }
 
     public ItemStack getIdentifierStack() {
@@ -110,7 +110,7 @@ public class RayTracing {
         int y = this.target.blockY;
         int z = this.target.blockZ;
 
-        Block mouseoverBlock = world.getBlock(x, y, z);
+        Block mouseoverBlock = Block.blocksList[world.getBlockId(x, y, z)];
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (mouseoverBlock == null) return items;
 
@@ -160,18 +160,18 @@ public class RayTracing {
 
         if (!items.isEmpty()) return items;
 
-        try {
-            ItemStack pick = mouseoverBlock.getPickBlock(this.target, world, x, y, z);
-            if (pick != null) items.add(pick);
-        } catch (Exception ignored) {}
-
-        if (!items.isEmpty()) return items;
-
-        if (mouseoverBlock instanceof IShearable shearable) {
-            if (shearable.isShearable(new ItemStack(Items.shears), world, x, y, z)) {
-                items.addAll(shearable.onSheared(new ItemStack(Items.shears), world, x, y, z, 0));
-            }
-        }
+//        try {
+//            ItemStack pick = mouseoverBlock.getPickBlock(this.target, world, x, y, z);
+//            if (pick != null) items.add(pick);
+//        } catch (Exception ignored) {}
+//
+//        if (!items.isEmpty()) return items;
+//
+//        if (mouseoverBlock instanceof IShearable shearable) {
+//            if (shearable.isShearable(new ItemStack(Items.shears), world, x, y, z)) {
+//                items.addAll(shearable.onSheared(new ItemStack(Items.shears), world, x, y, z, 0));
+//            }
+//        }
 
         if (items.isEmpty()) items.add(0, new ItemStack(mouseoverBlock, 1, world.getBlockMetadata(x, y, z)));
 

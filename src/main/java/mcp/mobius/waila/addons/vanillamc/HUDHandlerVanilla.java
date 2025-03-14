@@ -50,31 +50,30 @@ public class HUDHandlerVanilla implements IWailaDataProvider {
         }
 
         if (block == redstone) {
-            return new ItemStack(Items.redstone);
-        }
-
-        if (block == doubleplant && (accessor.getMetadata() & 8) != 0) {
-            int x = accessor.getPosition().blockX;
-            int y = accessor.getPosition().blockY - 1;
-            int z = accessor.getPosition().blockZ;
-            int meta = accessor.getWorld().getBlockMetadata(x, y, z);
-
-            return new ItemStack(doubleplant, 0, meta);
+            return new ItemStack(Item.redstone);
         }
 
         if (block instanceof BlockRedstoneOre) {
-            return new ItemStack(Blocks.redstone_ore);
+            return new ItemStack(Block.oreRedstone);
         }
 
         if (block == crops) {
-            return new ItemStack(Items.wheat);
+            return new ItemStack(Item.wheat);
         }
 
-        if ((block == leave || block == leave2) && (accessor.getMetadata() > 3)) {
+        if (block == carrot) {
+            return new ItemStack(Item.carrot);
+        }
+
+        if (block == potato) {
+            return new ItemStack(Item.potato);
+        }
+
+        if ((block == leave) && (accessor.getMetadata() > 3)) {
             return new ItemStack(block, 1, accessor.getMetadata() - 4);
         }
 
-        if (block == log || block == log2) {
+        if (block == log) {
             return new ItemStack(block, 1, accessor.getMetadata() % 4);
         }
 
@@ -90,9 +89,9 @@ public class HUDHandlerVanilla implements IWailaDataProvider {
             return new ItemStack(block, 1, block.damageDropped(accessor.getMetadata()));
         }
 
-        if (block instanceof BlockStoneSlab || block instanceof BlockWoodSlab) {
-            return new ItemStack(block, 1, block.damageDropped(accessor.getMetadata()));
-        }
+//        if (block instanceof BlockStoneSlab || block instanceof BlockWoodSlab) {
+//            return new ItemStack(block, 1, block.damageDropped(accessor.getMetadata()));
+//        }
 
         return null;
 
@@ -107,7 +106,7 @@ public class HUDHandlerVanilla implements IWailaDataProvider {
         if (block == mobSpawner && accessor.getTileEntity() instanceof TileEntityMobSpawner
                 && config.getConfig("vanilla.spawntype")) {
             String name = currenttip.get(0);
-            String mobname = ((TileEntityMobSpawner) accessor.getTileEntity()).func_145881_a().getEntityNameToSpawn();
+            String mobname = ((TileEntityMobSpawner) accessor.getTileEntity()).getSpawnerLogic().getEntityNameToSpawn();
             currenttip.set(0, String.format("%s (%s)", name, mobname));
         }
 
@@ -227,17 +226,13 @@ public class HUDHandlerVanilla implements IWailaDataProvider {
 
         ModuleRegistrar.instance().registerStackProvider(provider, silverfish.getClass());
         ModuleRegistrar.instance().registerStackProvider(provider, redstone.getClass());
-        ModuleRegistrar.instance().registerStackProvider(provider, doubleplant.getClass());
         ModuleRegistrar.instance().registerStackProvider(provider, BlockRedstoneOre.class);
         ModuleRegistrar.instance().registerStackProvider(provider, crops.getClass());
         ModuleRegistrar.instance().registerStackProvider(provider, leave.getClass());
-        ModuleRegistrar.instance().registerStackProvider(provider, leave2.getClass());
         ModuleRegistrar.instance().registerStackProvider(provider, log.getClass());
-        ModuleRegistrar.instance().registerStackProvider(provider, log2.getClass());
         ModuleRegistrar.instance().registerStackProvider(provider, quartz.getClass());
         ModuleRegistrar.instance().registerStackProvider(provider, anvil.getClass());
         ModuleRegistrar.instance().registerStackProvider(provider, sapling.getClass());
-        ModuleRegistrar.instance().registerStackProvider(provider, BlockStoneSlab.class);
         ModuleRegistrar.instance().registerStackProvider(provider, BlockWoodSlab.class);
 
         ModuleRegistrar.instance().registerHeadProvider(provider, mobSpawner.getClass());

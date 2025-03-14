@@ -19,7 +19,7 @@ public class OverlayRenderer {
     protected static boolean hasColorMaterial;
     protected static int boundTexIndex;
 
-    public static void renderOverlay() {
+    public void renderOverlay() {
         Minecraft mc = Minecraft.getMinecraft();
         if (!(mc.currentScreen == null && mc.theWorld != null
                 && Minecraft.isGuiEnabled()
