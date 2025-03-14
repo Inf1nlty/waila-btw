@@ -149,3 +149,7 @@ option.general.showcrop=显示作物生长状态
 option.thaumcraft.aspects=显示要素
 
 nei.options.keys.showenchant=显示附魔值
+
+option.btw.oven=显示砖炉
+option.btw.campfire=显示篝火
+option.btw.finite_torch=显示火把

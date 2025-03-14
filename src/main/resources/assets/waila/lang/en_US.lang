@@ -150,3 +150,7 @@ option.general.showcrop=Show crop growth
 option.thaumcraft.aspects=Show aspects
 
 nei.options.keys.showenchant=Show enchanting values
+
+option.btw.oven=Show Oven
+option.btw.campfire=Show Campfire
+option.btw.finite_torch=Show Finite Torch
