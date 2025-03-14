@@ -40,7 +40,6 @@ public class Waila extends BTWAddon implements ModInitializer {
         OverlayConfig.updateColors();
     }
 
-    @Deprecated
     public boolean serverCustomPacketReceived(NetServerHandler handler, Packet250CustomPayload packet) {
         if (this.wailaPacketHandler == null) {
             this.wailaPacketHandler = new WailaPacketHandler();

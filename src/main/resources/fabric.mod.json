@@ -10,7 +10,7 @@
   "icon": "assets/waila/icon.png",
   "authors": [
     "ProfMobius",
-    "GTNH",
+    "GTNH Team",
     "Xy_Lose"
   ],
   "contributors": [
@@ -18,8 +18,8 @@
   ],
   "license": "MIT",
   "contact": {
-    "homepage": "https://github.com/MinecraftIsTooEasy/Waila",
-    "issues": "https://github.com/MinecraftIsTooEasy/Waila/issue"
+    "homepage": "https://github.com/ysesiq/Waila-btw",
+    "issues": "https://github.com/ysesiq/Waila/issue-btw"
   },
   "entrypoints": {
     "main": [

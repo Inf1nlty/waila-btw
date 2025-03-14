@@ -1,5 +1,6 @@
 package mcp.mobius.waila.overlay;
 
+import cn.xylose.waila.api.IBreakingProgress;
 import net.minecraft.src.EnumMovingObjectType;
 import net.minecraft.src.Minecraft;
 import net.minecraft.src.RenderHelper;
@@ -18,6 +19,13 @@ public class OverlayRenderer {
     protected static boolean hasRescaleNormal;
     protected static boolean hasColorMaterial;
     protected static int boundTexIndex;
+    private static int lastProgressLine = 0;
+    private static int targetX = 0, targetY = 0, targetW = 0, targetH = 0;
+    private static float currentX = 0, currentY = 0, currentW = 0, currentH = 0;
+    private static final float LERP_FACTOR = 0.3f;
+    private static float lastBreakProgress = 0f;
+    private static float currentAlpha = 0f;
+    private static final float FADE_SPEED = 0.1f;
 
     public void renderOverlay() {
         Minecraft mc = Minecraft.getMinecraft();
@@ -39,10 +47,27 @@ public class OverlayRenderer {
         }
     }
 
-    public static void renderOverlay(Tooltip tooltip) {
-
+    public void renderOverlay(Tooltip tooltip) {
         GL11.glPushMatrix();
         saveGLState();
+
+        if (tooltip != null) {
+            currentAlpha = DisplayUtil.lerp(currentAlpha, 1f, FADE_SPEED);
+            if (currentAlpha > 0.99f) {
+                currentAlpha = 1f;
+            }
+        } else {
+            currentAlpha = DisplayUtil.lerp(currentAlpha, 0f, FADE_SPEED);
+            if (currentAlpha < 0.01f) {
+                currentAlpha = 0f;
+            }
+        }
+
+        if (currentAlpha <= 0f) {
+            loadGLState();
+            GL11.glPopMatrix();
+            return;
+        }
 
         GL11.glScalef(OverlayConfig.scale, OverlayConfig.scale, 1.0f);
 
@@ -60,6 +85,12 @@ public class OverlayRenderer {
                 OverlayConfig.gradient1,
                 OverlayConfig.gradient2);
 
+        drawBreakProgress(
+                tooltip.x,
+                tooltip.y,
+                tooltip.w,
+                tooltip.h);
+
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         tooltip.draw();
@@ -76,7 +107,6 @@ public class OverlayRenderer {
 
         loadGLState();
         GL11.glPopMatrix();
-
     }
 
     public static void saveGLState() {
@@ -99,15 +129,57 @@ public class OverlayRenderer {
     }
 
     public static void drawTooltipBox(int x, int y, int w, int h, int bg, int grad1, int grad2) {
-        DisplayUtil.drawGradientRect(x + 1, y, w - 1, 1, bg, bg);
-        DisplayUtil.drawGradientRect(x + 1, y + h, w - 1, 1, bg, bg);
-        DisplayUtil.drawGradientRect(x + 1, y + 1, w - 1, h - 1, bg, bg);// center
-        DisplayUtil.drawGradientRect(x, y + 1, 1, h - 1, bg, bg);
-        DisplayUtil.drawGradientRect(x + w, y + 1, 1, h - 1, bg, bg);
-        DisplayUtil.drawGradientRect(x + 1, y + 2, 1, h - 3, grad1, grad2);
-        DisplayUtil.drawGradientRect(x + w - 1, y + 2, 1, h - 3, grad1, grad2);
+        targetX = x;
+        targetY = y;
+        targetW = w;
+        targetH = h;
 
-        DisplayUtil.drawGradientRect(x + 1, y + 1, w - 1, 1, grad1, grad1);
-        DisplayUtil.drawGradientRect(x + 1, y + h - 1, w - 1, 1, grad2, grad2);
+        currentX = DisplayUtil.lerp(currentX, targetX, LERP_FACTOR);
+        currentY = DisplayUtil.lerp(currentY, targetY, LERP_FACTOR);
+        currentW = DisplayUtil.lerp(currentW, targetW, LERP_FACTOR);
+        currentH = DisplayUtil.lerp(currentH, targetH, LERP_FACTOR);
+
+        int drawX = (int) currentX;
+        int drawY = (int) currentY;
+        int drawW = (int) currentW;
+        int drawH = (int) currentH;
+
+        DisplayUtil.drawGradientRect(drawX + 1, drawY + 1, drawW - 1, drawH - 1, bg, bg); // center
+        DisplayUtil.drawGradientRect(drawX + 1, drawY, drawW - 1, 1, bg, bg); // top frame
+        DisplayUtil.drawGradientRect(drawX + 1, drawY + drawH, drawW - 1, 1, bg, bg); // bottom frame
+        DisplayUtil.drawGradientRect(drawX, drawY + 1, 1, drawH - 1, bg, bg); // left frame
+        DisplayUtil.drawGradientRect(drawX + drawW, drawY + 1, 1, drawH - 1, bg, bg); // right frame
+        DisplayUtil.drawGradientRect(drawX + 1, drawY + 2, 1, drawH - 3, grad1, grad2); // left gradient
+        DisplayUtil.drawGradientRect(drawX + drawW - 1, drawY + 2, 1, drawH - 3, grad1, grad2); // right gradient
+        DisplayUtil.drawGradientRect(drawX + 1, drawY + 1, drawW - 1, 1, grad1, grad1); // top gradient
+        DisplayUtil.drawGradientRect(drawX + 1, drawY + drawH - 1, drawW - 1, 1, grad2, grad2); // bottom gradient
+    }
+
+    public static void drawBreakProgress(int x, int y, int w, int h) {
+        float breakProgress;
+        if (Minecraft.getMinecraft().playerController != null) {
+            breakProgress = ((IBreakingProgress) Minecraft.getMinecraft().playerController).getCurrentBreakingProgress();
+            int currentProgressLine = 0;
+
+            if (breakProgress > 0.0f) {
+                int progress = (int) (breakProgress * 100.0f);
+                currentProgressLine = (int) (progress / 100.0 * w);
+                lastProgressLine = currentProgressLine;
+                lastBreakProgress = breakProgress;
+            } else {
+                if (lastBreakProgress > 0.0f) {
+                    lastProgressLine = (int) (lastProgressLine * 0.9f);
+                    currentProgressLine = lastProgressLine;
+                    if (currentProgressLine < 1) {
+                        currentProgressLine = 0;
+                        lastBreakProgress = 0.0f;
+                    }
+                }
+            }
+
+            if (currentProgressLine > 0) {
+                DisplayUtil.drawGradientRect(x, y + h - 2, currentProgressLine, 1, 0xFF74766B, 0xFF74766B);
+            }
+        }
     }
 }

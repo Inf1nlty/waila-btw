@@ -168,4 +168,8 @@ public class DisplayUtil {
         DisplayUtil.drawTexturedModalRect(x, y, icon.u, icon.v, sx, sy, icon.su, icon.sv);
     }
 
+    public static float lerp(float start, float end, float factor) {
+        return start + (end - start) * factor;
+    }
+
 }

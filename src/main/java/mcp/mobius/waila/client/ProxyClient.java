@@ -22,15 +22,6 @@ public class ProxyClient extends ProxyServer {
 
     @Override
     public void registerHandlers() {
-
-//        LangUtil.loadLangDir("waila");
-
-//        if (Loader.isModLoaded("NotEnoughItems")) {
-//            NEIHandler.register();
-//        } else {
-//            MinecraftForge.EVENT_BUS.register(new VanillaTooltipHandler());
-//        }
-
         ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerBlocks(), Block.class);
         ModuleRegistrar.instance().registerTailProvider(new HUDHandlerBlocks(), Block.class);
 

@@ -1,6 +1,10 @@
 package mcp.mobius.waila.network;
 
+import btw.block.tileentity.CampfireTileEntity;
+import btw.block.tileentity.FiniteTorchTileEntity;
+import btw.block.tileentity.OvenTileEntity;
 import mcp.mobius.waila.Waila;
+import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.utils.WailaExceptionHandler;
 import cn.xylose.waila.api.PacketDispatcher;
@@ -32,14 +36,18 @@ public class WailaPacketHandler {
         if (packet.channel.equals("Waila")) {
             try {
                 byte header = getHeader(packet);
+
                 if (header == 1) {
                     Packet0x01TERequest castedPacket = new Packet0x01TERequest(packet);
                     MinecraftServer server = MinecraftServer.getServer();
                     TileEntity entity = server.worldServers[castedPacket.worldID].getBlockTileEntity(castedPacket.posX, castedPacket.posY, castedPacket.posZ);
-                    if (entity instanceof TileEntityFurnace) {
-                        if ((entity instanceof TileEntitySkull)) {
-                            return;
-                        }
+
+                    ConfigHandler config = ConfigHandler.instance();
+                    if (entity instanceof OvenTileEntity || entity instanceof CampfireTileEntity ||
+                            entity instanceof TileEntitySkull || entity instanceof FiniteTorchTileEntity) {
+                        if (entity instanceof OvenTileEntity) return;
+                        else if (entity instanceof CampfireTileEntity) return;
+                        else if (entity instanceof FiniteTorchTileEntity) return;
                         try {
                             NBTTagCompound tag = new NBTTagCompound();
                             entity.writeToNBT(tag);
@@ -49,7 +57,18 @@ public class WailaPacketHandler {
                         }
                     }
                 }
-            } catch (Exception e2) {
+//                else if(header == 3) {
+//                    Packet0x03ConfigData filePacket = new Packet0x03ConfigData(packet);
+//                    Map<String, String> config = new HashMap<>();
+//                    for (Object addon: AddonHandler.modList.values().toArray()) {
+//                        if(Objects.equals(((BTWAddon) addon).getLanguageFilePrefix(), filePacket.file)) {
+//                            config = ((BTWAddon)addon).loadConfigProperties();
+//                            break;
+//                        }
+//                    }
+//                    handler.playerEntity.sendChatToPlayer(config.toString());
+//                }
+            } catch (Exception ignored) {
             }
         }
     }
