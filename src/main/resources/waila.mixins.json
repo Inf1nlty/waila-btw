@@ -5,15 +5,12 @@
   "target": "DEFAULT",
   "minVersion": "0.8.3",
   "client": [
+    "GameSettingMixin",
     "GuiInGameMixin",
     "MinecraftMixin",
-    "PlayerControllerMPMixin",
-    "WorldMixin"
+    "PlayerControllerMPMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-    "GameSettingMixin"
-  ]
+  }
 }

@@ -111,23 +111,23 @@ public class DataAccessorCommon implements IWailaCommonAccessor, IWailaDataAcces
 
     @Override
     public NBTTagCompound getNBTData() {
-        if ((this.tileEntity != null) && this.isTagCorrectTileEntity(this.remoteNbt)) return remoteNbt;
+        if ((this.tileEntity != null)) return remoteNbt;
 
-        if ((this.entity != null) && this.isTagCorrectEntity(this.remoteNbt)) return remoteNbt;
+        if ((this.entity != null)) return remoteNbt;
 
-        if (this.tileEntity != null) {
-            NBTTagCompound tag = new NBTTagCompound();
-            try {
-                this.tileEntity.writeToNBT(tag);
-            } catch (Exception ignored) {}
-            return tag;
-        }
-
-        if (this.entity != null) {
-            NBTTagCompound tag = new NBTTagCompound();
-            this.entity.writeToNBT(tag);
-            return tag;
-        }
+//        if (this.tileEntity != null) {
+//            NBTTagCompound tag = new NBTTagCompound();
+//            try {
+//                this.tileEntity.writeToNBT(tag);
+//            } catch (Exception ignored) {}
+//            return tag;
+//        }
+//
+//        if (this.entity != null) {
+//            NBTTagCompound tag = new NBTTagCompound();
+//            this.entity.writeToNBT(tag);
+//            return tag;
+//        }
 
         return null;
     }
