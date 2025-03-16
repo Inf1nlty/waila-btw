@@ -6,13 +6,18 @@ import btw.block.tileentity.CampfireTileEntity;
 import btw.block.tileentity.FiniteTorchTileEntity;
 import btw.block.tileentity.OvenTileEntity;
 import btw.item.BTWItems;
+import cn.xylose.waila.api.PacketDispatcher;
+import cn.xylose.waila.mixin.MinecraftMixin;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
+import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
+import mcp.mobius.waila.network.Packet0x01TERequest;
 import net.minecraft.src.*;
 
+import java.util.HashSet;
 import java.util.List;
 
 import static net.minecraft.src.TileEntityFurnace.DEFAULT_COOK_TIME;
@@ -65,11 +70,22 @@ public class HUDHandlerBTW implements IWailaDataProvider {
     private List<String> updateCampfire(List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
         Block block = accessor.getBlock();
         if (config.getConfig("btw.campfire") && (block == smallCampfire || block == mediumCampfire || block == largeCampfire) && accessor.getTileEntity() instanceof CampfireTileEntity) {
-            NBTTagCompound tag = accessor.getNBTData();
 
             int TIME_TO_COOK = (DEFAULT_COOK_TIME * 8 * 3 / 2);
             int TIME_TO_BURN_FOOD = (TIME_TO_COOK / 2);
 
+            HashSet<String> keys = new HashSet<>();
+
+            if (ModuleRegistrar.instance().hasSyncedNBTKeys(block))
+                keys.addAll(ModuleRegistrar.instance().getSyncedNBTKeys(block));
+
+            if (ModuleRegistrar.instance().hasSyncedNBTKeys(accessor.getTileEntity()))
+                keys.addAll(ModuleRegistrar.instance().getSyncedNBTKeys(accessor.getTileEntity()));
+
+            if (!keys.isEmpty() || ModuleRegistrar.instance().hasNBTProviders(block)
+                    || ModuleRegistrar.instance().hasNBTProviders(accessor.getTileEntity()))
+                PacketDispatcher.sendPacketToServer(Packet0x01TERequest.create(accessor.getWorld(), Minecraft.getMinecraft().objectMouseOver, keys));
+            NBTTagCompound tag = DataAccessorCommon.instance.remoteNbt;
             if (tag.getInteger("fcCookCounter") == 0) TIME_TO_COOK = 0;
 
             currenttip.add(String.format("BurnTime: %s", tag.getInteger("fcBurnCounter") / 20));

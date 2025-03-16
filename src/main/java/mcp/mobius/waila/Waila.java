@@ -44,7 +44,6 @@ public class Waila extends BTWAddon implements ModInitializer {
         if (this.wailaPacketHandler == null) {
             this.wailaPacketHandler = new WailaPacketHandler();
         }
-        this.wailaPacketHandler.handleCustomPacket(handler, packet);
         return false;
     }
 

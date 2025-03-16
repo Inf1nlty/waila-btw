@@ -31,7 +31,7 @@ public class WailaTickHandler {
 
     public void tickClient() {
 
-        if (!Keyboard.isKeyDown(KeyEvent.key_show.keyCode)
+        if (!Keyboard.isKeyDown(KeyEvent.instance.key_show.keyCode)
                 && !ConfigHandler.instance().getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_MODE, false)
                 && ConfigHandler.instance()
                         .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SHOW, false)) {

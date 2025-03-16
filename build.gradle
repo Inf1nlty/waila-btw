@@ -26,6 +26,10 @@ repositories {
 		url = 'https://maven.glass-launcher.net/babric'
 	}
 	maven {
+		name = "Spongepowered"
+		url = "https://repo.spongepowered.org/repository/maven-public/"
+	}
+	maven {
 		url file('mavenRepo')
 	}
 	mavenCentral() //For fastutil
@@ -100,6 +104,10 @@ java {
 jar {
 	from sourceSets.main.output.resourcesDir
 	from sourceSets.main.output.classesDirs
+	into('META-INF\\jars') {
+		from("libs\\log4j-api-2.19.0.jar")
+		from("libs\\log4j-core-2.19.0.jar")
+	}
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
 	}

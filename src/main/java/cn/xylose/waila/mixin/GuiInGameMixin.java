@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class GuiInGameMixin {
     @Inject(method = "renderGameOverlay(FZII)V", at = @At("TAIL"))
     private void renderWailaOverlay(float par1, boolean par2, int par3, int par4, CallbackInfo ci) {
-        DataAccessorCommon.instance = new DataAccessorCommon();
         WailaTickHandler.instance().tickClient();
         OverlayRenderer overlayRenderer = new OverlayRenderer();
         overlayRenderer.renderOverlay();

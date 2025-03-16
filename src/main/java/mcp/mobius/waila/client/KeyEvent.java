@@ -13,15 +13,16 @@ import mcp.mobius.waila.utils.Constants;
 import java.util.Objects;
 
 public class KeyEvent {
-
-    public static KeyBinding key_cfg;
-    public static KeyBinding key_show;
-    public static KeyBinding key_liquid;
-    public static KeyBinding key_recipe;
-    public static KeyBinding key_usage;
+    public static KeyEvent instance;
+    public KeyBinding key_cfg;
+    public KeyBinding key_show;
+    public KeyBinding key_liquid;
+    public KeyBinding key_recipe;
+    public KeyBinding key_usage;
     Minecraft mc = Minecraft.getMinecraft();
 
     public KeyEvent() {
+        instance = this;
         key_cfg = new KeyBinding(Constants.BIND_WAILA_CFG, Keyboard.KEY_NUMPAD0);
         key_show = new KeyBinding(Constants.BIND_WAILA_SHOW, Keyboard.KEY_NUMPAD1);
         key_liquid = new KeyBinding(Constants.BIND_WAILA_LIQUID, Keyboard.KEY_NUMPAD2);
