@@ -28,7 +28,7 @@ public class MinecraftMixin {
     @Inject(method = "startGame", at = @At("TAIL"))
     private void onWorldUnload(CallbackInfo ci) {
         if (this.wailaAddon == null) {
-            ConfigHandler.instance().config = new Configuration(new File(String.valueOf(FabricLoader.getInstance().getConfigDir()), "waila.cfg"));
+            ConfigHandler.instance().config = new Configuration(new File(String.valueOf(FabricLoader.getInstance().getConfigDir()), "Waila.cfg"));
             DataAccessorCommon.instance = new DataAccessorCommon();
             this.wailaAddon = new Waila();
             this.wailaAddon.load();

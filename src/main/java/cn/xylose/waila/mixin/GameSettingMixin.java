@@ -22,12 +22,11 @@ public class GameSettingMixin {
     public void initWailaKeybindings(CallbackInfo ci) {
         new KeyEvent();
         List<KeyBinding> list = new ArrayList<>();
-        list.add(KeyEvent.instance.key_show);
         list.add(KeyEvent.instance.key_cfg);
+        list.add(KeyEvent.instance.key_show);
         list.add(KeyEvent.instance.key_liquid);
         list.add(KeyEvent.instance.key_recipe);
         list.add(KeyEvent.instance.key_usage);
         this.keyBindings = ArrayUtils.addAll(this.keyBindings, list.toArray(KeyBinding[]::new));
     }
-
 }

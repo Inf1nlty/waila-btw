@@ -1,10 +1,14 @@
 package mcp.mobius.waila;
 
 import btw.BTWAddon;
+import btw.BTWMod;
+import btw.client.network.packet.handler.*;
 import cn.xylose.waila.api.PacketDispatcher;
 import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.client.ProxyClient;
 import mcp.mobius.waila.network.Packet0x00ServerPing;
+import mcp.mobius.waila.network.Packet0x01TERequest;
+import mcp.mobius.waila.network.Packet0x02TENBTData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
@@ -38,6 +42,13 @@ public class Waila extends BTWAddon implements ModInitializer {
         proxy.registerIMCs();
         ConfigHandler.instance().loadDefaultConfig();
         OverlayConfig.updateColors();
+        initClientPacketInfo();
+    }
+
+    @Environment(EnvType.CLIENT)
+    private static void initClientPacketInfo() {
+        Waila.instance.registerPacketHandler("Waila", new Packet0x01TERequest(new Packet250CustomPayload()));
+        Waila.instance.registerPacketHandler("Waila", new Packet0x02TENBTData(new Packet250CustomPayload()));
     }
 
     public boolean serverCustomPacketReceived(NetServerHandler handler, Packet250CustomPayload packet) {
@@ -68,7 +79,7 @@ public class Waila extends BTWAddon implements ModInitializer {
         if (this.wailaPacketHandler == null) {
             this.wailaPacketHandler = new WailaPacketHandler();
         }
-        this.wailaPacketHandler.handleCustomPacket(packet);
+//        this.wailaPacketHandler.onPacketData(packet, mc.thePlayer);
         return false;
     }
 

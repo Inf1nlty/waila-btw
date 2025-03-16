@@ -82,10 +82,11 @@ public class HUDHandlerBTW implements IWailaDataProvider {
             if (ModuleRegistrar.instance().hasSyncedNBTKeys(accessor.getTileEntity()))
                 keys.addAll(ModuleRegistrar.instance().getSyncedNBTKeys(accessor.getTileEntity()));
 
-            if (!keys.isEmpty() || ModuleRegistrar.instance().hasNBTProviders(block)
-                    || ModuleRegistrar.instance().hasNBTProviders(accessor.getTileEntity()))
-                PacketDispatcher.sendPacketToServer(Packet0x01TERequest.create(accessor.getWorld(), Minecraft.getMinecraft().objectMouseOver, keys));
+//            if (!keys.isEmpty() || ModuleRegistrar.instance().hasNBTProviders(block)
+//                    || ModuleRegistrar.instance().hasNBTProviders(accessor.getTileEntity()))
+//                PacketDispatcher.sendPacketToServer(Packet0x01TERequest.create(accessor.getWorld(), accessor.getPosition(), keys));
             NBTTagCompound tag = DataAccessorCommon.instance.remoteNbt;
+            System.out.println("tag: " + tag);
             if (tag.getInteger("fcCookCounter") == 0) TIME_TO_COOK = 0;
 
             currenttip.add(String.format("BurnTime: %s", tag.getInteger("fcBurnCounter") / 20));
