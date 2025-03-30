@@ -1,14 +1,13 @@
 package mcp.mobius.waila.server;
 
-import java.lang.reflect.Method;
-
 import cn.xylose.waila.addons.btw.HUDHandlerBTW;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.addons.vanillamc.HUDHandlerVanilla;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
 import mcp.mobius.waila.handlers.DecoratorFMP;
-import mcp.mobius.waila.handlers.HUDHandlerFMP;
+
+import java.lang.reflect.Method;
 
 public class ProxyServer {
 

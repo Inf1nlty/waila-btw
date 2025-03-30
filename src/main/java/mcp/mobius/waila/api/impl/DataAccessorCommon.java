@@ -137,14 +137,14 @@ public class DataAccessorCommon implements IWailaCommonAccessor, IWailaDataAcces
     }
 
     private boolean isTagCorrectTileEntity(NBTTagCompound tag) {
-        if (tag == null || !tag.hasKey("WailaX")) {
+        if (tag == null || !tag.hasKey("x")) {
             this.timeLastUpdate = System.currentTimeMillis() - 250;
             return false;
         }
 
-        int x = tag.getInteger("WailaX");
-        int y = tag.getInteger("WailaY");
-        int z = tag.getInteger("WailaZ");
+        int x = tag.getInteger("x");
+        int y = tag.getInteger("y");
+        int z = tag.getInteger("z");
 
         if (x == this.mop.blockX && y == this.mop.blockY && z == this.mop.blockZ) return true;
         else {

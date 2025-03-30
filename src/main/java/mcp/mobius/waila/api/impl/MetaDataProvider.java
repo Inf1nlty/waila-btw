@@ -1,10 +1,5 @@
 package mcp.mobius.waila.api.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import cn.xylose.waila.api.PacketDispatcher;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaBlock;
@@ -13,9 +8,13 @@ import mcp.mobius.waila.api.IWailaEntityProvider;
 import mcp.mobius.waila.cbcore.Layout;
 import mcp.mobius.waila.network.Packet0x01TERequest;
 import mcp.mobius.waila.network.Packet0x03EntRequest;
-import mcp.mobius.waila.network.WailaPacketHandler;
 import mcp.mobius.waila.utils.WailaExceptionHandler;
 import net.minecraft.src.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class MetaDataProvider {
 

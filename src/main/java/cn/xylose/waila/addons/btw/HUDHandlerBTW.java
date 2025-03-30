@@ -2,35 +2,28 @@ package cn.xylose.waila.addons.btw;
 
 import btw.block.BTWBlocks;
 import btw.block.blocks.CampfireBlock;
+import btw.block.blocks.FiniteBurningTorchBlock;
+import btw.block.blocks.OvenBlock;
 import btw.block.tileentity.CampfireTileEntity;
-import btw.block.tileentity.FiniteTorchTileEntity;
-import btw.block.tileentity.OvenTileEntity;
 import btw.item.BTWItems;
-import cn.xylose.waila.api.PacketDispatcher;
-import cn.xylose.waila.mixin.MinecraftMixin;
-import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
-import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
-import mcp.mobius.waila.network.Packet0x01TERequest;
 import net.minecraft.src.*;
 
-import java.util.HashSet;
 import java.util.List;
 
 import static net.minecraft.src.TileEntityFurnace.DEFAULT_COOK_TIME;
 
 public class HUDHandlerBTW implements IWailaDataProvider {
-
-    static Block idleOven = BTWBlocks.idleOven;
-    static Block burningOven = BTWBlocks.burningOven;
-    static Block unlitCampfire = BTWBlocks.unlitCampfire;
-    static Block smallCampfire = BTWBlocks.smallCampfire;
-    static Block mediumCampfire = BTWBlocks.mediumCampfire;
-    static Block largeCampfire = BTWBlocks.largeCampfire;
-    static Block finiteTorch = BTWBlocks.finiteBurningTorch;
+    static int idleOven = BTWBlocks.idleOven.blockID;
+    static int burningOven = BTWBlocks.burningOven.blockID;
+    static int unlitCampfire = BTWBlocks.unlitCampfire.blockID;
+    static int smallCampfire = BTWBlocks.smallCampfire.blockID;
+    static int mediumCampfire = BTWBlocks.mediumCampfire.blockID;
+    static int largeCampfire = BTWBlocks.largeCampfire.blockID;
+    static int finiteTorch = BTWBlocks.finiteBurningTorch.blockID;
 
     @Override
     public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
@@ -51,8 +44,8 @@ public class HUDHandlerBTW implements IWailaDataProvider {
     }
 
     private List<String> updateOven(List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        Block block = accessor.getBlock();
-        if (config.getConfig("btw.oven") && (block == burningOven) && accessor.getTileEntity() instanceof OvenTileEntity) {
+        int block = accessor.getBlockID();
+        if (config.getConfig("btw.oven") && (block == burningOven || block == idleOven)) {
             NBTTagCompound tag = accessor.getNBTData();
 
             int remainingCookingTime = 0;
@@ -61,50 +54,54 @@ public class HUDHandlerBTW implements IWailaDataProvider {
                 int iCookTimeShift = DEFAULT_COOK_TIME << FurnaceRecipes.smelting().getCookTimeBinaryShift(((NBTTagCompound) tag.getTagList("Items").tagAt(0)).getShort("id"));
                 remainingCookingTime = iCookTimeShift * 4 - tag.getInteger("fcCookTimeEx");
             }
-            currenttip.add(String.format("FuelTime: %s", (block == burningOven ? tag.getInteger("fcBurnTimeEx") : tag.getInteger("fcUnlitFuel")) / 20));
-            currenttip.add(String.format("CookTime: %s", remainingCookingTime / 20));
+            int fuelTime = block == burningOven ? tag.getInteger("fcBurnTimeEx") : tag.getInteger("fcUnlitFuel");
+            if (fuelTime != 0) {
+                currenttip.add(I18n.getStringParams("info.btw.fuel_time", fuelTime / 20));
+            }
+            if (remainingCookingTime != 0) {
+                currenttip.add(I18n.getStringParams("info.btw.cook_time", remainingCookingTime / 20));
+            }
         }
         return currenttip;
     }
 
     private List<String> updateCampfire(List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        Block block = accessor.getBlock();
-        if (config.getConfig("btw.campfire") && (block == smallCampfire || block == mediumCampfire || block == largeCampfire) && accessor.getTileEntity() instanceof CampfireTileEntity) {
+        int block = accessor.getBlockID();
+        if (config.getConfig("btw.campfire") && (block == smallCampfire || block == mediumCampfire || block == largeCampfire)) {
 
-            int TIME_TO_COOK = (DEFAULT_COOK_TIME * 8 * 3 / 2);
-            int TIME_TO_BURN_FOOD = (TIME_TO_COOK / 2);
+            final int TIME_TO_COOK = CampfireTileEntity.TIME_TO_COOK;
+            final int TIME_TO_BURN_FOOD = CampfireTileEntity.TIME_TO_BURN_FOOD;
 
-            HashSet<String> keys = new HashSet<>();
+            NBTTagCompound tag = accessor.getNBTData();
 
-            if (ModuleRegistrar.instance().hasSyncedNBTKeys(block))
-                keys.addAll(ModuleRegistrar.instance().getSyncedNBTKeys(block));
-
-            if (ModuleRegistrar.instance().hasSyncedNBTKeys(accessor.getTileEntity()))
-                keys.addAll(ModuleRegistrar.instance().getSyncedNBTKeys(accessor.getTileEntity()));
-
-//            if (!keys.isEmpty() || ModuleRegistrar.instance().hasNBTProviders(block)
-//                    || ModuleRegistrar.instance().hasNBTProviders(accessor.getTileEntity()))
-//                PacketDispatcher.sendPacketToServer(Packet0x01TERequest.create(accessor.getWorld(), accessor.getPosition(), keys));
-            NBTTagCompound tag = DataAccessorCommon.instance.remoteNbt;
-            System.out.println("tag: " + tag);
-            if (tag.getInteger("fcCookCounter") == 0) TIME_TO_COOK = 0;
-
-            currenttip.add(String.format("BurnTime: %s", tag.getInteger("fcBurnCounter") / 20));
-            currenttip.add(String.format("CookTime: %s", (TIME_TO_COOK - tag.getInteger("fcCookCounter")) / 20));
-            currenttip.add(String.format("BurnedTime: %s", (((CampfireBlock) accessor.getBlock()).fireLevel >= 3 && tag.getCompoundTag("fcCookStack").getShort("id") != BTWItems.burnedMeat.itemID) ? (TIME_TO_BURN_FOOD - tag.getInteger("fcCookBurning")) / 20 : "null"));
+            int burnTime = tag.getInteger("fcBurnCounter");
+            if (burnTime != 0) {
+                currenttip.add(I18n.getStringParams("info.btw.burn_time", burnTime / 20));
+            }
+            int cookCounter = tag.getInteger("fcCookCounter");
+            if (cookCounter != 0 && TIME_TO_COOK - cookCounter != 0) {
+                currenttip.add(I18n.getStringParams("info.btw.cook_time", (TIME_TO_COOK - cookCounter) / 20));
+            }
+            int burnedTime = (((CampfireBlock) accessor.getBlock()).fireLevel >= 3 &&
+                    tag.getCompoundTag("fcCookStack").getShort("id") != BTWItems.burnedMeat.itemID) ?
+                    (TIME_TO_BURN_FOOD - tag.getInteger("fcCookBurning")) / 20 : 0;
+            if (burnedTime != 0) {
+                currenttip.add(I18n.getStringParams("info.btw.burned_time", burnedTime));
+            }
         }
         return currenttip;
     }
 
     private List<String> updateFiniteTorch(List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        Block block = accessor.getBlock();
-        if (config.getConfig("btw.finite_torch") && block == finiteTorch && accessor.getTileEntity() instanceof FiniteTorchTileEntity) {
+        int block = accessor.getBlockID();
+        if (config.getConfig("btw.finite_torch") && block == finiteTorch) {
             NBTTagCompound tag = accessor.getNBTData();
             int time = tag.getInteger("fcBurnCounter");
-            currenttip.add(String.format("Time: %s", time / 20));
+            currenttip.add(I18n.getStringParams("info.btw.burn_time", time / 20));
         }
         return currenttip;
     }
+
 
     @Override
     public List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
@@ -124,12 +121,12 @@ public class HUDHandlerBTW implements IWailaDataProvider {
 
         IWailaDataProvider provider = new HUDHandlerBTW();
 
-        ModuleRegistrar.instance().registerBodyProvider(provider, idleOven.getClass());
-        ModuleRegistrar.instance().registerBodyProvider(provider, burningOven.getClass());
-        ModuleRegistrar.instance().registerBodyProvider(provider, unlitCampfire.getClass());
-        ModuleRegistrar.instance().registerBodyProvider(provider, smallCampfire.getClass());
-        ModuleRegistrar.instance().registerBodyProvider(provider, mediumCampfire.getClass());
-        ModuleRegistrar.instance().registerBodyProvider(provider, largeCampfire.getClass());
-        ModuleRegistrar.instance().registerBodyProvider(provider,  finiteTorch.getClass());
+        ModuleRegistrar.instance().registerBodyProvider(provider, OvenBlock.class);
+        ModuleRegistrar.instance().registerBodyProvider(provider, CampfireBlock.class);
+        ModuleRegistrar.instance().registerBodyProvider(provider, FiniteBurningTorchBlock.class);
+
+        ModuleRegistrar.instance().registerNBTProvider(provider, OvenBlock.class);
+        ModuleRegistrar.instance().registerNBTProvider(provider, CampfireBlock.class);
+        ModuleRegistrar.instance().registerNBTProvider(provider, FiniteBurningTorchBlock.class);
     }
 }

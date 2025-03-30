@@ -154,3 +154,8 @@ nei.options.keys.showenchant=显示附魔值
 option.btw.oven=显示砖炉
 option.btw.campfire=显示篝火
 option.btw.finite_torch=显示火把
+
+info.btw.fuel_time=燃料时间：%s
+info.btw.burn_time=燃烧时间：%s
+info.btw.cook_time=烧制时间：%s
+info.btw.burned_time=烧焦时间：%s

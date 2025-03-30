@@ -8,13 +8,11 @@
     "GameSettingMixin",
     "GuiInGameMixin",
     "MinecraftMixin",
-    "NetClientHandlerMixin",
     "PlayerControllerMPMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
-    "NetServerHandlerMixin"
   ]
 }

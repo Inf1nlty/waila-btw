@@ -16,7 +16,7 @@ public class Packet0x04EntNBTData {
         try {
             this.header = inputStream.readByte();
             this.tag = NBTUtil.readNBTTagCompound(inputStream);
-        } catch (IOException var4) {
+        } catch (IOException ignored) {
         }
 
     }
@@ -29,7 +29,7 @@ public class Packet0x04EntNBTData {
         try {
             outputStream.writeByte(4);
             NBTUtil.writeNBTTagCompound(tag, outputStream);
-        } catch (IOException var5) {
+        } catch (IOException ignored) {
         }
 
         packet.channel = "Waila";

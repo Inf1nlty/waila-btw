@@ -155,3 +155,8 @@ nei.options.keys.showenchant=Show enchanting values
 option.btw.oven=Show Oven
 option.btw.campfire=Show Campfire
 option.btw.finite_torch=Show Finite Torch
+
+info.btw.fuel_time=FuelTime: %s
+info.btw.burn_time=BurnTime: %s
+info.btw.cook_time=CookTime: %s
+info.btw.burned_time=BurnedTime: %s

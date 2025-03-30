@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Packet0x00ServerPing {
     public byte header;
-    public HashMap<String, Boolean> forcedKeys = new HashMap();
+    public HashMap<String, Boolean> forcedKeys = new HashMap<>();
 
     public Packet0x00ServerPing(Packet250CustomPayload packet) {
         DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
@@ -26,7 +26,7 @@ public class Packet0x00ServerPing {
                 boolean value = inputStream.readBoolean();
                 this.forcedKeys.put(key, value);
             }
-        } catch (IOException var5) {
+        } catch (IOException ignored) {
         }
 
     }
@@ -50,7 +50,7 @@ public class Packet0x00ServerPing {
 //            }
 
             Packet.writeString("END OF LIST", outputStream);
-        } catch (IOException var6) {
+        } catch (IOException ignored) {
         }
 
         packet.channel = "Waila";

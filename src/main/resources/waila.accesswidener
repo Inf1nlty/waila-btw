@@ -12,3 +12,5 @@ accessible field net/minecraft/src/GuiIngame updateCounter I
 accessible field net/minecraft/src/NetClientHandler mc Lnet/minecraft/src/Minecraft;
 accessible method net/minecraft/src/EnumDirection getFace() Lnet/minecraft/src/EnumFace;
 accessible field net/minecraft/src/Block unlocalizedName Ljava/lang/String;
+accessible field btw/block/tileentity/CampfireTileEntity TIME_TO_COOK I
+accessible field btw/block/tileentity/CampfireTileEntity TIME_TO_BURN_FOOD I
