@@ -1,6 +1,7 @@
 package mcp.mobius.waila.server;
 
-import cn.xylose.waila.addons.btw.HUDHandlerBTW;
+import cn.xylose.waila.addons.btw.HUDHandlerBTWBlock;
+import cn.xylose.waila.addons.btw.HUDHandlerBTWEntity;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.addons.vanillamc.HUDHandlerVanilla;
 import mcp.mobius.waila.api.IWailaRegistrar;
@@ -15,12 +16,16 @@ public class ProxyServer {
 
     public void registerHandlers() {}
 
+    /**
+     * Please register Waila addons in Minecraft.startGame()
+     */
     public void registerMods() {
         HUDHandlerVanilla.register();
 //        HUDHandlerFurnace.register(); //WIP
 //        HUDHandlerFMP.register();
         DecoratorFMP.register();
-        HUDHandlerBTW.register(); //WIP
+        HUDHandlerBTWBlock.register();
+        HUDHandlerBTWEntity.register();
     }
 
     public void registerIMCs() {

@@ -2,6 +2,8 @@ package mcp.mobius.waila.client;
 
 import cn.xylose.waila.handlers.emi.EMIHandler;
 import emi.dev.emi.emi.api.EmiApi;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.src.KeyBinding;
 import net.minecraft.src.Minecraft;
 import net.minecraftforge.common.Configuration;
@@ -12,6 +14,7 @@ import mcp.mobius.waila.utils.Constants;
 
 import java.util.Objects;
 
+@Environment(EnvType.CLIENT)
 public class KeyEvent {
     public static KeyEvent instance;
     public KeyBinding key_cfg;

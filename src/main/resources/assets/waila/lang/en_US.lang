@@ -152,11 +152,17 @@ option.thaumcraft.aspects=Show aspects
 
 nei.options.keys.showenchant=Show enchanting values
 
+# config
 option.btw.oven=Show Oven
 option.btw.campfire=Show Campfire
 option.btw.finite_torch=Show Finite Torch
+option.btw.spider_web=Show Spider Spits Web
 
-info.btw.fuel_time=FuelTime: %s
-info.btw.burn_time=BurnTime: %s
-info.btw.cook_time=CookTime: %s
-info.btw.burned_time=BurnedTime: %s
+# block
+info.btw.fuel_time=Fuel Time: %s
+info.btw.burn_time=Burn Time: %s
+info.btw.cook_time=Cook Time: %s
+info.btw.burned_time=Burned Time: %s
+
+# entity
+info.btw.has_web=Has Web

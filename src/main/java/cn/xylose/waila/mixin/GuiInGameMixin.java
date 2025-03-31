@@ -1,6 +1,5 @@
 package cn.xylose.waila.mixin;
 
-import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.overlay.OverlayRenderer;
 import mcp.mobius.waila.overlay.WailaTickHandler;
 import net.minecraft.src.GuiIngame;

@@ -19,7 +19,7 @@ public class GameSettingMixin {
     @Shadow public KeyBinding[] keyBindings;
 
     @Inject(method = "<init>(Lnet/minecraft/src/Minecraft;Ljava/io/File;)V", at = @At(value = "FIELD", target = "Lnet/minecraft/src/GameSettings;mc:Lnet/minecraft/src/Minecraft;"))
-    public void initWailaKeybindings(CallbackInfo ci) {
+    public void registerWailaKeybindings(CallbackInfo ci) {
         new KeyEvent();
         List<KeyBinding> list = new ArrayList<>();
         list.add(KeyEvent.instance.key_cfg);

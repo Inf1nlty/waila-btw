@@ -1,6 +1,5 @@
 package mcp.mobius.waila.client;
 
-import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
 import mcp.mobius.waila.gui.truetyper.FontLoader;
 import mcp.mobius.waila.gui.truetyper.TrueTypeFont;
@@ -10,10 +9,13 @@ import mcp.mobius.waila.overlay.tooltiprenderers.TTRenderHealth;
 import mcp.mobius.waila.overlay.tooltiprenderers.TTRenderProgressBar;
 import mcp.mobius.waila.overlay.tooltiprenderers.TTRenderStack;
 import mcp.mobius.waila.server.ProxyServer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.src.Block;
 import net.minecraft.src.Entity;
 import net.minecraft.src.ResourceLocation;
 
+@Environment(EnvType.CLIENT)
 public class ProxyClient extends ProxyServer {
 
     TrueTypeFont minecraftiaFont;

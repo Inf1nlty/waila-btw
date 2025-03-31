@@ -151,9 +151,9 @@ public class ConfigHandler implements IWailaConfigHandler {
         OverlayConfig.alpha = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_ALPHA, 80).getInt();
         OverlayConfig.bgcolor = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_BGCOLOR, 0x100010)
                 .getInt();
-        OverlayConfig.gradient1 = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_GRADIENT1, 0x5000ff)
+        OverlayConfig.gradient1 = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_GRADIENT1, 0x5000FF)
                 .getInt();
-        OverlayConfig.gradient2 = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_GRADIENT2, 0x28007f)
+        OverlayConfig.gradient2 = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_GRADIENT2, 0x28007F)
                 .getInt();
         OverlayConfig.fontcolor = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_FONTCOLOR, 0xA0A0A0)
                 .getInt();

@@ -1,6 +1,7 @@
 package mcp.mobius.waila.overlay;
 
 import cn.xylose.waila.api.IBreakingProgress;
+import net.minecraft.src.BossStatus;
 import net.minecraft.src.EnumMovingObjectType;
 import net.minecraft.src.Minecraft;
 import net.minecraft.src.RenderHelper;
@@ -68,6 +69,8 @@ public class OverlayRenderer {
             GL11.glPopMatrix();
             return;
         }
+
+        if (BossStatus.bossName != null && BossStatus.statusBarLength > 0) tooltip.y += 20;
 
         GL11.glScalef(OverlayConfig.scale, OverlayConfig.scale, 1.0f);
 
@@ -178,7 +181,7 @@ public class OverlayRenderer {
             }
 
             if (currentProgressLine > 0) {
-                DisplayUtil.drawGradientRect(x, y + h - 2, currentProgressLine, 1, 0xFF74766B, 0xFF74766B);
+                DisplayUtil.drawGradientRect(x, y + h - 1, currentProgressLine, 1, 0xFF74766B, 0xFF74766B);
             }
         }
     }
