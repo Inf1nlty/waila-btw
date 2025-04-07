@@ -25,6 +25,9 @@
     "main": [
       "mcp.mobius.waila.Waila"
     ],
+    "client": [
+      "mcp.mobius.waila.WailaClient"
+    ],
     "btw:addon": [
       "mcp.mobius.waila.Waila"
     ]

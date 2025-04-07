@@ -4,7 +4,8 @@ import net.fabricmc.loom.api.processor.SpecContext
 
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardCopyOption
+import java.text.SimpleDateFormat;
 
 plugins {
 	id 'maven-publish'
@@ -99,6 +100,11 @@ tasks.withType(JavaCompile).configureEach {
 
 java {
 	withSourcesJar()
+
+	if (project.dev) {
+		version += "-dev.build."
+		version += new SimpleDateFormat("yyyyMMdd").format(new Date())
+	}
 }
 
 jar {

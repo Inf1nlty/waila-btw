@@ -1,5 +1,10 @@
 # Waila for BTW
 
+## 2.0.1
+* 将客户端内容分离，使服务端运行本模组不再崩溃
+
+---
+
 ## 2.0.0
 * 重新移植自[GTNH Waila](https://github.com/GTNewHorizons/waila)
 * 适配了BTW，并移除了对其他模组的适配
