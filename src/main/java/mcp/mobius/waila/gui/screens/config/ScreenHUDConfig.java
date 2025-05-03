@@ -276,6 +276,8 @@ public class ScreenHUDConfig extends ScreenBase {
                         .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_POSY, 0);
                 OverlayConfig.scale = ConfigHandler.instance()
                         .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SCALE, 0) / 100.0f;
+                OverlayConfig.lerpfactor = ConfigHandler.instance()
+                        .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_LERPFACTOR, 0) / 100.0f;
 
                 OverlayConfig.updateColors();
             }

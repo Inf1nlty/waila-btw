@@ -3,6 +3,8 @@ package mcp.mobius.waila.overlay;
 import static mcp.mobius.waila.api.SpecialChars.ITALIC;
 
 import java.util.List;
+
+import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.api.impl.MetaDataProvider;
@@ -97,7 +99,7 @@ public class WailaTickHandler {
                     currenttip.addAll(currenttipBody);
                     currenttip.addAll(currenttipTail);
 
-                    this.tooltip = new Tooltip(currenttip, targetStack);
+                    this.tooltip = new Tooltip(currenttip, ConfigHandler.instance().getConfig("general.showicon"), targetStack);
                 }
             } else if (target != null && target.typeOfHit == EnumMovingObjectType.ENTITY) {
                 DataAccessorCommon accessor = DataAccessorCommon.instance;

@@ -29,7 +29,7 @@ public class Waila extends BTWAddon implements ModInitializer {
     public static Waila instance;
     public static Logger log = LogManager.getLogger(modName);
     public boolean serverPresent = false;
-    public WailaPacketHandler wailaPacketHandler;
+    private WailaPacketHandler wailaPacketHandler;
 
     @Override
     public void initialize() {
@@ -50,6 +50,7 @@ public class Waila extends BTWAddon implements ModInitializer {
     public void postSetup() {
         this.modID = modId;
         this.addonName = FabricLoader.getInstance().getModContainer(modID).get().getMetadata().getName();
+        addResourcePackDomain(modId);
     }
 
     @Override
@@ -69,5 +70,14 @@ public class Waila extends BTWAddon implements ModInitializer {
     @Override
     public void serverPlayerConnectionInitialized(NetServerHandler serverHandler, EntityPlayerMP playerMP) {
         PacketDispatcher.sendPacketToPlayer(Packet0x00ServerPing.create(), playerMP);
+    }
+
+    @Environment(EnvType.CLIENT)
+    public boolean interceptCustomClientPacket(Minecraft mc, Packet250CustomPayload packet) {
+        if (this.wailaPacketHandler == null) {
+            this.wailaPacketHandler = new WailaPacketHandler();
+        }
+        this.wailaPacketHandler.handleCustomPacket(packet);
+        return false;
     }
 }

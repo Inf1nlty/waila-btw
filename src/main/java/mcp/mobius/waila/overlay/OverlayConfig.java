@@ -14,6 +14,7 @@ public class OverlayConfig {
     public static int gradient2;
     public static int fontcolor;
     public static float scale;
+    public static float lerpfactor;
 
     public static void updateColors() {
         OverlayConfig.alpha = (int) (ConfigHandler.instance()

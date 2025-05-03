@@ -145,7 +145,11 @@ option.stevescarts.showall=显示数据
 option.stevescarts.colorblind=色盲模式
 option.stevescarts.shifttoggle=潜行触发
 option.general.showents=显示实体
+option.general.showicon=显示图标
+option.general.showmods=显示模组
 option.general.showhp=显示实体生命值
+option.general.showatk=显示实体攻击力
+option.general.showarmor=显示实体护甲值
 option.general.showcrop=显示作物生长状态
 option.thaumcraft.aspects=显示要素
 
@@ -164,4 +168,8 @@ info.btw.cook_time=烧制时间：%s
 info.btw.burned_time=烧焦时间：%s
 
 # entity
-info.btw.has_web=有蛛丝
+info.btw.has_web=有网
+
+hud.msg.attack=攻击力：%s
+hud.msg.health=生命值：
+hud.msg.armor=护甲值：%s

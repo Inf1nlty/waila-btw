@@ -146,7 +146,11 @@ option.stevescarts.showall=Show data
 option.stevescarts.colorblind=Colorblind mode
 option.stevescarts.shifttoggle=Shift toggle
 option.general.showents=Show entities
+option.general.showicon=Show icon
+option.general.showmods=Show mods
 option.general.showhp=Show entities health
+option.general.showatk=Show entities attack
+option.general.showarmor=Show entities armor
 option.general.showcrop=Show crop growth
 option.thaumcraft.aspects=Show aspects
 
@@ -166,3 +170,7 @@ info.btw.burned_time=Burned Time: %s
 
 # entity
 info.btw.has_web=Has Web
+
+hud.msg.attack=Atk: %s
+hud.msg.health=HP:
+hud.msg.armor=Armor：%s

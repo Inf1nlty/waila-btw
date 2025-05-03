@@ -5,3 +5,4 @@ accessible method net/minecraft/src/GuiIngame renderBossHealth ()V
 accessible field btw/block/tileentity/CampfireTileEntity TIME_TO_COOK I
 accessible field btw/block/tileentity/CampfireTileEntity TIME_TO_BURN_FOOD I
 accessible field net/minecraft/src/EntitySpider timeToNextWeb I
+accessible field net/minecraft/src/EntityChicken timeToLayEgg J

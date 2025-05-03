@@ -1,18 +1,15 @@
 package mcp.mobius.waila.api.impl;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-import com.google.common.base.CharMatcher;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.handlers.HUDHandlerEntities;
 import mcp.mobius.waila.overlay.OverlayConfig;
 import mcp.mobius.waila.utils.Constants;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
@@ -158,7 +155,9 @@ public class ConfigHandler implements IWailaConfigHandler {
         OverlayConfig.fontcolor = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_FONTCOLOR, 0xA0A0A0)
                 .getInt();
         OverlayConfig.scale = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SCALE, 100).getInt()
-                / 100.0f;
+                / 100.0F;
+        OverlayConfig.lerpfactor = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_LERPFACTOR, 30).getInt()
+                / 100.0F;
 
         HUDHandlerEntities.nhearts = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_NHEARTS, 20)
                 .getInt();

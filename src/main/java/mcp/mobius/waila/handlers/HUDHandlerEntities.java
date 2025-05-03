@@ -6,18 +6,22 @@ import static mcp.mobius.waila.api.SpecialChars.ITALIC;
 import static mcp.mobius.waila.api.SpecialChars.WHITE;
 import static mcp.mobius.waila.api.SpecialChars.getRenderString;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaEntityAccessor;
 import mcp.mobius.waila.api.IWailaEntityProvider;
+import mcp.mobius.waila.cbcore.LangUtil;
 import net.minecraft.src.*;
 
 public class HUDHandlerEntities implements IWailaEntityProvider {
 
     public static int nhearts = 20;
     public static float maxhpfortext = 40.0f;
+    public static int nArmorIconsPerLine = 20;
+    public static float maxArmorForText = 20.0f;
 
     @Override
     public Entity getWailaOverride(IWailaEntityAccessor accessor, IWailaConfigHandler config) {
@@ -37,8 +41,16 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
 
     @Override
     public List<String> getWailaBody(Entity entity, List<String> currenttip, IWailaEntityAccessor accessor,
-            IWailaConfigHandler config) {
-        if (!config.getConfig("general.showhp")) return currenttip;
+                                     IWailaConfigHandler config) {
+        this.getEntityHeath(entity, currenttip, accessor, config);
+        this.getEntityArmor(entity, currenttip, accessor, config);
+        this.getEntityAttack(entity, currenttip, accessor, config);
+        return currenttip;
+    }
+
+    public void getEntityHeath(Entity entity, List<String> currenttip, IWailaEntityAccessor accessor,
+                               IWailaConfigHandler config) {
+        if (!config.getConfig("general.showhp")) return;
 
         if (entity instanceof EntityLivingBase) {
 
@@ -46,6 +58,7 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
 
             float health = ((EntityLivingBase) entity).getHealth() / 2.0f;
             float maxhp = ((EntityLivingBase) entity).getMaxHealth() / 2.0f;
+            if (maxhp <= 0) return;
 
             if (((EntityLivingBase) entity).getMaxHealth() > maxhpfortext) currenttip.add(
                     String.format(
@@ -62,13 +75,56 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
                                 String.valueOf(maxhp)));
             }
         }
+    }
 
-        return currenttip;
+    public void getEntityArmor(Entity entity, List<String> currenttip, IWailaEntityAccessor accessor,
+                               IWailaConfigHandler config) {
+        if (!config.getConfig("general.showarmor")) return;
+
+        if (entity instanceof EntityLivingBase entityLivingBase) {
+
+            float armor = entityLivingBase.getTotalArmorValue();
+            if (armor <= 0) return;
+
+            if (armor > maxArmorForText) {
+                currenttip.add(
+                        String.format(
+                                LangUtil.translateG("hud.msg.armor") + WHITE + "%.0f",
+                                armor
+                        )
+                );
+            } else {
+                currenttip.add(
+                        getRenderString(
+                                "waila.armor",
+                                String.valueOf(nArmorIconsPerLine),
+                                String.valueOf(armor),
+                                String.valueOf(armor)));
+            }
+        }
+    }
+
+    public void getEntityAttack(Entity entity, List<String> currenttip, IWailaEntityAccessor accessor,
+                                IWailaConfigHandler config) {
+        if (!config.getConfig("general.showatk")) return;
+
+        if (entity instanceof EntityLivingBase entityLivingBase) {
+            float total_melee_damage;
+
+            DecimalFormat damageFormat = new DecimalFormat("0.00");
+            AttributeInstance attackDamage = entityLivingBase.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+            if (attackDamage != null) {
+                total_melee_damage = Float.parseFloat(damageFormat.format((float) attackDamage.getAttributeValue()));
+                currenttip.add(LangUtil.translateG("hud.msg.attack", total_melee_damage));
+            }
+        }
     }
 
     @Override
     public List<String> getWailaTail(Entity entity, List<String> currenttip, IWailaEntityAccessor accessor,
             IWailaConfigHandler config) {
+        if (!config.getConfig("general.showmods")) return currenttip;
+
         try {
             currenttip.add(BLUE + ITALIC + getEntityMod(entity));
         } catch (Exception e) {

@@ -5,6 +5,7 @@ import mcp.mobius.waila.gui.truetyper.FontLoader;
 import mcp.mobius.waila.gui.truetyper.TrueTypeFont;
 import mcp.mobius.waila.handlers.HUDHandlerBlocks;
 import mcp.mobius.waila.handlers.HUDHandlerEntities;
+import mcp.mobius.waila.overlay.tooltiprenderers.TTRenderArmor;
 import mcp.mobius.waila.overlay.tooltiprenderers.TTRenderHealth;
 import mcp.mobius.waila.overlay.tooltiprenderers.TTRenderProgressBar;
 import mcp.mobius.waila.overlay.tooltiprenderers.TTRenderStack;
@@ -32,12 +33,17 @@ public class ProxyClient extends ProxyServer {
         ModuleRegistrar.instance().registerTailProvider(new HUDHandlerEntities(), Entity.class);
 
         ModuleRegistrar.instance().addConfig("General", "general.showents");
+        ModuleRegistrar.instance().addConfig("General", "general.showmods");
+        ModuleRegistrar.instance().addConfig("General", "general.showicon");
         ModuleRegistrar.instance().addConfig("General", "general.showhp");
+        ModuleRegistrar.instance().addConfig("General", "general.showatk");
+        ModuleRegistrar.instance().addConfig("General", "general.showarmor");
         ModuleRegistrar.instance().addConfig("General", "general.showcrop");
 
         ModuleRegistrar.instance().registerTooltipRenderer("waila.health", new TTRenderHealth());
         ModuleRegistrar.instance().registerTooltipRenderer("waila.stack", new TTRenderStack());
         ModuleRegistrar.instance().registerTooltipRenderer("waila.progress", new TTRenderProgressBar());
+        ModuleRegistrar.instance().registerTooltipRenderer("waila.armor", new TTRenderArmor());
     }
 
     @Override

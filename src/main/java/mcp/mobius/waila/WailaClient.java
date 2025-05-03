@@ -2,6 +2,7 @@ package mcp.mobius.waila;
 
 import btw.BTWAddon;
 import mcp.mobius.waila.api.impl.ConfigHandler;
+import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.client.ProxyClient;
 import mcp.mobius.waila.network.WailaPacketHandler;
 import mcp.mobius.waila.overlay.OverlayConfig;
@@ -29,6 +30,7 @@ public class WailaClient extends BTWAddon implements ClientModInitializer {
 
     @Override
     public void initialize() {
+        OverlayConfig.updateColors();
     }
 
     @Override
@@ -38,15 +40,5 @@ public class WailaClient extends BTWAddon implements ClientModInitializer {
     @Override
     public void postSetup() {
         addResourcePackDomain(Waila.modId);
-        this.shouldVersionCheck = false;
-    }
-
-    @Environment(EnvType.CLIENT)
-    public boolean interceptCustomClientPacket(Minecraft mc, Packet250CustomPayload packet) {
-        if (Waila.instance.wailaPacketHandler == null) {
-            Waila.instance.wailaPacketHandler = new WailaPacketHandler();
-        }
-        Waila.instance.wailaPacketHandler.handleCustomPacket(packet);
-        return false;
     }
 }

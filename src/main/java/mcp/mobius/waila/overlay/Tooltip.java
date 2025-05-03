@@ -11,9 +11,12 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import net.fabricmc.api.Environment;
 import net.minecraft.src.ItemStack;
 import net.minecraftforge.common.Configuration;
 import org.lwjgl.opengl.GL11;
@@ -98,8 +101,8 @@ public class Tooltip {
     }
     ////////////////////////////////////////////////////////////////////////////
 
-    public Tooltip(List<String> textData, ItemStack stack) {
-        this(textData, true);
+    public Tooltip(List<String> textData, boolean hasIcon, ItemStack stack) {
+        this(textData, hasIcon);
         this.stack = stack;
     }
 

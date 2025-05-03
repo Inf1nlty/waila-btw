@@ -23,9 +23,9 @@ public class OverlayRenderer {
     private static int lastProgressLine = 0;
     private static int targetX = 0, targetY = 0, targetW = 0, targetH = 0;
     private static float currentX = 0, currentY = 0, currentW = 0, currentH = 0;
-    private static final float LERP_FACTOR = 0.3f;
-    private static float lastBreakProgress = 0f;
-    private static float currentAlpha = 0f;
+    private static float LERP_FACTOR = OverlayConfig.lerpfactor;
+    private static float lastBreakProgress = 0F;
+    private static float currentAlpha = 0F;
     private static final float FADE_SPEED = 0.1f;
 
     public void renderOverlay() {
@@ -53,18 +53,18 @@ public class OverlayRenderer {
         saveGLState();
 
         if (tooltip != null) {
-            currentAlpha = DisplayUtil.lerp(currentAlpha, 1f, FADE_SPEED);
-            if (currentAlpha > 0.99f) {
-                currentAlpha = 1f;
+            currentAlpha = DisplayUtil.lerp(currentAlpha, 1F, FADE_SPEED);
+            if (currentAlpha > 0.99F) {
+                currentAlpha = 1F;
             }
         } else {
-            currentAlpha = DisplayUtil.lerp(currentAlpha, 0f, FADE_SPEED);
-            if (currentAlpha < 0.01f) {
-                currentAlpha = 0f;
+            currentAlpha = DisplayUtil.lerp(currentAlpha, 0F, FADE_SPEED);
+            if (currentAlpha < 0.01F) {
+                currentAlpha = 0F;
             }
         }
 
-        if (currentAlpha <= 0f) {
+        if (currentAlpha <= 0F) {
             loadGLState();
             GL11.glPopMatrix();
             return;
@@ -72,7 +72,7 @@ public class OverlayRenderer {
 
         if (BossStatus.bossName != null && BossStatus.statusBarLength > 0) tooltip.y += 20;
 
-        GL11.glScalef(OverlayConfig.scale, OverlayConfig.scale, 1.0f);
+        GL11.glScalef(OverlayConfig.scale, OverlayConfig.scale, 1.0F);
 
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         RenderHelper.disableStandardItemLighting();
@@ -164,18 +164,18 @@ public class OverlayRenderer {
             breakProgress = ((IBreakingProgress) Minecraft.getMinecraft().playerController).getCurrentBreakingProgress();
             int currentProgressLine = 0;
 
-            if (breakProgress > 0.0f) {
-                int progress = (int) (breakProgress * 100.0f);
+            if (breakProgress > 0.0F) {
+                int progress = (int) (breakProgress * 100.0F);
                 currentProgressLine = (int) (progress / 100.0 * w);
                 lastProgressLine = currentProgressLine;
                 lastBreakProgress = breakProgress;
             } else {
-                if (lastBreakProgress > 0.0f) {
+                if (lastBreakProgress > 0.0F) {
                     lastProgressLine = (int) (lastProgressLine * 0.9f);
                     currentProgressLine = lastProgressLine;
                     if (currentProgressLine < 1) {
                         currentProgressLine = 0;
-                        lastBreakProgress = 0.0f;
+                        lastBreakProgress = 0.0F;
                     }
                 }
             }
