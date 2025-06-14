@@ -110,7 +110,6 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
 
         if (entity instanceof EntityLivingBase entityLivingBase) {
             float total_melee_damage;
-
             DecimalFormat damageFormat = new DecimalFormat("0.00");
             AttributeInstance attackDamage = entityLivingBase.getEntityAttribute(SharedMonsterAttributes.attackDamage);
             if (attackDamage != null) {

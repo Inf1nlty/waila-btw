@@ -101,10 +101,10 @@ tasks.withType(JavaCompile).configureEach {
 java {
 	withSourcesJar()
 
-	if (project.dev) {
-		version += "-dev.build."
-		version += new SimpleDateFormat("yyyyMMdd").format(new Date())
-	}
+//	if (project.dev) {
+//		version += "-dev.build."
+//		version += new SimpleDateFormat("yyyyMMdd").format(new Date())
+//	}
 }
 
 jar {

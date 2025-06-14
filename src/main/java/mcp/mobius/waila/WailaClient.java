@@ -30,11 +30,11 @@ public class WailaClient extends BTWAddon implements ClientModInitializer {
 
     @Override
     public void initialize() {
-        OverlayConfig.updateColors();
     }
 
     @Override
     public void onInitializeClient() {
+        OverlayConfig.updateColors();
     }
 
     @Override

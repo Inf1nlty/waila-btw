@@ -50,7 +50,6 @@ public class Waila extends BTWAddon implements ModInitializer {
     public void postSetup() {
         this.modID = modId;
         this.addonName = FabricLoader.getInstance().getModContainer(modID).get().getMetadata().getName();
-        addResourcePackDomain(modId);
     }
 
     @Override
