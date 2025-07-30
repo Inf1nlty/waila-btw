@@ -24,6 +24,8 @@ public class HUDHandlerBTWBlock implements IWailaDataProvider {
     static Block largeCampfire = BTWBlocks.largeCampfire;
     static Block finiteTorch = BTWBlocks.finiteBurningTorch;
 
+    private static final HUDHandlerBTWBlock INSTANCE = new HUDHandlerBTWBlock();
+
     @Override
     public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
         return null;
@@ -68,8 +70,8 @@ public class HUDHandlerBTWBlock implements IWailaDataProvider {
         Block block = accessor.getBlock();
         if (config.getConfig("btw.campfire") && (block == smallCampfire || block == mediumCampfire || block == largeCampfire)) {
 
-            final int TIME_TO_COOK = CampfireTileEntity.TIME_TO_COOK;
-            final int TIME_TO_BURN_FOOD = CampfireTileEntity.TIME_TO_BURN_FOOD;
+            final int TIME_TO_COOK = getCampfireTimeToCook();
+            final int TIME_TO_BURN_FOOD = getCampfireTimeToBurnFood();
 
             NBTTagCompound tag = accessor.getNBTData();
 
@@ -89,6 +91,26 @@ public class HUDHandlerBTWBlock implements IWailaDataProvider {
             }
         }
         return currenttip;
+    }
+
+    private static int getCampfireTimeToCook() {
+        try {
+            java.lang.reflect.Field field = CampfireTileEntity.class.getDeclaredField("TIME_TO_COOK");
+            field.setAccessible(true);
+            return field.getInt(null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static int getCampfireTimeToBurnFood() {
+        try {
+            java.lang.reflect.Field field = CampfireTileEntity.class.getDeclaredField("TIME_TO_BURN_FOOD");
+            field.setAccessible(true);
+            return field.getInt(null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private List<String> updateFiniteTorch(List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
@@ -124,15 +146,18 @@ public class HUDHandlerBTWBlock implements IWailaDataProvider {
     }
 
     public static void register() {
-        IWailaDataProvider provider = new HUDHandlerBTWBlock();
+        IWailaDataProvider provider = INSTANCE;
 
-        ModuleRegistrar.instance().addConfig("BTW", "btw.oven");
-        ModuleRegistrar.instance().addConfig("BTW", "btw.campfire");
-        ModuleRegistrar.instance().addConfig("BTW", "btw.finite_torch");
+        if (net.fabricmc.loader.api.FabricLoader.getInstance().getEnvironmentType()
+                == net.fabricmc.api.EnvType.CLIENT) {
+            ModuleRegistrar.instance().addConfig("BTW", "btw.oven");
+            ModuleRegistrar.instance().addConfig("BTW", "btw.campfire");
+            ModuleRegistrar.instance().addConfig("BTW", "btw.finite_torch");
 
-        ModuleRegistrar.instance().registerBodyProvider(provider, burningOven.getClass());
-        ModuleRegistrar.instance().registerBodyProvider(provider, largeCampfire.getClass());
-        ModuleRegistrar.instance().registerBodyProvider(provider, finiteTorch.getClass());
+            ModuleRegistrar.instance().registerBodyProvider(provider, burningOven.getClass());
+            ModuleRegistrar.instance().registerBodyProvider(provider, largeCampfire.getClass());
+            ModuleRegistrar.instance().registerBodyProvider(provider, finiteTorch.getClass());
+        }
 
         ModuleRegistrar.instance().registerNBTProvider(provider, burningOven.getClass());
         ModuleRegistrar.instance().registerNBTProvider(provider, largeCampfire.getClass());

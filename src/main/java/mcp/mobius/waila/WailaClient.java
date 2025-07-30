@@ -1,6 +1,7 @@
 package mcp.mobius.waila;
 
 import btw.BTWAddon;
+import cn.xylose.waila.addons.btw.HUDHandlerBTWBlock;
 import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.client.ProxyClient;
@@ -26,6 +27,7 @@ public class WailaClient extends BTWAddon implements ClientModInitializer {
         proxy.registerMods();
         proxy.registerIMCs();
         OverlayConfig.updateColors();
+        HUDHandlerBTWBlock.register();
     }
 
     @Override
