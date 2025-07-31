@@ -13,6 +13,8 @@ import mcp.mobius.waila.utils.Constants;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
+import java.io.File;
+
 public class ConfigHandler implements IWailaConfigHandler {
 
     /* SINGLETON */
@@ -97,6 +99,7 @@ public class ConfigHandler implements IWailaConfigHandler {
 
         if (this.forcedConfigs.containsKey(key)) return this.forcedConfigs.get(key);
 
+        if (config == null) return defvalue;
         Property prop = config.get(Constants.CATEGORY_MODULES, key, defvalue);
         return prop.getBoolean(defvalue);
     }
@@ -108,21 +111,25 @@ public class ConfigHandler implements IWailaConfigHandler {
     /* GENERAL ACCESS METHODS TO GET/SET VALUES IN THE CONFIG FILE */
 
     public boolean getConfig(String category, String key, boolean default_) {
+        if (config == null) return default_;
         Property prop = config.get(category, key, default_);
         return prop.getBoolean(default_);
     }
 
     public void setConfig(String category, String key, boolean state) {
+        if (config == null) return;
         config.getCategory(category).put(key, new Property(key, String.valueOf(state), Property.Type.BOOLEAN));
         config.save();
     }
 
     public int getConfig(String category, String key, int default_) {
+        if (config == null) return default_;
         Property prop = config.get(category, key, default_);
         return prop.getInt();
     }
 
     public void setConfig(String category, String key, int state) {
+        if (config == null) return;
         config.getCategory(category).put(key, new Property(key, String.valueOf(state), Property.Type.INTEGER));
         config.save();
     }
@@ -134,6 +141,11 @@ public class ConfigHandler implements IWailaConfigHandler {
 
     /* Default config loading */
     public void loadDefaultConfig() {
+        // Ensure config is initialized
+        if (config == null) {
+            config = new Configuration(new File("config/waila.cfg"));
+            config.load();
+        }
 
         config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SHOW, true);
         config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_MODE, true);

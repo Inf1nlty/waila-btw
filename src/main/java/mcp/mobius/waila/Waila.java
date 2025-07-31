@@ -2,6 +2,7 @@ package mcp.mobius.waila;
 
 import btw.AddonHandler;
 import btw.BTWAddon;
+import cn.xylose.waila.addons.btw.HUDHandlerBTWBlock;
 import cn.xylose.waila.api.PacketDispatcher;
 import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
@@ -44,6 +45,7 @@ public class Waila extends BTWAddon implements ModInitializer {
         ConfigHandler.instance().config = new Configuration(new File(String.valueOf(FabricLoader.getInstance().getConfigDir()), "Waila.cfg"));
         DataAccessorCommon.instance = new DataAccessorCommon();
         ConfigHandler.instance().loadDefaultConfig();
+        HUDHandlerBTWBlock.register();
     }
 
     @Override
