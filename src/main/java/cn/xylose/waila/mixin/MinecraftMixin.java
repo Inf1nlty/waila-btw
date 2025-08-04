@@ -13,12 +13,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MinecraftMixin {
 
     @Inject(method = "runTick", at = @At("TAIL"))
-    private void onKeyEvent(CallbackInfo ci) {
+    private void wailaKeyEvent(CallbackInfo ci) {
         KeyEvent.instance.onKeyEvent();
     }
 
     @Inject(method = "startGame", at = @At("TAIL"))
-    private void onStartGame(CallbackInfo ci) {
+    private void initWailaAddon(CallbackInfo ci) {
         Waila wailaAddon = new Waila();
         wailaAddon.loadWaila();
         WailaClient wailaClient = new WailaClient();

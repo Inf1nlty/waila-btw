@@ -3,7 +3,10 @@ package mcp.mobius.waila.utils;
 import mcp.mobius.waila.Waila;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.src.Block;
+import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -61,6 +64,13 @@ public class ModIdentification {
 //        } catch (NullPointerException e) {
 //            return "";
 //        }
+        if (stack.getItem() instanceof ItemBlock) {
+            Block block = Block.blocksList[((ItemBlock) stack.getItem()).getBlockID()];
+            if (block.getTextureName().contains(":")) {
+                String[] parts = block.getTextureName().split(":");
+                return StringUtils.capitalize(parts[0]);
+            }
+        }
         return Waila.modsName;
     }
 }

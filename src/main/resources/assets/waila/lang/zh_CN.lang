@@ -159,7 +159,7 @@ nei.options.keys.showenchant=显示附魔值
 option.btw.oven=显示砖炉
 option.btw.campfire=显示篝火
 option.btw.finite_torch=显示火把
-option.btw.spider_web=显示蜘蛛吐网
+option.info.btw.has_web=显示蜘蛛吐网
 
 # block
 info.btw.fuel_time=燃料时间：%s

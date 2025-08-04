@@ -23,7 +23,7 @@ public class ProxyServer {
         HUDHandlerVanilla.register();
 //        HUDHandlerFurnace.register(); //WIP
 //        HUDHandlerFMP.register();
-        DecoratorFMP.register();
+//        DecoratorFMP.register();
         HUDHandlerBTWBlock.register();
         HUDHandlerBTWEntity.register();
     }

@@ -160,7 +160,7 @@ nei.options.keys.showenchant=Show enchanting values
 option.btw.oven=Show Oven
 option.btw.campfire=Show Campfire
 option.btw.finite_torch=Show Finite Torch
-option.btw.spider_web=Show Spider Spits Web
+option.info.btw.has_web=Show Spider Spits Web
 
 # block
 info.btw.fuel_time=Fuel Time: %s

@@ -11,24 +11,25 @@ import mcp.mobius.waila.commands.CommandDumpHandlers;
 import mcp.mobius.waila.network.Packet0x00ServerPing;
 import mcp.mobius.waila.network.WailaPacketHandler;
 import mcp.mobius.waila.overlay.OverlayConfig;
+import mcp.mobius.waila.utils.WailaLogger;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.src.*;
 import net.minecraftforge.common.Configuration;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class Waila extends BTWAddon implements ModInitializer {
-    public static String modsName = "Better Than Wolves";
+    public static String modsName = "Minecraft";
     public static String modId = "waila";
     public static String modName = "Waila";
 
     public static Waila instance;
-    public static Logger log = LogManager.getLogger(modName);
+    public static WailaLogger log = WailaLogger.getInstance();
     public boolean serverPresent = false;
     private WailaPacketHandler wailaPacketHandler;
 

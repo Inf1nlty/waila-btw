@@ -15,6 +15,7 @@ import mcp.mobius.waila.api.IWailaEntityAccessor;
 import mcp.mobius.waila.api.IWailaEntityProvider;
 import mcp.mobius.waila.cbcore.LangUtil;
 import net.minecraft.src.*;
+import org.apache.commons.lang3.StringUtils;
 
 public class HUDHandlerEntities implements IWailaEntityProvider {
 
@@ -88,10 +89,7 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
 
             if (armor > maxArmorForText) {
                 currenttip.add(
-                        String.format(
-                                LangUtil.translateG("hud.msg.armor") + WHITE + "%.0f",
-                                armor
-                        )
+                        String.format(LangUtil.translateG("hud.msg.armor", armor))
                 );
             } else {
                 currenttip.add(
@@ -146,6 +144,13 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
 //        } catch (NullPointerException e) {
 //            modsName = "Minecraft";
 //        }
+        if (entity.worldObj.isRemote) {
+            Render render = RenderManager.instance.getEntityRenderObject(entity);
+            if (render instanceof RenderLiving renderLiving) {
+                ResourceLocation resourceLocation = renderLiving.getEntityTexture(entity);
+                return StringUtils.capitalize(resourceLocation.getResourceDomain());
+            }
+        }
         return modName;
     }
 

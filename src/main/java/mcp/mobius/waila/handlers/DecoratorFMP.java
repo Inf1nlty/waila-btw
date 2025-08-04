@@ -2,10 +2,10 @@ package mcp.mobius.waila.handlers;
 
 import java.util.List;
 
+import mcp.mobius.waila.utils.WailaLogger;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
-import org.apache.logging.log4j.Level;
 
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaBlockDecorator;
@@ -46,10 +46,10 @@ public class DecoratorFMP implements IWailaBlockDecorator {
         try {
             BlockMultipart = Class.forName("codechicken.multipart.BlockMultipart");
         } catch (ClassNotFoundException e) {
-            Waila.log.log(Level.WARN, "[FMP] Class not found. " + e);
+            Waila.log.log(WailaLogger.Level.WARN, "[FMP] Class not found. " + e);
             return;
         } catch (Exception e) {
-            Waila.log.log(Level.WARN, "[FMP] Unhandled exception." + e);
+            Waila.log.log(WailaLogger.Level.WARN, "[FMP] Unhandled exception." + e);
             return;
         }
 

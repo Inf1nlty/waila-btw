@@ -1,5 +1,12 @@
 # Waila for BTW
 
+## 2.0.2
+* Now supports fetching the mod name from the resource domain, and displays "Minecraft" if the fetch fails.
+* Modified the logging implementation, which no longer relies on third-party libraries.
+* Fixed an issue with client-server communication.
+
+---
+
 ## 2.0.1
 * Separate the content of the client, so that the server will not crash when running this mod
 * Added show mods configuration item

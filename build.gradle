@@ -100,20 +100,11 @@ tasks.withType(JavaCompile).configureEach {
 
 java {
 	withSourcesJar()
-
-//	if (project.dev) {
-//		version += "-dev.build."
-//		version += new SimpleDateFormat("yyyyMMdd").format(new Date())
-//	}
 }
 
 jar {
 	from sourceSets.main.output.resourcesDir
 	from sourceSets.main.output.classesDirs
-	into('META-INF\\jars') {
-		from("libs\\log4j-api-2.19.0.jar")
-		from("libs\\log4j-core-2.19.0.jar")
-	}
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
 	}
@@ -126,6 +117,7 @@ loom {
 
 runClient {
 	dependsOn(jar)
+	args("--username", "123", "--session", "a.a.a.a", "--width", 854, "--height", 480)
 }
 
 runServer {

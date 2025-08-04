@@ -143,7 +143,7 @@ public class ConfigHandler implements IWailaConfigHandler {
     public void loadDefaultConfig() {
         // Ensure config is initialized
         if (config == null) {
-            config = new Configuration(new File("config/waila.cfg"));
+            config = new Configuration(new File("config/Waila.cfg"));
             config.load();
         }
 
