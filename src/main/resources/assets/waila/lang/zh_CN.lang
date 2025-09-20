@@ -145,6 +145,8 @@ option.carpenters.hide=隐藏伪装方块
 option.stevescarts.showall=显示数据
 option.stevescarts.colorblind=色盲模式
 option.stevescarts.shifttoggle=潜行触发
+
+# general
 option.general.showents=显示实体
 option.general.showicon=显示图标
 option.general.showmods=显示模组

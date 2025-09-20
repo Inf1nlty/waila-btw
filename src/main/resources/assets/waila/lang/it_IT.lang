@@ -143,6 +143,49 @@ option.carpenters.hide=Nascondi blocchi camuffati
 option.stevescarts.showall=Mostra data
 option.stevescarts.colorblind=Modalità daltonico
 option.stevescarts.shifttoggle=Scambia stato
-option.general.showhp=Mostra vita dell'entità
-option.general.showcrop=Mostra crescita delle piante
+
+# general
+option.general.showents=Mostra entità
+option.general.showicon=Mostra icona
+option.general.showmods=Mostra mod
+option.general.showhp=Mostra la salute delle entità
+option.general.showatk=Mostra l'attacco delle entità
+option.general.showarmor=Mostra l'armatura delle entità
+option.general.showbreed=Mostra il tempo di recupero della riproduzione degli animali
+option.general.showcrop=Mostra la crescita delle colture
 option.thaumcraft.aspects=Mostra aspetti
+
+nei.options.keys.showenchant=Mostra valori incantamento
+
+# config
+option.btw.oven=Mostra forno
+option.btw.campfire=Mostra falò
+option.btw.finite_torch=Mostra torcia a consumo
+
+option.btw.animal_hunger=Mostra fame animale
+option.btw.chicken_egg_timer=Mostra timer deposizione uova gallina
+option.btw.wolf_poop=Mostra suggerimento defecazione lupo
+option.btw.spider_web=Mostra se il ragno ha una ragnatela
+option.btw.zombie_conversion_time=Mostra tempo di conversione zombie villager
+
+# block
+info.btw.fuel_time=Tempo carburante: %s
+info.btw.burn_time=Tempo di combustione: %s
+info.btw.cook_time=Tempo di cottura: %s
+info.btw.burned_time=Tempo bruciato: %s
+
+# entity
+info.btw.has_web=Ha ragnatela
+info.btw.zombie_conversion_time=Tempo di conversione: %ds
+info.btw.chicken_egg_timer=Deposizione uovo in: %ds
+info.btw.wolf_poop_chance=Questo lupo è ben nutrito e può defecare in qualsiasi momento (media 20 min)
+info.btw.growup.normal=Tempo di crescita: %ds (in crescita)
+info.btw.growup.toohungry=Tempo di crescita: %ds §c(Fame insufficiente per crescere)§r
+info.btw.hunger.famished=Affamato
+info.btw.hunger.starving=Affamato grave
+info.btw.hunger.state=Stato:
+
+hud.msg.attack=Atk: %s
+hud.msg.health=HP:
+hud.msg.armor=Armatura: %s
+hud.msg.breed_cooldown=Recupero riproduzione: %ds

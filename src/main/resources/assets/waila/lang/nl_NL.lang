@@ -115,3 +115,49 @@ option.vanilla.jukebox=Jukebox schijf
 option.extrautilities.fluidamount=Toon vloeistofhoeveelheid
 option.openblocks.fluidamount=Toon vloeistofhoeveelheid
 option.railcraft.fluidamount=Toon vloeistofhoeveelheid
+
+# general
+option.general.showents=Toon entiteiten
+option.general.showicon=Toon pictogram
+option.general.showmods=Toon mods
+option.general.showhp=Toon gezondheid van entiteiten
+option.general.showatk=Toon aanval van entiteiten
+option.general.showarmor=Toon pantser van entiteiten
+option.general.showbreed=Toon fokkoelperiode van dieren
+option.general.showcrop=Toon gewasgroei
+option.thaumcraft.aspects=Toon aspecten
+
+nei.options.keys.showenchant=Toon betoveringswaarden
+
+# config
+option.btw.oven=Toon oven
+option.btw.campfire=Toon kampvuur
+option.btw.finite_torch=Toon eindige fakkel
+
+option.btw.animal_hunger=Toon dierlijke honger
+option.btw.chicken_egg_timer=Toon timer voor kippen-eieren
+option.btw.wolf_poop=Toon wolf ontlasting-tip
+option.btw.spider_web=Toont of de spin een web heeft
+option.btw.zombie_conversion_time=Toon zombie dorpsbewoner conversietijd
+
+# block
+info.btw.fuel_time=Brandstof tijd: %s
+info.btw.burn_time=Branden tijd: %s
+info.btw.cook_time=Baktijd: %s
+info.btw.burned_time=Verbrand tijd: %s
+
+# entity
+info.btw.has_web=Heeft web
+info.btw.zombie_conversion_time=Conversietijd: %ds
+info.btw.chicken_egg_timer=Ei leggen over: %ds
+info.btw.wolf_poop_chance=Deze wolf is goed gevoed en kan op elk moment poepen (gem. 20 min)
+info.btw.growup.normal=Groeiperiode: %ds (groeiend)
+info.btw.growup.toohungry=Groeiperiode: %ds §c(Niet genoeg honger om te groeien)§r
+info.btw.hunger.famished=Uitgehongerd
+info.btw.hunger.starving=Stervend van de honger
+info.btw.hunger.state=Toestand:
+
+hud.msg.attack=Atk: %s
+hud.msg.health=HP:
+hud.msg.armor=Pantser: %s
+hud.msg.breed_cooldown=Fokkoelperiode: %ds

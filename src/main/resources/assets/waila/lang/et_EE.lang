@@ -143,6 +143,49 @@ option.carpenters.hide=Peida kamuflaaži blokid
 option.stevescarts.showall=Näita andmeid
 option.stevescarts.colorblind=Värvipimeda mood
 option.stevescarts.shifttoggle=Shift lülitus
-option.general.showhp=Näita entiteetide elusid
-option.general.showcrop=Näita põllu kasvu
+
+# general
+option.general.showents=Kuva olendid
+option.general.showicon=Kuva ikoon
+option.general.showmods=Kuva modid
+option.general.showhp=Kuva olendite tervis
+option.general.showatk=Kuva olendite rünnak
+option.general.showarmor=Kuva olendite soomus
+option.general.showbreed=Näita loomade paljunemiskuldauni
+option.general.showcrop=Näita põllukultuuri kasvu
 option.thaumcraft.aspects=Näita aspekte
+
+nei.options.keys.showenchant=Näita võluefekte
+
+# config
+option.btw.oven=Näita ahju
+option.btw.campfire=Näita lõket
+option.btw.finite_torch=Näita lõppevat tõrvikut
+
+option.btw.animal_hunger=Näita loomade nälga
+option.btw.chicken_egg_timer=Näita kana muna munemise taimerit
+option.btw.wolf_poop=Näita hungriku vihjet
+option.btw.spider_web=Näitab, kas ämblikul on võrku
+option.btw.zombie_conversion_time=Näita zombikülaelaniku muutmisaega
+
+# block
+info.btw.fuel_time=Kütuse aeg: %s
+info.btw.burn_time=Põlemisaeg: %s
+info.btw.cook_time=Küpsetusaeg: %s
+info.btw.burned_time=Põlenud aeg: %s
+
+# entity
+info.btw.has_web=On võrk
+info.btw.zombie_conversion_time=Muutmisaeg: %ds
+info.btw.chicken_egg_timer=Muna tuleb: %ds pärast
+info.btw.wolf_poop_chance=See hunt on hästi toidetud ja võib igal ajal väljaheidet teha (keskm. 20 min)
+info.btw.growup.normal=Kasvuaeg: %ds (kasvamas)
+info.btw.growup.toohungry=Kasvuaeg: %ds §c(Puudub piisav nälg kasvamiseks)§r
+info.btw.hunger.famished=Nälginud
+info.btw.hunger.starving=Suremas nälga
+info.btw.hunger.state=Olek:
+
+hud.msg.attack=Rünnak: %s
+hud.msg.health=HP:
+hud.msg.armor=Soomus: %s
+hud.msg.breed_cooldown=Paljunemiskuldaun: %ds

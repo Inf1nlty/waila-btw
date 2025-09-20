@@ -143,6 +143,49 @@ option.carpenters.hide=Спрятать камуфляжные блоки
 option.stevescarts.showall=Показывать данные
 option.stevescarts.colorblind=Режим цветокоррекции
 option.stevescarts.shifttoggle=Приседание показывает
+
+# general
+option.general.showents=Показывать сущности
+option.general.showicon=Показывать иконку
+option.general.showmods=Показывать моды
 option.general.showhp=Показывать здоровье сущностей
-option.general.showcrop=Показывать рост растений
+option.general.showatk=Показывать атаку сущностей
+option.general.showarmor=Показывать броню сущностей
+option.general.showbreed=Показывать перезарядку размножения животных
+option.general.showcrop=Показывать рост урожая
 option.thaumcraft.aspects=Показывать аспекты
+
+nei.options.keys.showenchant=Показывать значения зачарования
+
+# config
+option.btw.oven=Показывать печь
+option.btw.campfire=Показывать костёр
+option.btw.finite_torch=Показывать конечный факел
+
+option.btw.animal_hunger=Показывать голод животных
+option.btw.chicken_egg_timer=Показывать таймер откладывания яиц курицей
+option.btw.wolf_poop=Показывать подсказку о дефекации волка
+option.btw.spider_web=Показывает, есть ли у паука паутина
+option.btw.zombie_conversion_time=Показывать время обращения зомби-жителя
+
+# block
+info.btw.fuel_time=Время топлива: %s
+info.btw.burn_time=Время горения: %s
+info.btw.cook_time=Время готовки: %s
+info.btw.burned_time=Время перегорело: %s
+
+# entity
+info.btw.has_web=Есть паутина
+info.btw.zombie_conversion_time=Время обращения: %ds
+info.btw.chicken_egg_timer=Яйцо через: %ds
+info.btw.wolf_poop_chance=Этот волк сыт и может испражниться в любой момент (ср. 20 мин)
+info.btw.growup.normal=Время роста: %ds (растет)
+info.btw.growup.toohungry=Время роста: %ds §c(Недостаточно голода для роста)§r
+info.btw.hunger.famished=Голоден
+info.btw.hunger.starving=Умирает от голода
+info.btw.hunger.state=Состояние:
+
+hud.msg.attack=Атк: %s
+hud.msg.health=ХП:
+hud.msg.armor=Броня: %s
+hud.msg.breed_cooldown=Перезарядка размножения: %ds

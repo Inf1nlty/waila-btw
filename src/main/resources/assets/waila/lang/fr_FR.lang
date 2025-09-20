@@ -134,3 +134,49 @@ option.pr.showdata=Afficher plaques data
 option.extrautilities.fluidamount=Afficher niveau fluides
 option.openblocks.fluidamount=Afficher niveau fluides
 option.railcraft.fluidamount=Afficher niveau fluides
+
+# general
+option.general.showents=Afficher les entités
+option.general.showicon=Afficher l'icône
+option.general.showmods=Afficher les mods
+option.general.showhp=Afficher la santé des entités
+option.general.showatk=Afficher l'attaque des entités
+option.general.showarmor=Afficher l'armure des entités
+option.general.showbreed=Afficher le délai de reproduction des animaux
+option.general.showcrop=Afficher la croissance des cultures
+option.thaumcraft.aspects=Afficher les aspects
+
+nei.options.keys.showenchant=Afficher les valeurs d'enchantement
+
+# config
+option.btw.oven=Afficher le four
+option.btw.campfire=Afficher le feu de camp
+option.btw.finite_torch=Afficher la torche finie
+
+option.btw.animal_hunger=Afficher la faim des animaux
+option.btw.chicken_egg_timer=Afficher le temps de ponte des poules
+option.btw.wolf_poop=Afficher l'indication de défécation du loup
+option.btw.spider_web=Indique si l'araignée a une toile
+option.btw.zombie_conversion_time=Afficher le temps de conversion du zombie villageois
+
+# block
+info.btw.fuel_time=Temps de carburant : %s
+info.btw.burn_time=Temps de combustion : %s
+info.btw.cook_time=Temps de cuisson : %s
+info.btw.burned_time=Temps brûlé : %s
+
+# entity
+info.btw.has_web=A une toile
+info.btw.zombie_conversion_time=Temps de conversion : %ds
+info.btw.chicken_egg_timer=Prochain œuf dans : %ds
+info.btw.wolf_poop_chance=Ce loup est bien nourri et peut déféquer à tout moment (moy. 20 min)
+info.btw.growup.normal=Temps de croissance : %ds (en croissance)
+info.btw.growup.toohungry=Temps de croissance : %ds §c(Pas assez de faim pour grandir)§r
+info.btw.hunger.famished=Affamé
+info.btw.hunger.starving=Affamé à mourir
+info.btw.hunger.state=État :
+
+hud.msg.attack=Atk : %s
+hud.msg.health=PV :
+hud.msg.armor=Armure : %s
+hud.msg.breed_cooldown=Refroidissement de reproduction : %ds

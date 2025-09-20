@@ -145,6 +145,8 @@ option.carpenters.hide=Hide camo blocks
 option.stevescarts.showall=Show data
 option.stevescarts.colorblind=Colorblind mode
 option.stevescarts.shifttoggle=Shift toggle
+
+# general
 option.general.showents=Show entities
 option.general.showicon=Show icon
 option.general.showmods=Show mods
