@@ -1,6 +1,7 @@
 package mcp.mobius.waila;
 
 import cn.xylose.waila.addons.btw.HUDHandlerBTWBlock;
+import cn.xylose.waila.addons.btw.HUDHandlerBTWEntity;
 import mcp.mobius.waila.client.ProxyClient;
 import mcp.mobius.waila.overlay.OverlayConfig;
 import net.fabricmc.api.ClientModInitializer;
@@ -19,6 +20,7 @@ public class WailaClient implements ClientModInitializer {
         proxy.registerIMCs();
         OverlayConfig.updateColors();
         HUDHandlerBTWBlock.register();
+        HUDHandlerBTWEntity.register();
         DefaultResourcePack.defaultResourceDomains.add(Waila.modId);
     }
 

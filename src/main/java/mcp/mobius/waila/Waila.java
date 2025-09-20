@@ -8,6 +8,7 @@ import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.client.ProxyClient;
 import mcp.mobius.waila.commands.CommandDumpHandlers;
+import mcp.mobius.waila.handlers.HUDHandlerEntitiesServer;
 import mcp.mobius.waila.network.Packet0x00ServerPing;
 import mcp.mobius.waila.network.WailaPacketHandler;
 import mcp.mobius.waila.overlay.OverlayConfig;
@@ -47,6 +48,7 @@ public class Waila extends BTWAddon implements ModInitializer {
         DataAccessorCommon.instance = new DataAccessorCommon();
         ConfigHandler.instance().loadDefaultConfig();
         HUDHandlerBTWBlock.register();
+        HUDHandlerEntitiesServer.register();
     }
 
     @Override

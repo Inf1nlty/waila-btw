@@ -18,6 +18,8 @@ import static net.minecraft.src.TileEntityFurnace.DEFAULT_COOK_TIME;
 public class HUDHandlerBTWBlock implements IWailaDataProvider {
     static Block idleOven = BTWBlocks.idleOven;
     static Block burningOven = BTWBlocks.burningOven;
+    static Block idleLooseOven = BTWBlocks.idleLooseOven;
+    static Block burningLooseOven = BTWBlocks.burningLooseOven;
     static Block unlitCampfire = BTWBlocks.unlitCampfire;
     static Block smallCampfire = BTWBlocks.smallCampfire;
     static Block mediumCampfire = BTWBlocks.mediumCampfire;
@@ -46,7 +48,7 @@ public class HUDHandlerBTWBlock implements IWailaDataProvider {
 
     private List<String> updateOven(List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
         Block block = accessor.getBlock();
-        if (config.getConfig("btw.oven") && (block == burningOven || block == idleOven)) {
+        if (config.getConfig("btw.oven") && (block == burningOven || block == burningLooseOven)) {
             NBTTagCompound tag = accessor.getNBTData();
 
             int remainingCookingTime = 0;
@@ -55,12 +57,26 @@ public class HUDHandlerBTWBlock implements IWailaDataProvider {
                 int iCookTimeShift = DEFAULT_COOK_TIME << FurnaceRecipes.smelting().getCookTimeBinaryShift(((NBTTagCompound) tag.getTagList("Items").tagAt(0)).getShort("id"));
                 remainingCookingTime = iCookTimeShift * 4 - tag.getInteger("fcCookTimeEx");
             }
-            int fuelTime = block == burningOven ? tag.getInteger("fcBurnTimeEx") : tag.getInteger("fcUnlitFuel");
+
+            int fuelTime = (block == burningOven || block == burningLooseOven) ? tag.getInteger("fcBurnTimeEx") : tag.getInteger("fcUnlitFuel");
+
             if (fuelTime != 0) {
                 currenttip.add(I18n.getStringParams("info.btw.fuel_time", fuelTime / 20));
             }
+
             if (remainingCookingTime != 0) {
                 currenttip.add(I18n.getStringParams("info.btw.cook_time", remainingCookingTime / 20));
+            }
+
+            // Check if the NBT contains the "burnCounter" field (added by Nightmare-Mode for oven food burning support)
+            if (tag.hasKey("burnCounter")) {
+
+                int burnCounter = tag.getInteger("burnCounter");
+                int burnedTime = (1600 - burnCounter) / 20;
+
+                if (burnedTime > 0) {
+                    currenttip.add(I18n.getStringParams("info.btw.burned_time", burnedTime));
+                }
             }
         }
         return currenttip;
@@ -154,12 +170,12 @@ public class HUDHandlerBTWBlock implements IWailaDataProvider {
             ModuleRegistrar.instance().addConfig("BTW", "btw.campfire");
             ModuleRegistrar.instance().addConfig("BTW", "btw.finite_torch");
 
-            ModuleRegistrar.instance().registerBodyProvider(provider, burningOven.getClass());
+            ModuleRegistrar.instance().registerBodyProvider(provider, burningLooseOven.getClass());
             ModuleRegistrar.instance().registerBodyProvider(provider, largeCampfire.getClass());
             ModuleRegistrar.instance().registerBodyProvider(provider, finiteTorch.getClass());
         }
 
-        ModuleRegistrar.instance().registerNBTProvider(provider, burningOven.getClass());
+        ModuleRegistrar.instance().registerNBTProvider(provider, burningLooseOven.getClass());
         ModuleRegistrar.instance().registerNBTProvider(provider, largeCampfire.getClass());
         ModuleRegistrar.instance().registerNBTProvider(provider, finiteTorch.getClass());
     }

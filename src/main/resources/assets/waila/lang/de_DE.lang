@@ -143,6 +143,49 @@ option.carpenters.hide=Getarnte Blöcke verdecken
 option.stevescarts.showall=Zeige Daten
 option.stevescarts.colorblind=Farbenblind-Modus
 option.stevescarts.shifttoggle=Schleichend Umschalten
-option.general.showhp=Zeige Gesundheit von Lebewesen
-option.general.showcrop=Zeige Pflanzenwachstum
-option.thaumcraft.aspects=Zeige Aspekte
+
+# general
+option.general.showents=Entitäten anzeigen
+option.general.showicon=Symbol anzeigen
+option.general.showmods=Mods anzeigen
+option.general.showhp=Entitäten Gesundheit anzeigen
+option.general.showatk=Angriff der Entitäten anzeigen
+option.general.showarmor=Rüstung der Entitäten anzeigen
+option.general.showbreed=Tierzucht-Abklingzeit anzeigen
+option.general.showcrop=Pflanzenwachstum anzeigen
+option.thaumcraft.aspects=Aspekte anzeigen
+
+nei.options.keys.showenchant=Verzauberungswerte anzeigen
+
+# config
+option.btw.oven=Ofen anzeigen
+option.btw.campfire=Lagerfeuer anzeigen
+option.btw.finite_torch=Endliche Fackel anzeigen
+
+option.btw.animal_hunger=Tierhunger anzeigen
+option.btw.chicken_egg_timer=Legezeit der Hühner anzeigen
+option.btw.wolf_poop=Hinweis auf Wolfskot anzeigen
+option.btw.spider_web=Zeigt, ob die Spinne ein Netz hat
+option.btw.zombie_conversion_time=Zombie-Dorfbewohner-Umwandlungszeit anzeigen
+
+# block
+info.btw.fuel_time=Brennzeit: %s
+info.btw.burn_time=Brennzeit: %s
+info.btw.cook_time=Kochzeit: %s
+info.btw.burned_time=Verbrannte Zeit: %s
+
+# entity
+info.btw.has_web=Hat Netz
+info.btw.zombie_conversion_time=Umwandlungszeit: %ds
+info.btw.chicken_egg_timer=Ei wird gelegt in: %ds
+info.btw.wolf_poop_chance=Dieser Wolf ist gut gefüttert und kann jederzeit koten (ca. 20 Min.)
+info.btw.growup.normal=Wachstumszeit: %ds (wachsend)
+info.btw.growup.toohungry=Wachstumszeit: %ds §c(Nicht genug Hunger zum Wachsen)§r
+info.btw.hunger.famished=Ausgehungert
+info.btw.hunger.starving=Verhungert
+info.btw.hunger.state=Status:
+
+hud.msg.attack=Atk: %s
+hud.msg.health=HP:
+hud.msg.armor=Rüstung: %s
+hud.msg.breed_cooldown=Zucht-Abklingzeit: %ds

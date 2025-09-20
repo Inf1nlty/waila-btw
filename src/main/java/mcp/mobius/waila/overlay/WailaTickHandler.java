@@ -2,8 +2,11 @@ package mcp.mobius.waila.overlay;
 
 import static mcp.mobius.waila.api.SpecialChars.ITALIC;
 
+import java.util.HashSet;
 import java.util.List;
 
+import cn.xylose.waila.api.PacketDispatcher;
+import mcp.mobius.waila.network.Packet0x03EntRequest;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
@@ -23,6 +26,8 @@ public class WailaTickHandler {
     private final Minecraft mc = Minecraft.getMinecraft();
 
     private static WailaTickHandler _instance;
+
+    private int lastEntityId = -1;
 
     private WailaTickHandler() {}
 
@@ -106,7 +111,19 @@ public class WailaTickHandler {
                 accessor.set(world, player, target);
 
                 Entity targetEnt = RayTracing.instance().getTargetEntity(); // This need to be replaced by the override
-                                                                            // check.
+
+                if (targetEnt != null && targetEnt.entityId != lastEntityId) {
+                    lastEntityId = targetEnt.entityId;
+                    HashSet<String> keys = new HashSet<>();
+                    PacketDispatcher.sendPacketToServer(Packet0x03EntRequest.create(world, targetEnt, keys));
+                    DataAccessorCommon.instance.resetTimer();
+                }
+
+                else if (targetEnt != null && DataAccessorCommon.instance.isTimeElapsed(250)) {
+                    HashSet<String> keys = new HashSet<>();
+                    PacketDispatcher.sendPacketToServer(Packet0x03EntRequest.create(world, targetEnt, keys));
+                    DataAccessorCommon.instance.resetTimer();
+                }
 
                 if (targetEnt != null) {
                     currenttip = new TipList<String, String>();

@@ -136,6 +136,7 @@ option.bcapi.consump=显示最大能量
 option.bcapi.trigger=显示触发能量
 option.pr.showio=显示逻辑门IO
 option.pr.showdata=显示逻辑门数据
+option.pr.showsignal=显示导线信号强度
 option.extrautilities.fluidamount=显示流体量
 option.openblocks.fluidamount=显示流体量
 option.railcraft.fluidamount=显示流体量
@@ -144,12 +145,15 @@ option.carpenters.hide=隐藏伪装方块
 option.stevescarts.showall=显示数据
 option.stevescarts.colorblind=色盲模式
 option.stevescarts.shifttoggle=潜行触发
+
+# general
 option.general.showents=显示实体
 option.general.showicon=显示图标
 option.general.showmods=显示模组
 option.general.showhp=显示实体生命值
 option.general.showatk=显示实体攻击力
 option.general.showarmor=显示实体护甲值
+option.general.showbreed=显示动物繁殖冷却
 option.general.showcrop=显示作物生长状态
 option.thaumcraft.aspects=显示要素
 
@@ -159,7 +163,12 @@ nei.options.keys.showenchant=显示附魔值
 option.btw.oven=显示砖炉
 option.btw.campfire=显示篝火
 option.btw.finite_torch=显示火把
-option.info.btw.has_web=显示蜘蛛吐网
+
+option.btw.animal_hunger=显示动物饱食度
+option.btw.chicken_egg_timer=显示坤下蛋时间
+option.btw.wolf_poop=显示狼排泄提示
+option.btw.spider_web=显示蜘蛛是否有网
+option.btw.zombie_conversion_time=显示僵尸村民转化时间
 
 # block
 info.btw.fuel_time=燃料时间：%s
@@ -169,7 +178,16 @@ info.btw.burned_time=烧焦时间：%s
 
 # entity
 info.btw.has_web=有网
+info.btw.zombie_conversion_time=转化时间: %d秒
+info.btw.chicken_egg_timer=下蛋时间: %d秒
+info.btw.wolf_poop_chance=吃饱了，随时可能拉粑粑(平均20分钟)
+info.btw.growup.normal=成长时间: %d秒 (成长中)
+info.btw.growup.toohungry=成长时间: %d秒 §c(饱食度不足无法成长)§r
+info.btw.hunger.famished=饥饿
+info.btw.hunger.starving=消瘦
+info.btw.hunger.state=状态：
 
 hud.msg.attack=攻击力：%s
 hud.msg.health=生命值：
 hud.msg.armor=护甲值：%s
+hud.msg.breed_cooldown=繁殖冷却：%d秒

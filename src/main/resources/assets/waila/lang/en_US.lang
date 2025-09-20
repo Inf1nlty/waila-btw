@@ -145,12 +145,15 @@ option.carpenters.hide=Hide camo blocks
 option.stevescarts.showall=Show data
 option.stevescarts.colorblind=Colorblind mode
 option.stevescarts.shifttoggle=Shift toggle
+
+# general
 option.general.showents=Show entities
 option.general.showicon=Show icon
 option.general.showmods=Show mods
 option.general.showhp=Show entities health
 option.general.showatk=Show entities attack
 option.general.showarmor=Show entities armor
+option.general.showbreed=Show animal breeding cooldown
 option.general.showcrop=Show crop growth
 option.thaumcraft.aspects=Show aspects
 
@@ -160,7 +163,12 @@ nei.options.keys.showenchant=Show enchanting values
 option.btw.oven=Show Oven
 option.btw.campfire=Show Campfire
 option.btw.finite_torch=Show Finite Torch
-option.info.btw.has_web=Show Spider Spits Web
+
+option.btw.animal_hunger=Show animal hunger
+option.btw.chicken_egg_timer=Show chicken egg-laying timer
+option.btw.wolf_poop=Show wolf defecation tip
+option.btw.spider_web=Shows whether the spider has a web
+option.btw.zombie_conversion_time=Show zombie villager conversion time
 
 # block
 info.btw.fuel_time=Fuel Time: %s
@@ -170,7 +178,16 @@ info.btw.burned_time=Burned Time: %s
 
 # entity
 info.btw.has_web=Has Web
+info.btw.zombie_conversion_time=Conversion time: %ds
+info.btw.chicken_egg_timer=Egg laying in: %ds
+info.btw.wolf_poop_chance=This wolf is well-fed and may poop at any time (avg. 20 min)
+info.btw.growup.normal=Growth time: %ds (growing)
+info.btw.growup.toohungry=Growth time: %ds §c(Not enough hunger to grow)§r
+info.btw.hunger.famished=Famished
+info.btw.hunger.starving=Starving
+info.btw.hunger.state=State:
 
 hud.msg.attack=Atk: %s
 hud.msg.health=HP:
 hud.msg.armor=Armor：%s
+hud.msg.breed_cooldown=Breeding cooldown: %ds
