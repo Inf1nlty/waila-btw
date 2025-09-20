@@ -1,12 +1,11 @@
 package mcp.mobius.waila.server;
 
 import cn.xylose.waila.addons.btw.HUDHandlerBTWBlock;
-import cn.xylose.waila.addons.btw.HUDHandlerBTWEntity;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.addons.vanillamc.HUDHandlerVanilla;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
-import mcp.mobius.waila.handlers.DecoratorFMP;
+import mcp.mobius.waila.handlers.HUDHandlerEntitiesServer;
 
 import java.lang.reflect.Method;
 
@@ -25,7 +24,7 @@ public class ProxyServer {
 //        HUDHandlerFMP.register();
 //        DecoratorFMP.register();
         HUDHandlerBTWBlock.register();
-        HUDHandlerBTWEntity.register();
+        HUDHandlerEntitiesServer.register();
     }
 
     public void registerIMCs() {

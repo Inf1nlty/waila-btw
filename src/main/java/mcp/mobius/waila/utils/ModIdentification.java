@@ -1,5 +1,6 @@
 package mcp.mobius.waila.utils;
 
+import cn.xylose.waila.mixin.accessor.BlockAccessor;
 import mcp.mobius.waila.Waila;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -66,8 +67,9 @@ public class ModIdentification {
 //        }
         if (stack.getItem() instanceof ItemBlock) {
             Block block = Block.blocksList[((ItemBlock) stack.getItem()).getBlockID()];
-            if (block.getTextureName().contains(":")) {
-                String[] parts = block.getTextureName().split(":");
+            String textureName = ((BlockAccessor) block).getTextureName();
+            if (textureName.contains(":")) {
+                String[] parts = textureName.split(":");
                 return StringUtils.capitalize(parts[0]);
             }
         }

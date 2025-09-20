@@ -161,8 +161,9 @@ public class DataAccessorCommon implements IWailaCommonAccessor, IWailaDataAcces
 
         int id = tag.getInteger("WailaEntityID");
 
-        if (id == EntityList.getEntityID(this.entity)) return true;
-        else {
+        if (this.entity != null && this.entity.entityId == id) {
+            return true;
+        } else {
             this.timeLastUpdate = System.currentTimeMillis() - 250;
             return false;
         }

@@ -9,6 +9,7 @@ import static mcp.mobius.waila.api.SpecialChars.getRenderString;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import cn.xylose.waila.mixin.accessor.RenderAccessor;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaEntityAccessor;
@@ -46,6 +47,7 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
         this.getEntityHeath(entity, currenttip, accessor, config);
         this.getEntityArmor(entity, currenttip, accessor, config);
         this.getEntityAttack(entity, currenttip, accessor, config);
+        this.getAnimalBreedAndGrowthInfo(entity, currenttip, accessor, config);
         return currenttip;
     }
 
@@ -117,6 +119,25 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
         }
     }
 
+    public void getAnimalBreedAndGrowthInfo(Entity entity, List<String> currenttip, IWailaEntityAccessor accessor, IWailaConfigHandler config) {
+        if (!config.getConfig("general.showbreed") || !(entity instanceof EntityAnimal)) return;
+
+        NBTTagCompound tag = accessor.getNBTData();
+
+        if (tag == null) return;
+
+        if (tag.hasKey("AnimalGrowingAge")) {
+
+            int growingAge = tag.getInteger("AnimalGrowingAge");
+
+            if (growingAge > 0) {
+
+                int seconds = growingAge / 20;
+                currenttip.add(GRAY + LangUtil.translateG("hud.msg.breed_cooldown", seconds));
+            }
+        }
+    }
+
     @Override
     public List<String> getWailaTail(Entity entity, List<String> currenttip, IWailaEntityAccessor accessor,
             IWailaConfigHandler config) {
@@ -146,8 +167,9 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
 //        }
         if (entity.worldObj.isRemote) {
             Render render = RenderManager.instance.getEntityRenderObject(entity);
+
             if (render instanceof RenderLiving renderLiving) {
-                ResourceLocation resourceLocation = renderLiving.getEntityTexture(entity);
+                ResourceLocation resourceLocation = ((RenderAccessor) renderLiving).getEntityTexture(entity);
                 return StringUtils.capitalize(resourceLocation.getResourceDomain());
             }
         }

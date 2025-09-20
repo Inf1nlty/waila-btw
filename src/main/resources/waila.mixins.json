@@ -4,12 +4,16 @@
   "compatibilityLevel": "JAVA_17",
   "target": "DEFAULT",
   "client": [
+    "accessor.RenderAccessor",
     "GuiInGameMixin"
   ],
   "server": [
     "DedicatedServerMixin"
   ],
   "mixins": [
+    "accessor.BlockAccessor",
+    "accessor.EntityChickenAccessor",
+    "accessor.EntityZombieAccessor",
     "MinecraftMixin",
     "GameSettingMixin",
     "PlayerControllerMPMixin"
