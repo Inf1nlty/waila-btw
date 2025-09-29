@@ -35,6 +35,21 @@ public class HUDHandlerBlocks implements IWailaDataProvider {
             if (name != null) currenttip.add(name);
         } catch (Exception ignored) {}
 
+        if (currenttip.isEmpty() || (name == null || name.endsWith("Unnamed")) || itemStack.getItem() == null) {
+            ItemStack fallbackStack = findFallbackItemStackForBlock(accessor.getBlock(), accessor.getMetadata());
+            if (fallbackStack != null && fallbackStack.getItem() != null) {
+                String fallbackName = DisplayUtil.itemDisplayNameShort(fallbackStack);
+                if (fallbackName != null && !fallbackName.endsWith("Unnamed")) {
+                    currenttip.add(fallbackName);
+                    itemStack = fallbackStack;
+                } else {
+                    currenttip.add("< Unnamed >");
+                }
+            } else {
+                currenttip.add("< Unnamed >");
+            }
+        }
+
         if (itemStack.getItem() == Item.redstone) {
             int md = accessor.getMetadata();
             String s = "" + md;
@@ -82,5 +97,18 @@ public class HUDHandlerBlocks implements IWailaDataProvider {
     public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x,
                                      int y, int z) {
         return tag;
+    }
+
+    public static ItemStack findFallbackItemStackForBlock(Block block, int metadata) {
+        String blockName = block.getUnlocalizedName();
+        for (Item item : Item.itemsList) {
+            if (item == null) continue;
+            String itemName = item.getUnlocalizedName();
+            if (itemName != null && blockName != null &&
+                    itemName.replace("item.", "").equals(blockName.replace("tile.", ""))) {
+                return new ItemStack(item, 1, metadata);
+            }
+        }
+        return null;
     }
 }

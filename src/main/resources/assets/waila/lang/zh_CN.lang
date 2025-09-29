@@ -167,6 +167,7 @@ option.btw.finite_torch=显示火把
 option.btw.animal_hunger=显示动物饱食度
 option.btw.chicken_egg_timer=显示坤下蛋时间
 option.btw.wolf_poop=显示狼排泄提示
+option.btw.possession=显示附身信息
 option.btw.spider_web=显示蜘蛛是否有网
 option.btw.zombie_conversion_time=显示僵尸村民转化时间
 
@@ -186,6 +187,8 @@ info.btw.growup.toohungry=成长时间: %d秒 §c(饱食度不足无法成长)§
 info.btw.hunger.famished=饥饿
 info.btw.hunger.starving=消瘦
 info.btw.hunger.state=状态：
+info.btw.possession.full=已附身
+info.btw.possession.progressing=附身中 (%d秒)
 
 hud.msg.attack=攻击力：%s
 hud.msg.health=生命值：

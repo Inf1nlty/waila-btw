@@ -54,13 +54,20 @@ public class HUDHandlerEntitiesServer implements IWailaEntityProvider {
             }
         }
 
+        if (entity instanceof EntityCreature creature) {
+            tag.setBoolean("Possessible", creature.getCanCreatureTypeBePossessed());
+            tag.setBoolean("IsPossessed", creature.isPossessed());
+            tag.setBoolean("IsFullyPossessed", creature.isFullyPossessed());
+            tag.setInteger("PossessionLevel", creature.getPossessionLevel());
+            tag.setInteger("PossessionTimer", creature.possessionTimer);
+        }
+
         return tag;
     }
 
     public static void register() {
         IWailaEntityProvider serverProvider = new HUDHandlerEntitiesServer();
 
-        ModuleRegistrar.instance().registerNBTProvider(serverProvider, EntityAnimal.class);
-        ModuleRegistrar.instance().registerNBTProvider(serverProvider, EntityZombie.class);
+        ModuleRegistrar.instance().registerNBTProvider(serverProvider, EntityCreature.class);
     }
 }

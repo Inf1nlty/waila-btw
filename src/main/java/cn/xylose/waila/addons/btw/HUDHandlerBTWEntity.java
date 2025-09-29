@@ -88,6 +88,24 @@ public class HUDHandlerBTWEntity implements IWailaEntityProvider {
             }
         }
 
+        NBTTagCompound tag = accessor.getNBTData();
+        if (tag != null && tag.hasKey("Possessible") && tag.getBoolean("Possessible")) {
+            int level = tag.getInteger("PossessionLevel");
+            int timer = tag.getInteger("PossessionTimer");
+            boolean fully = tag.getBoolean("IsFullyPossessed");
+
+            if (fully || level > 0) {
+                String phase = null;
+                if (fully || level > 1) {
+                    phase = I18n.getString("info.btw.possession.full");
+                } else if (timer > 0) {
+                    phase = String.format(I18n.getString("info.btw.possession.progressing"), timer / 20);
+                }
+                if (phase != null) {
+                    currenttip.add(phase);
+                }
+            }
+        }
         return currenttip;
     }
 
@@ -104,15 +122,17 @@ public class HUDHandlerBTWEntity implements IWailaEntityProvider {
     public static void register() {
         IWailaEntityProvider provider = new HUDHandlerBTWEntity();
 
+        ModuleRegistrar.instance().registerBodyProvider(provider, EntityCreature.class);
+
         ModuleRegistrar.instance().addConfig("BTW", "btw.animal_hunger");
         ModuleRegistrar.instance().addConfig("BTW", "btw.chicken_egg_timer");
         ModuleRegistrar.instance().addConfig("BTW", "btw.wolf_poop");
-        ModuleRegistrar.instance().registerBodyProvider(provider, EntityAnimal.class);
+
+        ModuleRegistrar.instance().addConfig("BTW", "btw.possession");
 
         ModuleRegistrar.instance().addConfig("BTW", "btw.spider_web");
-        ModuleRegistrar.instance().registerBodyProvider(provider, EntitySpider.class);
 
         ModuleRegistrar.instance().addConfig("BTW", "btw.zombie_conversion_time");
-        ModuleRegistrar.instance().registerBodyProvider(provider, EntityZombie.class);
+
     }
 }
