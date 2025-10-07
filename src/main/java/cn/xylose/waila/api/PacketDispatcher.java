@@ -25,7 +25,7 @@ public class PacketDispatcher {
         if (server != null) {
             server.getConfigurationManager().sendToAllNear(X, Y, Z, range, dimensionId, packet);
         } else {
-            Waila.log.warn("Attempt to send packet to all around without a server instance available");
+            Waila.logger.warn("Attempt to send packet to all around without a server instance available");
         }
     }
 
@@ -34,7 +34,7 @@ public class PacketDispatcher {
         if (server != null) {
             server.getConfigurationManager().sendPacketToAllPlayersInDimension(packet, dimId);
         } else {
-            Waila.log.warn("Attempt to send packet to all in dimension without a server instance available");
+            Waila.logger.warn("Attempt to send packet to all in dimension without a server instance available");
         }
     }
 
@@ -43,7 +43,7 @@ public class PacketDispatcher {
         if (server != null) {
             server.getConfigurationManager().sendPacketToAllPlayers(packet);
         } else {
-            Waila.log.warn("Attempt to send packet to all in dimension without a server instance available");
+            Waila.logger.warn("Attempt to send packet to all in dimension without a server instance available");
         }
     }
 }

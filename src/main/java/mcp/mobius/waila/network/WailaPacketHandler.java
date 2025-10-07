@@ -20,7 +20,7 @@ public class WailaPacketHandler {
             try {
                 byte header = getHeader(packet);
                 if (header == 0) {
-                    Waila.log.info("Received server authentication msg. Remote sync will be activated");
+                    Waila.logger.info("Received server authentication msg. Remote sync will be activated");
                     Waila.instance.serverPresent = true;
                 } else if (header == 2) {
                     Packet0x02TENBTData castedPacket = new Packet0x02TENBTData(packet);
@@ -78,7 +78,7 @@ public class WailaPacketHandler {
                             PacketDispatcher.sendPacketToPlayer(Packet0x04EntNBTData.create(tag), handler.playerEntity);
                         }
                         catch (Throwable e) {
-                            Waila.log.warn("Exception in entity NBT provider: " + e);
+                            Waila.logger.warn("Exception in entity NBT provider: " + e);
                         }
                     }
                 }

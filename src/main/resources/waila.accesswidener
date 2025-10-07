@@ -6,3 +6,5 @@ accessible field btw/block/tileentity/CampfireTileEntity TIME_TO_COOK I
 accessible field btw/block/tileentity/CampfireTileEntity TIME_TO_BURN_FOOD I
 accessible field net/minecraft/src/EntitySpider timeToNextWeb I
 accessible field net/minecraft/src/EntityChicken timeToLayEgg J
+accessible method net/minecraft/src/Block getTextureName ()Ljava/lang/String;
+accessible field btw/block/blocks/SmoothStoneSlabBlock sideIcon [Lnet/minecraft/src/Icon;

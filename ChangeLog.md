@@ -1,5 +1,15 @@
 # Waila for BTW
 
+## 2.0.3
+* Both the Brick Oven and Loose Brick Oven now display their burn times. (Also supports food burnt time display added by Nightmare Mode).
+* Added a display for zombie villager conversion time.
+* Added a display for chicken egg-laying time.
+* Added a prompt when wolves are well-fed and can poop.
+* Added display of animal hunger levels.
+* Added breeding cooldown and growth time displays for animals.
+
+---
+
 ## 2.0.2
 * Now supports fetching the mod name from the resource domain, and displays "Minecraft" if the fetch fails.
 * Modified the logging implementation, which no longer relies on third-party libraries.

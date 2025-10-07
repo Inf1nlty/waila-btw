@@ -220,7 +220,7 @@ public class ModuleRegistrar implements IWailaRegistrar {
     @Override
     public void registerTooltipRenderer(String name, IWailaTooltipRenderer renderer) {
         if (!this.tooltipRenderers.containsKey(name)) this.tooltipRenderers.put(name, renderer);
-        else Waila.log.warn(
+        else Waila.logger.warn(
                 String.format(
                         "A renderer named %s already exists (Class : %s). Skipping new renderer.",
                         name,

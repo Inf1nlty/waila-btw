@@ -4,7 +4,6 @@ import java.util.List;
 
 import mcp.mobius.waila.utils.WailaLogger;
 import net.minecraft.src.*;
-import org.apache.logging.log4j.Level;
 
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -102,10 +101,10 @@ public class HUDHandlerFMP implements IWailaDataProvider {
         try {
             BlockMultipart = Class.forName("codechicken.multipart.BlockMultipart");
         } catch (ClassNotFoundException e) {
-            Waila.log.log(WailaLogger.Level.WARN, "[FMP] Class not found. " + e);
+            Waila.logger.log(WailaLogger.Level.WARN, "[FMP] Class not found. " + e);
             return;
         } catch (Exception e) {
-            Waila.log.log(WailaLogger.Level.WARN, "[FMP] Unhandled exception." + e);
+            Waila.logger.log(WailaLogger.Level.WARN, "[FMP] Unhandled exception." + e);
             return;
         }
 
@@ -114,7 +113,7 @@ public class HUDHandlerFMP implements IWailaDataProvider {
 //        ModuleRegistrar.instance().registerTailProvider(new HUDHandlerFMP(), BlockMultipart);
 //        ModuleRegistrar.instance().registerNBTProvider(new HUDHandlerFMP(), BlockMultipart);
 
-        Waila.log.log(WailaLogger.Level.INFO, "Forge Multipart found and dedicated handler registered");
+        Waila.logger.log(WailaLogger.Level.INFO, "Forge Multipart found and dedicated handler registered");
 
     }
 }

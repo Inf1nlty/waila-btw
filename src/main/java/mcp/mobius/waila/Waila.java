@@ -6,12 +6,11 @@ import cn.xylose.waila.addons.btw.HUDHandlerBTWBlock;
 import cn.xylose.waila.api.PacketDispatcher;
 import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
-import mcp.mobius.waila.client.ProxyClient;
 import mcp.mobius.waila.commands.CommandDumpHandlers;
 import mcp.mobius.waila.handlers.HUDHandlerEntitiesServer;
 import mcp.mobius.waila.network.Packet0x00ServerPing;
 import mcp.mobius.waila.network.WailaPacketHandler;
-import mcp.mobius.waila.overlay.OverlayConfig;
+import mcp.mobius.waila.utils.ModIdentification;
 import mcp.mobius.waila.utils.WailaLogger;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -21,8 +20,6 @@ import net.minecraft.src.*;
 import net.minecraftforge.common.Configuration;
 
 import java.io.File;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 public class Waila extends BTWAddon implements ModInitializer {
     public static String modsName = "Minecraft";
@@ -30,7 +27,7 @@ public class Waila extends BTWAddon implements ModInitializer {
     public static String modName = "Waila";
 
     public static Waila instance;
-    public static WailaLogger log = WailaLogger.getInstance();
+    public static WailaLogger logger = WailaLogger.getInstance();
     public boolean serverPresent = false;
     private WailaPacketHandler wailaPacketHandler;
 
@@ -49,6 +46,7 @@ public class Waila extends BTWAddon implements ModInitializer {
         ConfigHandler.instance().loadDefaultConfig();
         HUDHandlerBTWBlock.register();
         HUDHandlerEntitiesServer.register();
+        ModIdentification.init();
     }
 
     @Override
