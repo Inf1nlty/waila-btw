@@ -167,6 +167,7 @@ option.btw.finite_torch=Show Finite Torch
 option.btw.animal_hunger=Show animal hunger
 option.btw.chicken_egg_timer=Show chicken egg-laying timer
 option.btw.wolf_poop=Show wolf defecation tip
+option.btw.possession=Show possession info
 option.btw.spider_web=Shows whether the spider has a web
 option.btw.zombie_conversion_time=Show zombie villager conversion time
 
@@ -186,6 +187,8 @@ info.btw.growup.toohungry=Growth time: %ds §c(Not enough hunger to grow)§r
 info.btw.hunger.famished=Famished
 info.btw.hunger.starving=Starving
 info.btw.hunger.state=State:
+info.btw.possession.full=Fully Possessed
+info.btw.possession.progressing=Possessing (%d seconds)
 
 hud.msg.attack=Atk: %s
 hud.msg.health=HP:
