@@ -5,18 +5,17 @@
   "target": "DEFAULT",
   "client": [
     "accessor.RenderAccessor",
-    "GuiInGameMixin"
+    "GuiInGameMixin",
+    "MinecraftMixin"
   ],
   "server": [
     "DedicatedServerMixin"
   ],
   "mixins": [
-    "accessor.BlockAccessor",
     "accessor.EntityChickenAccessor",
     "accessor.EntityZombieAccessor",
-    "MinecraftMixin",
-    "GameSettingMixin",
-    "PlayerControllerMPMixin"
+    "PlayerControllerMPMixin",
+    "GameSettingMixin"
   ],
   "injectors": {
     "defaultRequire": 1

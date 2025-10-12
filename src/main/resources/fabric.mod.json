@@ -4,7 +4,8 @@
   "version": "${version}",
   "depends": {
     "minecraft": "1.6.4",
-    "forge_config": "0.1.0"
+    "forge_config": ">=0.1.0",
+    "btw": "*"
   },
   "environment": "*",
   "name": "Waila",

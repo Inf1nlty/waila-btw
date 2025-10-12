@@ -7,8 +7,9 @@ import btw.item.BTWItems;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
-import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.src.*;
 
 import java.util.List;
@@ -69,7 +70,7 @@ public class HUDHandlerBTWBlock implements IWailaDataProvider {
             }
 
             // Check if the NBT contains the "burnCounter" field (added by Nightmare-Mode for oven food burning support)
-            if (tag.hasKey("burnCounter")) {
+            if (FabricLoader.getInstance().isModLoaded("nightmare_mode") && tag.hasKey("burnCounter")) {
 
                 int burnCounter = tag.getInteger("burnCounter");
                 int burnedTime = (1600 - burnCounter) / 20;
@@ -164,8 +165,7 @@ public class HUDHandlerBTWBlock implements IWailaDataProvider {
     public static void register() {
         IWailaDataProvider provider = INSTANCE;
 
-        if (net.fabricmc.loader.api.FabricLoader.getInstance().getEnvironmentType()
-                == net.fabricmc.api.EnvType.CLIENT) {
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
             ModuleRegistrar.instance().addConfig("BTW", "btw.oven");
             ModuleRegistrar.instance().addConfig("BTW", "btw.campfire");
             ModuleRegistrar.instance().addConfig("BTW", "btw.finite_torch");

@@ -46,10 +46,10 @@ public class DecoratorFMP implements IWailaBlockDecorator {
         try {
             BlockMultipart = Class.forName("codechicken.multipart.BlockMultipart");
         } catch (ClassNotFoundException e) {
-            Waila.log.log(WailaLogger.Level.WARN, "[FMP] Class not found. " + e);
+            Waila.logger.log(WailaLogger.Level.WARN, "[FMP] Class not found. " + e);
             return;
         } catch (Exception e) {
-            Waila.log.log(WailaLogger.Level.WARN, "[FMP] Unhandled exception." + e);
+            Waila.logger.log(WailaLogger.Level.WARN, "[FMP] Unhandled exception." + e);
             return;
         }
 
