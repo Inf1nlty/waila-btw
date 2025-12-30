@@ -148,8 +148,8 @@ option.stevescarts.shifttoggle=Shift toggle
 
 # general
 option.general.showents=Show entities
-option.general.showicon=Show icon
-option.general.showmods=Show mods
+option.general.showicon=Show icons
+option.general.showmods=Show source mods
 option.general.showhp=Show entities health
 option.general.showatk=Show entities attack
 option.general.showarmor=Show entities armor

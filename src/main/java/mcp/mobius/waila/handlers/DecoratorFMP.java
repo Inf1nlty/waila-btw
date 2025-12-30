@@ -14,6 +14,7 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaFMPDecorator;
 import mcp.mobius.waila.api.impl.DataAccessorFMP;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
+import org.apache.logging.log4j.Level;
 
 public class DecoratorFMP implements IWailaBlockDecorator {
 
@@ -46,10 +47,10 @@ public class DecoratorFMP implements IWailaBlockDecorator {
         try {
             BlockMultipart = Class.forName("codechicken.multipart.BlockMultipart");
         } catch (ClassNotFoundException e) {
-            Waila.logger.log(WailaLogger.Level.WARN, "[FMP] Class not found. " + e);
+            Waila.logger.warn("[FMP] Class not found. ", e);
             return;
         } catch (Exception e) {
-            Waila.logger.log(WailaLogger.Level.WARN, "[FMP] Unhandled exception." + e);
+            Waila.logger.warn("[FMP] Unhandled exception.", e);
             return;
         }
 

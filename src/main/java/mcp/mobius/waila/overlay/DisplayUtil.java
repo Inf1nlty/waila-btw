@@ -148,8 +148,8 @@ public class DisplayUtil {
 
         if (namelist.get(0) == null || namelist.get(0).isEmpty()) namelist.set(0, "Unnamed");
 
-        namelist.set(0, "\u00a7f" + namelist.get(0));
-        for (int i = 1; i < namelist.size(); i++) namelist.set(i, "\u00a77" + namelist.get(i));
+        namelist.set(0, EnumChatFormatting.WHITE + namelist.get(0));
+        for (int i = 1; i < namelist.size(); i++) namelist.set(i, EnumChatFormatting.GRAY + namelist.get(i));
 
         return namelist;
     }

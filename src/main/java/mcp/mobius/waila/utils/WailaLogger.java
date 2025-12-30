@@ -128,6 +128,10 @@ public class WailaLogger {
         log(Level.WARN, message, null);
     }
 
+    public void warn(String message, Throwable throwable) {
+        log(Level.WARN, message, throwable);
+    }
+
     public void error(String message) {
         log(Level.ERROR, message, null);
     }

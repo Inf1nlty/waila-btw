@@ -149,7 +149,7 @@ option.stevescarts.shifttoggle=潜行触发
 # general
 option.general.showents=显示实体
 option.general.showicon=显示图标
-option.general.showmods=显示模组
+option.general.showmods=显示来源模组
 option.general.showhp=显示实体生命值
 option.general.showatk=显示实体攻击力
 option.general.showarmor=显示实体护甲值
@@ -165,7 +165,7 @@ option.btw.campfire=显示篝火
 option.btw.finite_torch=显示火把
 
 option.btw.animal_hunger=显示动物饱食度
-option.btw.chicken_egg_timer=显示坤下蛋时间
+option.btw.chicken_egg_timer=显示鸡下蛋时间
 option.btw.wolf_poop=显示狼排泄提示
 option.btw.possession=显示附身信息
 option.btw.spider_web=显示蜘蛛是否有网

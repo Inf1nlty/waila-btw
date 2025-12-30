@@ -3,13 +3,14 @@ package mcp.mobius.waila.utils;
 import mcp.mobius.waila.Waila;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.src.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.Locale;
+import java.util.Optional;
 
 public class ModIdentification {
 
@@ -106,11 +107,14 @@ public class ModIdentification {
             Block block = Block.blocksList[((ItemBlock) stack.getItem()).getBlockID()];
             String textureName = block.getTextureName();
             String iconName = "";
+            String unlocalizedName = block.getUnlocalizedName();
             if (block.blockIcon != null) iconName = block.getIcon(1, 1).getIconName();
             if (textureName.contains(":")) {
                 return parseTexture(textureName);
             } else if (iconName.contains(":")) {
                 return parseTexture(iconName);
+            } else if (unlocalizedName.startsWith("tile.fc")) {
+                return getModNameById("btw");
             }
         }
         return Waila.modsName;
@@ -118,7 +122,21 @@ public class ModIdentification {
 
     public static String parseTexture(String str) {
         String[] parts = str.split(":");
-        if (parts[0].equals("btw")) return parts[0].toUpperCase(Locale.ROOT) + "CE";
-        return StringUtils.capitalize(parts[0]);
+        return getModNameById(parts[0]);
+    }
+
+    public static String getModNameById(String modId) {
+        return FabricLoader.getInstance().getModContainer(modId)
+                .map(ModContainer::getMetadata)
+                .map(ModMetadata::getName)
+                .map(ModIdentification::normalizeModName)
+                .orElse(StringUtils.capitalize(modId));
+    }
+
+    private static String normalizeModName(String name) {
+        if (name.equals("Better Than Wolves: Community Edition")) {
+            return "Better Than Wolves";
+        }
+        return name;
     }
 }

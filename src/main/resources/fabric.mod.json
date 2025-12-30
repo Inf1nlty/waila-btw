@@ -16,7 +16,7 @@
   ],
   "contributors": [
     "GTNH Team",
-    "Xy_Lose",
+    "Xy_Luce",
     "limingzxc",
     "Inf1nlty"
   ],
@@ -34,6 +34,9 @@
     ],
     "btw:addon": [
       "mcp.mobius.waila.Waila"
+    ],
+    "modmenu": [
+      "cn.xylose.waila.WailaModMenuCompat"
     ]
   },
   "mixins": [

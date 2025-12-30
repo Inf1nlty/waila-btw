@@ -1,6 +1,16 @@
 # Waila for BTW
 
-## 2.0.3
+## 2.0.4
+* Adapted to 3.0.0 Release
+* Greatly improved the accuracy of mod names
+* ModMenu adaptation has been added
+* Added possession info by Inf1nlty
+* Temporarily fixed an issue where the siding blocks name was displayed incorrectly
+* Fixed an issue where the sky color was incorrect when pointing to sparse loose grass block
+
+---
+
+## 2.0.3 by Inf1nlty
 * Both the Brick Oven and Loose Brick Oven now display their burn times. (Also supports food burnt time display added by Nightmare Mode).
 * Added a display for zombie villager conversion time.
 * Added a display for chicken egg-laying time.

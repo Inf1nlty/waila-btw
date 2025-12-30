@@ -1,7 +1,7 @@
 package mcp.mobius.waila;
 
-import btw.AddonHandler;
-import btw.BTWAddon;
+import api.AddonHandler;
+import api.BTWAddon;
 import cn.xylose.waila.addons.btw.HUDHandlerBTWBlock;
 import cn.xylose.waila.api.PacketDispatcher;
 import mcp.mobius.waila.api.impl.ConfigHandler;
@@ -18,6 +18,8 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.src.*;
 import net.minecraftforge.common.Configuration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
