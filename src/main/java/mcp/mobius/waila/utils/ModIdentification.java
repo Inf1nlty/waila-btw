@@ -107,14 +107,14 @@ public class ModIdentification {
             Block block = Block.blocksList[((ItemBlock) stack.getItem()).getBlockID()];
             String textureName = block.getTextureName();
             String iconName = "";
-            String unlocalizedName = block.getUnlocalizedName();
+            String modid = block.getModId();
             if (block.blockIcon != null) iconName = block.getIcon(1, 1).getIconName();
             if (textureName.contains(":")) {
                 return parseTexture(textureName);
             } else if (iconName.contains(":")) {
                 return parseTexture(iconName);
-            } else if (unlocalizedName.startsWith("tile.fc")) {
-                return getModNameById("btw");
+            } else {
+                return getModNameById(modid);
             }
         }
         return Waila.modsName;

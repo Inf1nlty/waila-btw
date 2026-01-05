@@ -1,7 +1,7 @@
 # Waila for BTW
 
 ## 2.0.4
-* Adapted to 3.0.0 Release
+* Adapted for 3.0.0 Release
 * Greatly improved the accuracy of mod names
 * ModMenu adaptation has been added
 * Added possession info by Inf1nlty
