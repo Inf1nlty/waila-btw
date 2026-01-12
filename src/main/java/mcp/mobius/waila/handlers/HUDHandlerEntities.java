@@ -10,11 +10,15 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import cn.xylose.waila.mixin.accessor.RenderAccessor;
+import com.google.common.base.Strings;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaEntityAccessor;
 import mcp.mobius.waila.api.IWailaEntityProvider;
+import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.cbcore.LangUtil;
+import mcp.mobius.waila.config.FormattingConfig;
+import mcp.mobius.waila.utils.Constants;
 import net.minecraft.src.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -33,11 +37,13 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
     @Override
     public List<String> getWailaHead(Entity entity, List<String> currenttip, IWailaEntityAccessor accessor,
                                      IWailaConfigHandler config) {
-        try {
-            currenttip.add(WHITE + entity.getEntityName());
-        } catch (Exception e) {
-            currenttip.add(WHITE + "Unknown");
-        }
+        if (!Strings.isNullOrEmpty(FormattingConfig.entityFormat)) {
+            try {
+                currenttip.add("\u00a7r" + String.format(FormattingConfig.entityFormat, entity.getEntityName()));
+            } catch (Exception e) {
+                currenttip.add("\u00a7r" + String.format(FormattingConfig.entityFormat, "Unknown"));
+            }
+        } else currenttip.add("Unknown");
         return currenttip;
     }
 
@@ -141,13 +147,10 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
     @Override
     public List<String> getWailaTail(Entity entity, List<String> currenttip, IWailaEntityAccessor accessor,
             IWailaConfigHandler config) {
-        if (!config.getConfig("general.showmods")) return currenttip;
+        if (!ConfigHandler.instance().showMods()) return currenttip;
 
-        try {
-            currenttip.add(BLUE + ITALIC + getEntityMod(entity));
-        } catch (Exception e) {
-            currenttip.add(BLUE + ITALIC + "Unknown");
-        }
+        if (!Strings.isNullOrEmpty(FormattingConfig.modNameFormat) && !Strings.isNullOrEmpty(getEntityMod(entity)))
+            currenttip.add(String.format(FormattingConfig.modNameFormat, getEntityMod(entity)));
         return currenttip;
     }
 
@@ -157,7 +160,7 @@ public class HUDHandlerEntities implements IWailaEntityProvider {
     }
 
     private static String getEntityMod(Entity entity) {
-        String modName = Waila.modsName;
+        String modName = "Unknown";
 //        try {
 //            EntityRegistration er = EntityRegistry.instance().lookupModSpawn(entity.getClass(), true);
 //            ModContainer modC = er.getContainer();

@@ -15,14 +15,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 
-import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.*;
+import mcp.mobius.waila.config.OverlayConfig;
 import net.fabricmc.api.Environment;
 import net.minecraft.src.ItemStack;
 import net.minecraftforge.common.Configuration;
 import org.lwjgl.opengl.GL11;
 
-import mcp.mobius.waila.api.IWailaCommonAccessor;
-import mcp.mobius.waila.api.IWailaTooltipRenderer;
 import mcp.mobius.waila.api.impl.ConfigHandler;
 import mcp.mobius.waila.api.impl.DataAccessorCommon;
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
@@ -101,12 +100,14 @@ public class Tooltip {
     }
     ////////////////////////////////////////////////////////////////////////////
 
-    public Tooltip(List<String> textData, boolean hasIcon, ItemStack stack) {
-        this(textData, hasIcon);
+    public Tooltip(List<String> textData, ItemStack stack) {
+        this(textData, true);
         this.stack = stack;
     }
 
     public Tooltip(List<String> textData, boolean hasIcon) {
+
+        if (hasIcon) hasIcon = ConfigHandler.instance().showIcon();
 
         columnsWidth.add(0); // Small init of the arrays to have at least one element
         columnsPos.add(0);
@@ -146,19 +147,19 @@ public class Tooltip {
 
     private void computeRenderables() {
         int offsetY = 0;
-        for (int i = 0; i < lines.size(); i++) { // We check all the lines, one by one
+        for (ArrayList<String> line : lines) { // We check all the lines, one by one
             int maxHeight = 0; // Maximum height of this line
-            for (int c = 0; c < lines.get(i).size(); c++) { // We check all the columns for this line
+            for (int c = 0; c < line.size(); c++) { // We check all the columns for this line
                 offsetX = columnsPos.get(c); // We move the "cursor" to the current column
-                String currentLine = lines.get(i).get(c);
+                String currentLine = line.get(c);
                 Matcher lineMatcher = patternLineSplit.matcher(currentLine);
 
                 while (lineMatcher.find()) {
                     String cs = lineMatcher.group();
                     Renderable renderable = null;
                     Matcher renderMatcher = patternRender.matcher(cs); // We keep a matcher here to be able to check if
-                                                                       // we have a Renderer. Might be better to do a
-                                                                       // startWith + full matcher init after the check
+                    // we have a Renderer. Might be better to do a
+                    // startWith + full matcher init after the check
                     Matcher iconMatcher = patternIcon.matcher(cs);
 
                     if (renderMatcher.find()) {
@@ -169,7 +170,10 @@ public class Tooltip {
                             renderable = new Renderable(
                                     renderer,
                                     new Point(offsetX, offsetY),
-                                    renderMatcher.group("args").split(","));
+                                    renderMatcher.group("args").split(SpecialChars.WailaRendererComma));
+                            if (renderer instanceof IWailaVariableWidthTooltipRenderer variableWidthRenderer) {
+                                variableWidthRenderer.setMaxLineWidth(maxStringW);
+                            }
                             this.elements2nd.add(renderable);
                         }
                     } else if (iconMatcher.find()) {

@@ -83,6 +83,26 @@ public class ScreenWailaConfig extends ScreenBase {
                         "screen.button.no",
                         "screen.button.yes"),
                 "choice.shifttoggledents");
+        buttonContainer.addButton(
+                new ButtonBooleanConfig(
+                        this.getRoot(),
+                        Configuration.CATEGORY_GENERAL,
+                        Constants.CFG_WAILA_SHOWICON,
+                        true,
+                        false,
+                        "screen.button.no",
+                        "screen.button.yes"),
+                "choice.showicon");
+        buttonContainer.addButton(
+                new ButtonBooleanConfig(
+                        this.getRoot(),
+                        Configuration.CATEGORY_GENERAL,
+                        Constants.CFG_WAILA_SHOWMODS,
+                        true,
+                        false,
+                        "screen.button.no",
+                        "screen.button.yes"),
+                "choice.showmods");
 
         this.getRoot().addWidget("LayoutConfigPos", new LayoutBase(this.getRoot()));
         this.getRoot().getWidget("LayoutConfigPos")
@@ -92,6 +112,11 @@ public class ScreenWailaConfig extends ScreenBase {
                 new ButtonScreenChange(null, "screen.button.configureaspect", new ScreenHUDConfig(this)));
         this.getRoot().getWidget("LayoutConfigPos").getWidget("ButtonConfigPos").setGeometry(
                 new WidgetGeometry(50.0, 50.0, 150.0, 20.0, CType.RELXY, CType.ABSXY, WAlign.CENTER, WAlign.CENTER));
+
+        this.getRoot().addWidget("FormatConfig", new LayoutBase(this.getRoot()));
+        this.getRoot().getWidget("FormatConfig").setGeometry(new WidgetGeometry(0.0, 60.0, 100.0, 20.0, CType.RELXY, CType.RELXY));
+        this.getRoot().getWidget("FormatConfig").addWidget("ButtonConfigPos", new ButtonScreenChange(null, "screen.button.configureformat", new ScreenFormatConfig(this)));
+        this.getRoot().getWidget("FormatConfig").getWidget("ButtonConfigPos").setGeometry(new WidgetGeometry(50.0, 50.0, 150.0, 20.0, CType.RELXY, CType.ABSXY, WAlign.CENTER, WAlign.CENTER));
 
         this.getRoot().addWidget("LayoutBack", new LayoutBase(this.getRoot()));
         this.getRoot().getWidget("LayoutBack")

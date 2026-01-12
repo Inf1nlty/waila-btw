@@ -38,7 +38,7 @@ public class ProxyServer {
         String methodName = splitName[splitName.length - 1];
         String className = method.substring(0, method.length() - methodName.length() - 1);
 
-        Waila.logger.info(String.format("Trying to reflect %s %s", className, methodName));
+        Waila.logger.debug(String.format("Trying to reflect %s %s", className, methodName));
 
         try {
             Class<?> reflectClass = Class.forName(className);

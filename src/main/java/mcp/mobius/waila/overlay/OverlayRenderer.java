@@ -1,34 +1,32 @@
 package mcp.mobius.waila.overlay;
 
 import cn.xylose.waila.api.IBreakingProgress;
-import net.minecraft.src.BossStatus;
-import net.minecraft.src.EnumMovingObjectType;
-import net.minecraft.src.Minecraft;
-import net.minecraft.src.RenderHelper;
+import mcp.mobius.waila.Waila;
+import mcp.mobius.waila.api.impl.TipList;
+import mcp.mobius.waila.config.FormattingConfig;
+import mcp.mobius.waila.config.OverlayConfig;
+import mcp.mobius.waila.utils.Constants;
+import mcp.mobius.waila.utils.ModIdentification;
+import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import mcp.mobius.waila.api.impl.ConfigHandler;
 
+import java.util.List;
+
 public class OverlayRenderer {
 
     protected static boolean hasBlending;
-    protected static boolean hasLight;
     protected static boolean hasDepthTest;
-    protected static boolean hasLight0;
-    protected static boolean hasLight1;
-    protected static boolean hasRescaleNormal;
-    protected static boolean hasColorMaterial;
     protected static int boundTexIndex;
-    private static int lastProgressLine = 0;
-    private static int targetX = 0, targetY = 0, targetW = 0, targetH = 0;
     private static float currentX = 0, currentY = 0, currentW = 0, currentH = 0;
-    private static float LERP_FACTOR = OverlayConfig.lerpfactor;
+    private static int lastProgressLine = 0;
     private static float lastBreakProgress = 0F;
-    private static float currentAlpha = 0F;
-    private static final float FADE_SPEED = 0.1f;
 
-    public void renderOverlay() {
+    private static boolean isExample = false;
+
+    public static void renderOverlay(Tooltip tooltip) {
         Minecraft mc = Minecraft.getMinecraft();
         if (!(mc.currentScreen == null && mc.theWorld != null
                 && Minecraft.isGuiEnabled()
@@ -37,38 +35,42 @@ public class OverlayRenderer {
                 && RayTracing.instance().getTarget() != null))
             return;
 
+        isExample = false;
+
         if (RayTracing.instance().getTarget().typeOfHit == EnumMovingObjectType.TILE
                 && RayTracing.instance().getTargetStack() != null) {
-            renderOverlay(WailaTickHandler.instance().tooltip);
+            doRenderOverlay(tooltip);
         }
 
         if (RayTracing.instance().getTarget().typeOfHit == EnumMovingObjectType.ENTITY
                 && ConfigHandler.instance().getConfig("general.showents")) {
-            renderOverlay(WailaTickHandler.instance().tooltip);
+            doRenderOverlay(tooltip);
         }
     }
 
-    public void renderOverlay(Tooltip tooltip) {
+    public static void renderOverlayExample() {
+        isExample = true;
+        ItemStack exampleStack = new ItemStack(Block.grass);
+        List<String> currenttip = new TipList<String, String>();
+        List<String> currenttipHead = new TipList<String, String>();
+        List<String> currenttipBody = new TipList<String, String>();
+        List<String> currenttipTail = new TipList<String, String>();
+
+        currenttipHead.add(String.format(FormattingConfig.blockFormat, DisplayUtil.itemDisplayNameShort(exampleStack)));
+        if (ConfigHandler.instance().showMods())
+            currenttipTail.add(String.format(FormattingConfig.modNameFormat, ModIdentification.nameFromStack(exampleStack)));
+
+        currenttip.addAll(currenttipHead);
+        currenttip.addAll(currenttipBody);
+        currenttip.addAll(currenttipTail);
+
+        Tooltip exampleTip = new Tooltip(currenttip, exampleStack);
+        doRenderOverlay(exampleTip);
+    }
+
+    private static void doRenderOverlay(Tooltip tooltip) {
         GL11.glPushMatrix();
         saveGLState();
-
-        if (tooltip != null) {
-            currentAlpha = DisplayUtil.lerp(currentAlpha, 1F, FADE_SPEED);
-            if (currentAlpha > 0.99F) {
-                currentAlpha = 1F;
-            }
-        } else {
-            currentAlpha = DisplayUtil.lerp(currentAlpha, 0F, FADE_SPEED);
-            if (currentAlpha < 0.01F) {
-                currentAlpha = 0F;
-            }
-        }
-
-        if (currentAlpha <= 0F) {
-            loadGLState();
-            GL11.glPopMatrix();
-            return;
-        }
 
         if (BossStatus.bossName != null && BossStatus.statusBarLength > 0) tooltip.y += 20;
 
@@ -112,35 +114,29 @@ public class OverlayRenderer {
         GL11.glPopMatrix();
     }
 
-    public static void saveGLState() {
+    private static void saveGLState() {
         hasBlending = GL11.glGetBoolean(GL11.GL_BLEND);
-        hasLight = GL11.glGetBoolean(GL11.GL_LIGHTING);
         hasDepthTest = GL11.glGetBoolean(GL11.GL_DEPTH_TEST);
         boundTexIndex = GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
         GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
     }
 
-    public static void loadGLState() {
+    private static void loadGLState() {
         if (hasBlending) GL11.glEnable(GL11.GL_BLEND);
         else GL11.glDisable(GL11.GL_BLEND);
-        if (hasLight1) GL11.glEnable(GL11.GL_LIGHT1);
-        else GL11.glDisable(GL11.GL_LIGHT1);
         if (hasDepthTest) GL11.glEnable(GL11.GL_DEPTH_TEST);
         else GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, boundTexIndex);
         GL11.glPopAttrib();
     }
 
-    public static void drawTooltipBox(int x, int y, int w, int h, int bg, int grad1, int grad2) {
-        targetX = x;
-        targetY = y;
-        targetW = w;
-        targetH = h;
+    private static void drawTooltipBox(int x, int y, int w, int h, int bg, int grad1, int grad2) {
+        float lerpFactor = isExample ? 1.0F : OverlayConfig.lerpfactor;
 
-        currentX = DisplayUtil.lerp(currentX, targetX, LERP_FACTOR);
-        currentY = DisplayUtil.lerp(currentY, targetY, LERP_FACTOR);
-        currentW = DisplayUtil.lerp(currentW, targetW, LERP_FACTOR);
-        currentH = DisplayUtil.lerp(currentH, targetH, LERP_FACTOR);
+        currentX = DisplayUtil.lerp(currentX, x, lerpFactor);
+        currentY = DisplayUtil.lerp(currentY, y, lerpFactor);
+        currentW = DisplayUtil.lerp(currentW, w, lerpFactor);
+        currentH = DisplayUtil.lerp(currentH, h, lerpFactor);
 
         int drawX = (int) currentX;
         int drawY = (int) currentY;

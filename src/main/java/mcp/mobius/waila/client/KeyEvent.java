@@ -22,6 +22,7 @@ public class KeyEvent {
     public KeyBinding key_liquid;
     public KeyBinding key_recipe;
     public KeyBinding key_usage;
+    public KeyBinding key_show_advanced;
     Minecraft mc = Minecraft.getMinecraft();
 
     public KeyEvent() {
@@ -31,6 +32,7 @@ public class KeyEvent {
         key_liquid = new KeyBinding(Constants.BIND_WAILA_LIQUID, Keyboard.KEY_NUMPAD2);
         key_recipe = new KeyBinding(Constants.BIND_WAILA_RECIPE, Keyboard.KEY_NUMPAD3);
         key_usage = new KeyBinding(Constants.BIND_WAILA_USAGE, Keyboard.KEY_NUMPAD4);
+        key_usage = new KeyBinding(Constants.BIND_WAILA_SHOW_ADVANCED, Keyboard.KEY_LMENU);
     }
 
     public void onKeyEvent() {

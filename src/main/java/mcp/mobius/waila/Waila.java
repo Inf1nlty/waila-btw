@@ -32,6 +32,8 @@ public class Waila extends BTWAddon implements ModInitializer {
     public static WailaLogger logger = WailaLogger.getInstance();
     public boolean serverPresent = false;
     private WailaPacketHandler wailaPacketHandler;
+    public static File configDir;
+    public static File themeDir;
 
     @Override
     public void initialize() {
@@ -43,8 +45,9 @@ public class Waila extends BTWAddon implements ModInitializer {
 
     public void loadWaila() {
         instance = new Waila();
-        ConfigHandler.instance().config = new Configuration(new File(String.valueOf(FabricLoader.getInstance().getConfigDir()), "Waila.cfg"));
-        DataAccessorCommon.instance = new DataAccessorCommon();
+        Waila.configDir = new File(String.valueOf(FabricLoader.getInstance().getConfigDir()), "waila");
+        Waila.themeDir = new File(Waila.configDir, "theme");
+        ConfigHandler.instance().config = new Configuration(new File(Waila.configDir, "waila.cfg"));
         ConfigHandler.instance().loadDefaultConfig();
         HUDHandlerBTWBlock.register();
         HUDHandlerEntitiesServer.register();

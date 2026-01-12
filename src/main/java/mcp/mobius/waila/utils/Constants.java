@@ -6,6 +6,7 @@ public final class Constants {
 
     public static String BIND_WAILA_CFG = "waila.keybind.wailaconfig";
     public static String BIND_WAILA_SHOW = "waila.keybind.wailadisplay";
+    public static String BIND_WAILA_SHOW_ADVANCED = "waila.keybind.showadvanced";
     public static String BIND_WAILA_LIQUID = "waila.keybind.liquid";
     public static String BIND_WAILA_RECIPE = "waila.keybind.recipe";
     public static String BIND_WAILA_USAGE = "waila.keybind.usage";
@@ -15,10 +16,17 @@ public final class Constants {
 
     public static boolean CFG_DEFAULT_VALUE = true;
     public static String CFG_WAILA_SHOW = "waila.cfg.show";
+    public static final String CFG_WAILA_MODNAMEFORMAT = "waila.cfg.modnameformat";
+    public static final String CFG_WAILA_BLOCKNAMEFORMAT = "waila.cfg.blocknameformat";
+    public static final String CFG_WAILA_FLUIDNAMEFORMAT = "waila.cfg.fluidnameformat";
+    public static final String CFG_WAILA_ENTITYNAMEFORMAT = "waila.cfg.entitynameformat";
+    public static final String CFG_WAILA_METADATAFORMAT = "waila.cfg.metadataformat";
     public static String CFG_WAILA_MODE = "waila.cfg.showmode";
     public static String CFG_WAILA_LIQUID = "waila.cfg.liquid";
     public static String CFG_WAILA_METADATA = "waila.cfg.metadata";
     public static String CFG_WAILA_KEYBIND = "waila.cfg.keybind";
+    public static String CFG_WAILA_SHOWICON = "waila.cfg.showicon";
+    public static String CFG_WAILA_SHOWMODS = "waila.cfg.showmods";
     public static String CFG_WAILA_POSX = "waila.cfg.posx";
     public static String CFG_WAILA_POSY = "waila.cfg.posy";
     public static String CFG_WAILA_SCALE = "waila.cfg.scale";

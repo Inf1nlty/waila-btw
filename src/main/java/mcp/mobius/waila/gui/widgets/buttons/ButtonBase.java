@@ -46,8 +46,17 @@ public abstract class ButtonBase extends WidgetBase {
                 this.getSize().getY(),
                 0,
                 66 + texOffset * 20,
-                200,
-                20);
+                this.getSize().getX(),
+                this.getSize().getY());
+        UIHelper.drawTexture(
+                this.getPos().getX() + this.getSize().getX() - 5,
+                this.getPos().getY(),
+                5,
+                this.getSize().getY(),
+                195,
+                66 + texOffset * 20,
+                5,
+                this.getSize().getY());
 
         this.loadGLState();
     }

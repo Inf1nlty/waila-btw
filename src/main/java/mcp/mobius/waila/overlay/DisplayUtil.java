@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import mcp.mobius.waila.api.SpecialChars;
+import mcp.mobius.waila.config.FormattingConfig;
 import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
 
@@ -32,8 +34,9 @@ public class DisplayUtil {
         Matcher renderMatcher = patternRender.matcher(s);
         while (renderMatcher.find()) {
             IWailaTooltipRenderer renderer = ModuleRegistrar.instance().getTooltipRenderer(renderMatcher.group("name"));
-            if (renderer != null)
-                width += renderer.getSize(renderMatcher.group("args").split(","), DataAccessorCommon.instance).width;
+            if (renderer != null) width += renderer.getSize(
+                    renderMatcher.group("args").split(SpecialChars.WailaRendererComma),
+                    DataAccessorCommon.instance).width;
         }
 
         Matcher iconMatcher = patternIcon.matcher(s);
@@ -156,7 +159,7 @@ public class DisplayUtil {
 
     public static String itemDisplayNameShort(ItemStack itemstack) {
         List<String> list = itemDisplayNameMultiline(itemstack);
-        return list.get(0);
+        return String.format(FormattingConfig.blockFormat, list.get(0));
     }
 
     public static void renderIcon(int x, int y, int sx, int sy, IconUI icon) {

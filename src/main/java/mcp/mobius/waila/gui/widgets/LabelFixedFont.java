@@ -56,7 +56,7 @@ public class LabelFixedFont extends WidgetBase {
     @Override
     public void draw(Point pos) {
         this.saveGLState();
-        this.mc.fontRenderer.drawString(this.text, pos.getX(), pos.getY(), this.color);
+        this.mc.fontRenderer.drawStringWithShadow(this.text, pos.getX(), pos.getY(), this.color);
         this.loadGLState();
     }
 }

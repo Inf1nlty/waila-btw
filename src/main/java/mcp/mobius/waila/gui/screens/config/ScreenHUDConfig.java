@@ -1,6 +1,7 @@
 package mcp.mobius.waila.gui.screens.config;
 
 import mcp.mobius.waila.api.impl.ConfigHandler;
+import mcp.mobius.waila.config.OverlayConfig;
 import mcp.mobius.waila.gui.events.MouseEvent;
 import mcp.mobius.waila.gui.interfaces.CType;
 import mcp.mobius.waila.gui.interfaces.IWidget;
@@ -15,7 +16,7 @@ import mcp.mobius.waila.gui.widgets.WidgetGeometry;
 import mcp.mobius.waila.gui.widgets.buttons.ButtonLabel;
 import mcp.mobius.waila.gui.widgets.buttons.ButtonScreenChange;
 import mcp.mobius.waila.gui.widgets.movable.PictureMovableRC;
-import mcp.mobius.waila.overlay.OverlayConfig;
+import mcp.mobius.waila.overlay.OverlayRenderer;
 import mcp.mobius.waila.utils.Constants;
 import net.minecraft.src.GuiScreen;
 import net.minecraftforge.common.Configuration;
@@ -46,7 +47,7 @@ public class ScreenHUDConfig extends ScreenBase {
             this.addWidget("Layout", new LayoutMargin(null), RenderPriority.HIGH);
             ((LayoutMargin) this.getWidget("Layout")).setMargins(picSX / 2, picSX / 2, picSY / 2, picSY / 2);
             this.getWidget("Layout")
-                    .addWidget("Picture", new PictureMovableRC(null, "waila:textures/config_template.png")).setGeometry(
+                    .addWidget("Picture", new PictureMovableRC(null, null)).setGeometry(
                             new WidgetGeometry(
                                     picX,
                                     picY,
@@ -138,6 +139,13 @@ public class ScreenHUDConfig extends ScreenBase {
         }
 
         @Override
+        public void draw() {
+            super.draw();
+            OverlayRenderer.renderOverlayExample();
+            this.updateConfig();
+        }
+
+        @Override
         public IWidget getWidgetAtCoordinates(double posX, double posY) {
             if (this.getWidget("Layout").getWidget("Picture").isWidgetAtCoordinates(posX, posY))
                 return this.getWidget("Layout").getWidget("Picture");
@@ -181,6 +189,36 @@ public class ScreenHUDConfig extends ScreenBase {
                     .setText(String.format("%.2f", this.getWidget("Layout").getWidget("Picture").getAlpha()));
             ((LabelFixedFont) this.getWidget("LayoutScale").getWidget("ValueDisplayScale"))
                     .setText(String.format("%.2f", scale));
+        }
+
+        private void updateConfig() {
+            ConfigHandler.instance().setConfig(
+                    Configuration.CATEGORY_GENERAL,
+                    Constants.CFG_WAILA_POSX,
+                    (int) (this.getWidget("Layout").getWidget("Picture").getGeometry().getRawPos().getX() * 100.0));
+            ConfigHandler.instance().setConfig(
+                    Configuration.CATEGORY_GENERAL,
+                    Constants.CFG_WAILA_POSY,
+                    (int) (this.getWidget("Layout").getWidget("Picture").getGeometry().getRawPos().getY() * 100.0));
+            ConfigHandler.instance().setConfig(
+                    Configuration.CATEGORY_GENERAL,
+                    Constants.CFG_WAILA_ALPHA,
+                    (int) (this.getWidget("Layout").getWidget("Picture").getAlpha() * 100.0));
+            ConfigHandler.instance()
+                    .setConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SCALE, (int) (scale * 100.0));
+
+            OverlayConfig.alpha = ConfigHandler.instance()
+                    .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_ALPHA, 0);
+            OverlayConfig.posX = ConfigHandler.instance()
+                    .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_POSX, 0);
+            OverlayConfig.posY = ConfigHandler.instance()
+                    .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_POSY, 0);
+            OverlayConfig.scale = ConfigHandler.instance()
+                    .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SCALE, 0) / 100.0f;
+            OverlayConfig.lerpfactor = ConfigHandler.instance()
+                    .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_LERPFACTOR, 0) / 100.0f;
+
+            OverlayConfig.updateColors();
         }
 
         @Override

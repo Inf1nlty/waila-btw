@@ -4,8 +4,8 @@ import java.awt.Dimension;
 
 import mcp.mobius.waila.api.IWailaCommonAccessor;
 import mcp.mobius.waila.api.IWailaTooltipRenderer;
+import mcp.mobius.waila.config.OverlayConfig;
 import mcp.mobius.waila.overlay.DisplayUtil;
-import mcp.mobius.waila.overlay.OverlayConfig;
 
 public class TTRenderString implements IWailaTooltipRenderer {
 

@@ -1,5 +1,20 @@
 # Waila for BTW
 
+## 2.0.5
+* Completely improve the display of mod names
+* Optimized the configuration button and configuration screen
+* Optimized the implementation of show/hide icons
+* Text transparency is not affected by configuration transparency
+* Add variable width tooltip renderer support
+* Add support for advanced tooltip body
+* Changed the configuration file path from config/Waila.cfg to config/waila/waila.cfg
+* Port Hwyla's format content configuration screen and format configuration
+* Added achievement prompt theme
+* Optimized the HUD preview in the configure aspect screen
+* Optimized code
+
+---
+
 ## 2.0.4
 * Adapted for 3.0.0 Release
 * Greatly improved the accuracy of mod names

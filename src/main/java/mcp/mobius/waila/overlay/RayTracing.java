@@ -14,6 +14,7 @@ import net.minecraftforge.common.Configuration;
 
 public class RayTracing {
 
+    private MovingObjectPosition target = null;
     private static RayTracing _instance;
 
     private RayTracing() {}
@@ -23,21 +24,22 @@ public class RayTracing {
         return _instance;
     }
 
-    private MovingObjectPosition target = null;
-    private final Minecraft mc = Minecraft.getMinecraft();
-
     public void fire() {
+        final Minecraft mc = Minecraft.getMinecraft();
         if (mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == EnumMovingObjectType.ENTITY
                 && !shouldHidePlayer(mc.objectMouseOver.entityHit)) {
             this.target = mc.objectMouseOver;
             return;
         }
-
         EntityLivingBase viewpoint = mc.renderViewEntity;
         if (viewpoint == null) return;
-
         this.target = this.rayTrace(viewpoint, mc.playerController.getBlockReachDistance(), 0);
     }
+
+    public void clear() {
+        target = null;
+    }
+
 
     private static boolean shouldHidePlayer(Entity targetEnt) {
         // Check if entity is player with invisibility effect
@@ -104,7 +106,7 @@ public class RayTracing {
 
         if (this.target == null) return items;
 
-        World world = mc.theWorld;
+        World world = Minecraft.getMinecraft().theWorld;
 
         int x = this.target.blockX;
         int y = this.target.blockY;

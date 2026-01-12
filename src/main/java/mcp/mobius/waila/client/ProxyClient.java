@@ -33,8 +33,6 @@ public class ProxyClient extends ProxyServer {
         ModuleRegistrar.instance().registerTailProvider(new HUDHandlerEntities(), Entity.class);
 
         ModuleRegistrar.instance().addConfig("General", "general.showents");
-        ModuleRegistrar.instance().addConfig("General", "general.showmods");
-        ModuleRegistrar.instance().addConfig("General", "general.showicon");
         ModuleRegistrar.instance().addConfig("General", "general.showhp");
         ModuleRegistrar.instance().addConfig("General", "general.showatk");
         ModuleRegistrar.instance().addConfig("General", "general.showarmor");

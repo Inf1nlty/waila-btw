@@ -1,15 +1,13 @@
 package mcp.mobius.waila.handlers;
 
-import static mcp.mobius.waila.api.SpecialChars.BLUE;
-import static mcp.mobius.waila.api.SpecialChars.ITALIC;
-import static mcp.mobius.waila.api.SpecialChars.RENDER;
-
 import java.util.List;
 
+import com.google.common.base.Strings;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.impl.ConfigHandler;
+import mcp.mobius.waila.config.FormattingConfig;
 import mcp.mobius.waila.overlay.DisplayUtil;
 import mcp.mobius.waila.utils.Constants;
 import mcp.mobius.waila.utils.ModIdentification;
@@ -57,16 +55,17 @@ public class HUDHandlerBlocks implements IWailaDataProvider {
             currenttip.set(currenttip.size() - 1, name + " " + s);
         }
 
-        if (currenttip.isEmpty()) currenttip.add("< Unnamed >");
+        if (currenttip.isEmpty()) currenttip.add("\u00a7r" + String.format(FormattingConfig.blockFormat, "< Unnamed >"));
         else {
             if (ConfigHandler.instance()
-                    .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_METADATA, true)) {
+                    .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_METADATA, true)
+                    && !Strings.isNullOrEmpty(FormattingConfig.metaFormat)) {
                 currenttip.add(
                         String.format(
-                                ITALIC + "[%d:%d] | %s",
-                                accessor.getBlockID(),
-                                accessor.getMetadata(),
-                                accessor.getBlockQualifiedName()));
+                                "\u00a7r" + String.format(FormattingConfig.metaFormat,
+                                        accessor.getBlockID(),
+                                        accessor.getMetadata(),
+                                        accessor.getBlockQualifiedName())));
             }
         }
         return currenttip;
@@ -81,14 +80,13 @@ public class HUDHandlerBlocks implements IWailaDataProvider {
     @Override
     public List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
             IWailaConfigHandler config) {
-        if (!config.getConfig("general.showmods")) return currenttip;
+        if (!ConfigHandler.instance().showMods()) return currenttip;
 
-        currenttip.add(RENDER + "{Plip}" + RENDER + "{Plop,thisisatest,222,333}");
+        //currenttip.add(RENDER + "{Plip}" + RENDER + "{Plop,thisisatest,222,333}");
 
         String modName = ModIdentification.nameFromStack(itemStack);
-        if (modName != null && !modName.isEmpty()) {
-            currenttip.add(BLUE + ITALIC + modName);
-        }
+        if (!Strings.isNullOrEmpty(FormattingConfig.modNameFormat))
+            currenttip.add(String.format(FormattingConfig.modNameFormat, modName));
 
         return currenttip;
     }

@@ -7,11 +7,13 @@ import java.util.Set;
 
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.config.FormattingConfig;
+import mcp.mobius.waila.config.OverlayConfig;
 import mcp.mobius.waila.handlers.HUDHandlerEntities;
-import mcp.mobius.waila.overlay.OverlayConfig;
 import mcp.mobius.waila.utils.Constants;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.File;
 
@@ -122,6 +124,16 @@ public class ConfigHandler implements IWailaConfigHandler {
         config.save();
     }
 
+    public String getConfig(String category, String key, String default_) {
+        Property prop = config.get(category, key, default_);
+        return prop.getString();
+    }
+
+    public void setConfig(String category, String key, String value) {
+        config.getCategory(category).put(key, new Property(key, value, Property.Type.STRING));
+        config.save();
+    }
+
     public int getConfig(String category, String key, int default_) {
         if (config == null) return default_;
         Property prop = config.get(category, key, default_);
@@ -139,11 +151,19 @@ public class ConfigHandler implements IWailaConfigHandler {
         return getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SHOW, true);
     }
 
+    public boolean showIcon() {
+        return getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SHOWICON, true);
+    }
+
+    public boolean showMods() {
+        return getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SHOWMODS, true);
+    }
+
     /* Default config loading */
     public void loadDefaultConfig() {
         // Ensure config is initialized
         if (config == null) {
-            config = new Configuration(new File("config/Waila.cfg"));
+            config = new Configuration(new File(Waila.configDir, "waila.cfg"));
             config.load();
         }
 
@@ -153,6 +173,8 @@ public class ConfigHandler implements IWailaConfigHandler {
         config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_METADATA, false);
         config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_KEYBIND, true);
         config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_NEWFILTERS, true);
+        config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SHOWICON, true);
+        config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SHOWMODS, true);
 
         OverlayConfig.posX = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_POSX, 5000).getInt();
         OverlayConfig.posY = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_POSY, 100).getInt();
@@ -170,6 +192,12 @@ public class ConfigHandler implements IWailaConfigHandler {
                 / 100.0F;
         OverlayConfig.lerpfactor = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_LERPFACTOR, 30).getInt()
                 / 100.0F;
+
+        FormattingConfig.modNameFormat = StringEscapeUtils.unescapeJava(config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_MODNAMEFORMAT, StringEscapeUtils.escapeJava("\u00A79\u00A7o%s")).getString());
+        FormattingConfig.blockFormat = StringEscapeUtils.unescapeJava(config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_BLOCKNAMEFORMAT, StringEscapeUtils.escapeJava("\u00a7f%s")).getString());
+        FormattingConfig.fluidFormat = StringEscapeUtils.unescapeJava(config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_FLUIDNAMEFORMAT, StringEscapeUtils.escapeJava("\u00a7f%s")).getString());
+        FormattingConfig.entityFormat = StringEscapeUtils.unescapeJava(config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_ENTITYNAMEFORMAT, StringEscapeUtils.escapeJava("\u00a7f%s")).getString());
+        FormattingConfig.metaFormat = StringEscapeUtils.unescapeJava(config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_METADATAFORMAT, StringEscapeUtils.escapeJava("\u00a77[%s@%d]")).getString());
 
         HUDHandlerEntities.nhearts = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_NHEARTS, 20)
                 .getInt();

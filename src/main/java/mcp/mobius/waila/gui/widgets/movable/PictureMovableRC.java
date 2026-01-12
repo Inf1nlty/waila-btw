@@ -17,9 +17,9 @@ public class PictureMovableRC extends WidgetBase {
     private double offsetX, offsetY;
     protected ResourceLocation texture;
 
-    public PictureMovableRC(IWidget parent, String uri) {
+    public PictureMovableRC(IWidget parent, ResourceLocation uri) {
         super(parent);
-        this.texture = new ResourceLocation(uri);
+        this.texture = uri;
     }
 
     @Override
@@ -48,6 +48,8 @@ public class PictureMovableRC extends WidgetBase {
 
     @Override
     public void draw(Point pos) {
+        if (texture == null) return;
+
         this.saveGLState();
 
         GL11.glPushMatrix();
