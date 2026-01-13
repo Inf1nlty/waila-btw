@@ -4,7 +4,7 @@
 * Completely improve the display of mod names
 * Optimized the configuration button and configuration screen
 * Optimized the implementation of show/hide icons
-* Text transparency is not affected by configuration transparency
+* Text transparency is not affected by configuration alpha
 * Add variable width tooltip renderer support
 * Add support for advanced tooltip body
 * Changed the configuration file path from config/Waila.cfg to config/waila/waila.cfg

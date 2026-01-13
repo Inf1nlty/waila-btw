@@ -27,6 +27,7 @@ public class GameSettingMixin {
         list.add(KeyEvent.instance.key_liquid);
         list.add(KeyEvent.instance.key_recipe);
         list.add(KeyEvent.instance.key_usage);
+        list.add(KeyEvent.instance.key_show_advanced);
         this.keyBindings = ArrayUtils.addAll(this.keyBindings, list.toArray(KeyBinding[]::new));
     }
 }

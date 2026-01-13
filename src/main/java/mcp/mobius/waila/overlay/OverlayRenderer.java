@@ -69,6 +69,8 @@ public class OverlayRenderer {
     }
 
     private static void doRenderOverlay(Tooltip tooltip) {
+        Minecraft client = Minecraft.getMinecraft();
+
         GL11.glPushMatrix();
         saveGLState();
 
@@ -98,7 +100,16 @@ public class OverlayRenderer {
 
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+//        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+//        int scale = new ScaledResolution(client.gameSettings, client.displayWidth, client.displayHeight).getScaleFactor();
+//        GL11.glScissor(
+//                tooltip.x * scale,
+//                client.displayHeight - tooltip.h * scale,
+//                (tooltip.w - tooltip.x) * scale,
+//                (tooltip.h - tooltip.y) * scale);
+//        Waila.logger.debug("Scissor: " + tooltip.x + " " + tooltip.y + " " + tooltip.w + " " + tooltip.h);
         tooltip.draw();
+//        GL11.glDisable(GL11.GL_SCISSOR_TEST);
         GL11.glDisable(GL11.GL_BLEND);
 
         tooltip.draw2nd();
