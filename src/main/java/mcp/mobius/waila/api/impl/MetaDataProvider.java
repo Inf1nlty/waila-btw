@@ -187,7 +187,7 @@ public class MetaDataProvider {
                 keys.addAll(ModuleRegistrar.instance().getSyncedNBTKeys(accessor.getEntity()));
 
             if (!keys.isEmpty() || ModuleRegistrar.instance().hasNBTEntityProviders(accessor.getEntity()))
-                PacketDispatcher.sendPacketToServer(Packet0x03EntRequest.create(world, player, keys));
+                PacketDispatcher.sendPacketToServer(Packet0x03EntRequest.create(world, accessor.getEntity(), keys));
 
         } else if (accessor.getEntity() != null && !Waila.instance.serverPresent && accessor.isTimeElapsed(250)) {
 

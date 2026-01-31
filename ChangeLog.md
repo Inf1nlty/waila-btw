@@ -1,5 +1,9 @@
 # Waila for BTW
 
+## 2.0.5-Fix
+* Fix entity NBT requests to target the inspected entity
+* Use server‑authoritative spider web state for the tooltip
+
 ## 2.0.5
 * Completely improve the display of mod names
 * Optimized the configuration button and configuration screen
